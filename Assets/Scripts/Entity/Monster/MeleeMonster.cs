@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class MeleeMonster : BaseMonster
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        MoveSpeed = 1f;
+        AttackRange = 1f;
+    }
+    public override void Attack()
+    {
+        Debug.Log("Melee Attack");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 플레이어 감지됨
+            PlayerDetectStart(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // 플레이어 감지 해제
+            PlayerDetectEnd();
+        }
     }
 }
