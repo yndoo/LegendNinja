@@ -3,6 +3,7 @@ using Random = UnityEngine.Random;
 
 public class RangeWeaponHandler : WeaponHandler
 {
+
     [Header("Ranged Attack Data")]
     [SerializeField] private Transform projectileSpawnPosition;
 
@@ -28,13 +29,10 @@ public class RangeWeaponHandler : WeaponHandler
     public Color ProjectileColor { get { return projectileColor; } }
 
     private ProjectileManager projectileManager;
-    private BaseController baseController;
-
     protected override void Start()
     {
         base.Start();
         projectileManager = ProjectileManager.Instance;
-        baseController = GetComponentInParent<BaseController>();
     }
 
     public override void Attack()
@@ -46,12 +44,13 @@ public class RangeWeaponHandler : WeaponHandler
 
         float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace + 0.5f * multipleProjectilesAngel;
 
+
         for (int i = 0; i < numberOfProjectilesPerShot; i++)
         {
             float angle = minAngle + projectilesAngleSpace * i;
             float randomSpread = Random.Range(-spread, spread);
             angle += randomSpread;
-            CreateProjectile(baseController.LookDirection, angle);
+            CreateProjectile(Controller.LookDirection, angle);
         }
     }
 
