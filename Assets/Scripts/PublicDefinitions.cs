@@ -5,11 +5,14 @@ using UnityEngine;
 namespace PublicDefinitions
 {
     #region 열거형
-    public enum EMonsterType
+    /// <summary>
+    /// 전투 타입  
+    /// </summary>
+    public enum EAttackType
     {
-        Small, 
-        Medium,
-        Boss,
+        Melee,  // 근접 공격 
+        Ranged, // 원거리 공격 (투사체발사)
+        AoE,    // 범위 공격 (Area of Effect)
     }
     #endregion 
 

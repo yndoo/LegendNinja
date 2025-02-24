@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using PublicDefinitions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class MonsterData
 {
     public int id;
     public string name;
+    public EAttackType type;
     public StatData stats;
 }
 

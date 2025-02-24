@@ -6,6 +6,7 @@ public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField]
     private int stage = 1;
+    private int curWave = 1;
 
     private MonsterDatabase monsterDB;
 

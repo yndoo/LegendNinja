@@ -1,8 +1,9 @@
 {
   "Small": [
     {
-      "id": 1,
+      "id": 101,
       "name": "Bamboo",
+      "type": "Melee",
       "stats": {
         "MaxHealth": 50.0,
         "AttackPower": 10.0,
@@ -14,8 +15,9 @@
       }
     },
     {
-      "id": 2,
+      "id": 102,
       "name": "Mushroom",
+      "type": "Melee",
       "stats": {
         "MaxHealth": 60.0,
         "AttackPower": 10.0,
@@ -27,8 +29,9 @@
       }
     },
     {
-      "id": 3,
+      "id": 103,
       "name": "Owl",
+      "type": "Ranged",
       "stats": {
         "MaxHealth": 60.0,
         "AttackPower": 4.0,
@@ -42,8 +45,9 @@
   ],
   "Medium": [
     {
-      "id": 1,
+      "id": 104,
       "name": "Bear",
+      "type": "Melee",
       "stats": {
         "MaxHealth": 100.0,
         "AttackPower": 15.0,
@@ -55,8 +59,9 @@
       }
     },
     {
-      "id": 2,
+      "id": 105,
       "name": "GreenSnake",
+      "type": "Ranged",
       "stats": {
         "MaxHealth": 100.0,
         "AttackPower": 10.0,
@@ -68,8 +73,9 @@
       }
     },
     {
-      "id": 3,
+      "id": 106,
       "name": "Reptile",
+      "type": "Melee",
       "stats": {
         "MaxHealth": 100.0,
         "AttackPower": 12.0,
@@ -82,8 +88,9 @@
     }
   ],
   "Boss": {
-    "id": 1,
+    "id": 107,
     "name": "GiantBamboo",
+    "type": "Melee",
     "stats": {
       "MaxHealth": 300.0,
       "AttackPower": 10.0,
