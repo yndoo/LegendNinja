@@ -1,13 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Player : Character
 {
+    public GameObject Shuriken;
+    public GameObject PlayerPivot;
+
     private Animator animator;
     private Rigidbody2D rb;
 
+    private float AttackCoolDown = 0f; //ì¿¨íƒ€ì„
     public void Move()
     {
         
@@ -17,8 +21,8 @@ public class Player : Character
 
         Vector2 MoveDirection = new Vector2(MoveX, MoveY).normalized;
 
-        // ¾Ö´Ï¸ŞÀÌ¼Ç Ã³¸®
-        if (MoveDirection.magnitude > 0)  // ÀÌµ¿ ÁßÀÏ ¶§
+        // ì• ë‹ˆë©”ì´ì…˜ ì²˜ë¦¬
+        if (MoveDirection.magnitude > 0)  // ì´ë™ ì¤‘ì¼ ë•Œ
         {
             animator.SetBool("IsMove", true);
         }
@@ -34,8 +38,23 @@ public class Player : Character
 
     public override void Attack()
     {
+        Transform target = FindCloseMonster();  // ê°€ì¥ ê°€ê¹Œìš´ ì  ì°¾ê¸°
+        if (target != null)
+        {
+            // í‘œì°½ì„ ë°œì‚¬í•  ìœ„ì¹˜ì—ì„œ ë°œì‚¬
+            GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
+            Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
 
-        // base.Attack();
+            // ì ì˜ ë°©í–¥ ê³„ì‚°
+            Vector2 direction = (target.position - PlayerPivot.transform.position).normalized;
+
+            // í‘œì°½ì— ë°©í–¥ê³¼ í˜ì„ ì ìš©
+            shurikenRb.velocity = direction * AttackPower;
+        }
+        else
+        {
+            Debug.Log("ì ì´ ì—†ìŒ!");
+        }
     }
 
     public void UseSkill()
@@ -49,31 +68,31 @@ public class Player : Character
     }
     Transform FindCloseMonster()
     {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // "Monster" ÅÂ±× °¡Áø ¿ÀºêÁ§Æ® Ã£±â
-        Transform ClosestEnemy = null; //°¡Àå °¡±î¿î ÀûÀ» ÀúÀåÇÒ º¯¼ö
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // "Monster" íƒœê·¸ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
+        Transform ClosestEnemy = null; //ê°€ì¥ ê°€ê¹Œìš´ ì ì„ ì €ì¥í•  ë³€ìˆ˜
 
-        float MaxDistance = 50f; // È­¸é »ó¿¡¼­ÀÇ ÃÖ´ë°Å¸® ¼³Á¤
-        float ClosestDistance = MaxDistance; // ÃÖ´ë°Å¸® ¼³Á¤ÇÑ °ªÀ¸·Î ÃÊ±âÈ­
+        float MaxDistance = 50f; // í™”ë©´ ìƒì—ì„œì˜ ìµœëŒ€ê±°ë¦¬ ì„¤ì •
+        float ClosestDistance = MaxDistance; // ìµœëŒ€ê±°ë¦¬ ì„¤ì •í•œ ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
         
-        Vector2 PlayerPos = transform.position; // ÇÃ·¹ÀÌ¾î À§Ä¡
+        Vector2 PlayerPos = transform.position; // í”Œë ˆì´ì–´ ìœ„ì¹˜
 
         foreach (GameObject monster in monsters)
         {
-            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); // ÇÃ·¹ÀÌ¾î¿Í ÀûÀÇ °Å¸® °è»ê
-            if (Distance < ClosestDistance) //Áö±İ±îÁö ÀúÀåµÈ °¡Àå °¡±î¿î °Å¸®º¸´Ù ÀÛÀ¸¸é
+            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); // í”Œë ˆì´ì–´ì™€ ì ì˜ ê±°ë¦¬ ê³„ì‚°
+            if (Distance < ClosestDistance) //ì§€ê¸ˆê¹Œì§€ ì €ì¥ëœ ê°€ì¥ ê°€ê¹Œìš´ ê±°ë¦¬ë³´ë‹¤ ì‘ìœ¼ë©´
             {
-                ClosestDistance = Distance; // »õ·Î¿î °¡Àå °¡±î¿î °Å¸®·Î ÀúÀå 
-                ClosestEnemy = monster.transform; // ÇØ´ç ÀûÀÇ transform ÀúÀå
+                ClosestDistance = Distance; // ìƒˆë¡œìš´ ê°€ì¥ ê°€ê¹Œìš´ ê±°ë¦¬ë¡œ ì €ì¥ 
+                ClosestEnemy = monster.transform; // í•´ë‹¹ ì ì˜ transform ì €ì¥
             }
         }
 
-        return ClosestEnemy; // °¡Àå °¡±î¿î Àû ¹İÈ¯ (¾øÀ¸¸é null)
+        return ClosestEnemy; // ê°€ì¥ ê°€ê¹Œìš´ ì  ë°˜í™˜ (ì—†ìœ¼ë©´ null)
     }
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        // ÀÓÀÇ·Î °ª ¼³Á¤ Çß½À´Ï´Ù.
+        // ì„ì˜ë¡œ ê°’ ì„¤ì • í–ˆìŠµë‹ˆë‹¤.
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
@@ -83,11 +102,16 @@ public class Player : Character
     void Update()
     {
         Move();
-        
-        Transform target = FindCloseMonster();
-        if (target != null)
+
+        // ê³µê²© ì¿¨íƒ€ì„ ì²˜ë¦¬
+        if (AttackCoolDown <= 0f)
         {
-            Debug.Log("°¡Àå °¡±î¿î Àû: " + target.name); // Àû ÀÌ¸§ Ãâ·Â
+            Attack();
+            AttackCoolDown = 1f; // 1ì´ˆ ì¿¨íƒ€ì„
+        }
+        else
+        {
+            AttackCoolDown -= Time.deltaTime;
         }
     }
 }
