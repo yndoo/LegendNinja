@@ -12,6 +12,7 @@ public class MeleeMonster : BaseMonster
     }
     public override void Attack()
     {
+        base.Attack();
         Debug.Log("Melee Attack");
     }
 

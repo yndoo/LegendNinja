@@ -6,6 +6,6 @@ public class RangedMonster : BaseMonster
 {
     public override void Attack()
     {
-
+        base.Attack();
     }
 }
