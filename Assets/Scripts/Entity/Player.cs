@@ -19,7 +19,7 @@ public class Player : Character
 
     public override void Attack()
     {
-        
+
         // base.Attack();
     }
 
@@ -27,7 +27,11 @@ public class Player : Character
     {
 
     }
-
+    public override void Damage(float damage)
+    {
+        Health -= damage; 
+        
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
