@@ -1,0 +1,97 @@
+{
+  "Small": [
+    {
+      "id": 1,
+      "name": "Bamboo",
+      "stats": {
+        "MaxHealth": 50.0,
+        "AttackPower": 10.0,
+        "Defense": 5.0,
+        "MoveSpeed": 0.4,
+        "AttackRange": 1.2,
+        "AttackSpeed": 0.3,
+        "AttackTime": 4.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Mushroom",
+      "stats": {
+        "MaxHealth": 60.0,
+        "AttackPower": 10.0,
+        "Defense": 5.0,
+        "MoveSpeed": 0.2,
+        "AttackRange": 1.2,
+        "AttackSpeed": 0.2,
+        "AttackTime": 0.5
+      }
+    },
+    {
+      "id": 3,
+      "name": "Owl",
+      "stats": {
+        "MaxHealth": 60.0,
+        "AttackPower": 4.0,
+        "Defense": 4.0,
+        "MoveSpeed": 0.8,
+        "AttackRange": 3,
+        "AttackSpeed": 0.4,
+        "AttackTime": 2
+      }
+    }
+  ],
+  "Medium": [
+    {
+      "id": 1,
+      "name": "Bear",
+      "stats": {
+        "MaxHealth": 100.0,
+        "AttackPower": 15.0,
+        "Defense": 10.0,
+        "MoveSpeed": 0.6,
+        "AttackRange": 1.1,
+        "AttackSpeed": 0.5,
+        "AttackTime": 1.5
+      }
+    },
+    {
+      "id": 2,
+      "name": "GreenSnake",
+      "stats": {
+        "MaxHealth": 100.0,
+        "AttackPower": 10.0,
+        "Defense": 5.0,
+        "MoveSpeed": 1,
+        "AttackRange": 3,
+        "AttackSpeed": 0.2,
+        "AttackTime": 0.7
+      }
+    },
+    {
+      "id": 3,
+      "name": "Reptile",
+      "stats": {
+        "MaxHealth": 100.0,
+        "AttackPower": 12.0,
+        "Defense": 14.0,
+        "MoveSpeed": 0.6,
+        "AttackRange": 1,
+        "AttackSpeed": 0.5,
+        "AttackTime": 1.6
+      }
+    }
+  ],
+  "Boss": {
+    "id": 1,
+    "name": "GiantBamboo",
+    "stats": {
+      "MaxHealth": 300.0,
+      "AttackPower": 10.0,
+      "Defense": 10.0,
+      "MoveSpeed": 0.8,
+      "AttackRange": 1.5,
+      "AttackSpeed": 0.2,
+      "AttackTime": 0.5
+    }
+  }
+}
