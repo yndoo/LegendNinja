@@ -19,11 +19,17 @@ public abstract class BaseMonster : Character
     }
 
     /// <summary>
-    /// 데미지 입었을 때 처리 (애니메이션 등)
+    /// 피격 처리 (Health 감소, 애니메이션)
     /// </summary>
+    /// <param name="damage">피격 데미지 크기</param>
     public override void Damage(float damage)
     {
-        
+        Health -= damage;
+        if(Health <= 0)
+        {
+            // TO DO : 애니메이션 Die 처리
+            Destroy(this.gameObject, 1f);
+        }
     }
 
     private void FixedUpdate()
