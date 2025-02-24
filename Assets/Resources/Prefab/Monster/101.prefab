@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5435130810387471394}
   - component: {fileID: 5209377432284295804}
   m_Layer: 0
-  m_Name: MeleeMonster
+  m_Name: 101
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
