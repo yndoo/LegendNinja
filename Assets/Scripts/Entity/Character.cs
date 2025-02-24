@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     #region 캐릭터 능력치
     public float Health { get; set; }
@@ -25,4 +25,6 @@ public class Character : MonoBehaviour
     {
 
     }
+    public abstract void Damage();
+
 }

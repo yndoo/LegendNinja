@@ -21,7 +21,7 @@ public abstract class BaseMonster : Character
     /// <summary>
     /// 데미지 입었을 때 처리 (애니메이션 등)
     /// </summary>
-    public void Damaged()
+    public override void Damage()
     {
         
     }
