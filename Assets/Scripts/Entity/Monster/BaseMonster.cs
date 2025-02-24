@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseMonster : MonoBehaviour
+public abstract class BaseMonster : Character
 {
     protected GameObject Target;
-    #region 몬스터 능력치
-    protected float AttackRange { get; set; }
-    protected float MoveSpeed { get; set; }
-    #endregion
     protected bool TargetFollowMode { get; set; }
     
-    public abstract void Attack();
+    protected float AttackCoolDown;
+    public override void Attack()
+    {
+        base.Attack();
+    }
 
     protected virtual void Start()
     {
@@ -21,7 +21,7 @@ public abstract class BaseMonster : MonoBehaviour
     /// <summary>
     /// 데미지 입었을 때 처리 (애니메이션 등)
     /// </summary>
-    public void Damaged()
+    public override void Damage(float damage)
     {
         
     }
@@ -42,6 +42,8 @@ public abstract class BaseMonster : MonoBehaviour
     {
         Target = player;
         TargetFollowMode = true;
+
+        // TO DO : 애니메이션 Move 처리
     }
 
     /// <summary>
