@@ -25,6 +25,6 @@ public abstract class Character : MonoBehaviour
     {
 
     }
-    public abstract void Damage();
+    public abstract void Damage(float damage);
 
 }
