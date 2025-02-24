@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class RangedMonster : BaseMonster
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Attack()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
