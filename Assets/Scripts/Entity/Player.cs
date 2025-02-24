@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : Character
 {
+    private Animator animator;
     private Rigidbody2D rb;
 
     public void Move()
@@ -13,6 +15,16 @@ public class Player : Character
         float MoveY = Input.GetAxisRaw("Vertical");
 
         Vector2 MoveDirection = new Vector2(MoveX, MoveY).normalized;
+
+        // 애니메이션 처리
+        if (MoveDirection.magnitude > 0)  // 이동 중일 때
+        {
+            animator.SetBool("IsMove", true);
+        }
+        else
+        {
+            animator.SetBool("IsMove", false);
+        }
 
         rb.velocity = MoveDirection * MoveSpeed;
     }
@@ -34,12 +46,13 @@ public class Player : Character
     }
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         // 임의로 값 설정 했습니다.
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
-        MoveSpeed = 5f;
+        MoveSpeed = 3f;
     }
 
     void Update()
