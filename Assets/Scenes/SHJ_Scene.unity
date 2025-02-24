@@ -549,6 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13daa41a2bd798447a0054b8aad778c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Shuriken: {fileID: 7256886330311997986, guid: 113188e8a8235434b96ef6a83b43c2af, type: 3}
+  PlayerPivot: {fileID: 367933837}
 --- !u!61 &2112636686
 BoxCollider2D:
   m_ObjectHideFlags: 0
