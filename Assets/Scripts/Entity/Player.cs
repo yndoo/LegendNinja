@@ -47,6 +47,28 @@ public class Player : Character
         Health -= damage; 
         
     }
+    Transform FindCloseMonster()
+    {
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // "Monster" 태그 가진 오브젝트 찾기
+        Transform ClosestEnemy = null; //가장 가까운 적을 저장할 변수
+
+        float MaxDistance = 50f; // 화면 상에서의 최대거리 설정
+        float ClosestDistance = MaxDistance; // 최대거리 설정한 값으로 초기화
+        
+        Vector2 PlayerPos = transform.position; // 플레이어 위치
+
+        foreach (GameObject monster in monsters)
+        {
+            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); // 플레이어와 적의 거리 계산
+            if (Distance < ClosestDistance) //지금까지 저장된 가장 가까운 거리보다 작으면
+            {
+                ClosestDistance = Distance; // 새로운 가장 가까운 거리로 저장 
+                ClosestEnemy = monster.transform; // 해당 적의 transform 저장
+            }
+        }
+
+        return ClosestEnemy; // 가장 가까운 적 반환 (없으면 null)
+    }
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -61,5 +83,11 @@ public class Player : Character
     void Update()
     {
         Move();
+        
+        Transform target = FindCloseMonster();
+        if (target != null)
+        {
+            Debug.Log("가장 가까운 적: " + target.name); // 적 이름 출력
+        }
     }
 }

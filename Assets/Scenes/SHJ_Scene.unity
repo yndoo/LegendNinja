@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3886792298918476967, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.39
+      value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 3886792298918476967, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 4048893732630899918, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 5209377432284295804, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -184,6 +188,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
+--- !u!1 &367933837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367933838}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &367933838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367933837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2112636684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1146808029
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,9 +323,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 1283699837092602556, guid: 29a518bf8b878b84fa4768b12f8d6962, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 2569451157687722374, guid: 29a518bf8b878b84fa4768b12f8d6962, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.21
+      value: 6.42
       objectReference: {fileID: 0}
     - target: {fileID: 2569451157687722374, guid: 29a518bf8b878b84fa4768b12f8d6962, type: 3}
       propertyPath: m_LocalPosition.y
@@ -503,6 +542,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2084649693}
+  - {fileID: 367933838}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2112636685
