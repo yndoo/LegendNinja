@@ -9,9 +9,16 @@ public class MonsterSpawner : MonoBehaviour
     private int curWave = 1;
 
     private MonsterDatabase monsterDB;
+    private WaveDatabase waveDB;
 
     void Start()
     {
-        monsterDB = DataTableLoader.LoadMonsterData("Stage1_MonsterTable");
-    }   
+        monsterDB = DataTableLoader.LoadMonsterData("MonsterTable");
+        waveDB = DataTableLoader.LoadWaveData("WaveDataTable");
+    }
+
+    void RandomSpawn()
+    {
+        WaveData data = waveDB.WaveDatas[curWave - 1];
+    }
 }

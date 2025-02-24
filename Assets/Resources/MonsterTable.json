@@ -45,7 +45,7 @@
   ],
   "Medium": [
     {
-      "id": 104,
+      "id": 201,
       "name": "Bear",
       "type": "Melee",
       "stats": {
@@ -59,7 +59,7 @@
       }
     },
     {
-      "id": 105,
+      "id": 202,
       "name": "GreenSnake",
       "type": "Ranged",
       "stats": {
@@ -73,7 +73,7 @@
       }
     },
     {
-      "id": 106,
+      "id": 203,
       "name": "Reptile",
       "type": "Melee",
       "stats": {
@@ -88,7 +88,7 @@
     }
   ],
   "Boss": {
-    "id": 107,
+    "id": 301,
     "name": "GiantBamboo",
     "type": "Melee",
     "stats": {

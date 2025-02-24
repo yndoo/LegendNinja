@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+#region 몬스터 데이터 틀
 public class StatData
 {
     public float MaxHealth;
@@ -31,6 +32,23 @@ public class MonsterDatabase
     public List<MonsterData> Medium;
     public MonsterData Boss;
 }
+#endregion
+
+#region 웨이브 데이터 틀
+public class WaveData
+{ 
+    public int wave;
+    public int smallType;
+    public int mediumType;
+    public int smallCount;
+    public int mediumCount;
+    public int bossType;
+}
+public class WaveDatabase
+{
+    public List<WaveData> WaveDatas;
+}
+#endregion
 
 public static class DataTableLoader
 {
@@ -49,16 +67,21 @@ public static class DataTableLoader
 
         MonsterDatabase MonsterDB = JsonConvert.DeserializeObject<MonsterDatabase>(monsterJsonFile.text);
 
-        //foreach (MonsterData monster in MonsterDB.Small)
-        //{
-        //    Debug.Log($"소형 몬스터: {monster.name}, 공격력: {monster.stats.AttackPower}");
-        //}
-        //foreach (MonsterData monster in MonsterDB.Medium)
-        //{
-        //    Debug.Log($"중형 몬스터: {monster.name}, 공격력: {monster.stats.AttackPower}");
-        //}
-        //Debug.Log($"보스 : {MonsterDB.Boss.name}");
-
+        Debug.Log("MonsterTable 로드 완료");
         return MonsterDB;
+    }
+
+    public static WaveDatabase LoadWaveData(string jsonFileName)
+    {
+        TextAsset JsonFile = Resources.Load<TextAsset>(jsonFileName);
+        if (JsonFile == null)
+        {
+            Debug.Log("json 파일이 null입니다.");
+        }
+
+        WaveDatabase WaveDB = JsonConvert.DeserializeObject<WaveDatabase>(JsonFile.text);
+
+        Debug.Log("WaveDataTable 로드 완료");
+        return WaveDB;
     }
 }
