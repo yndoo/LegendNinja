@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1252989125544170920}
   - component: {fileID: 5817582497762027488}
-  - component: {fileID: 1198454711718467640}
   m_Layer: 0
   m_Name: PShuriken
   m_TagString: Untagged
@@ -57,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7900796188930451891}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.4450501, w: 0.89550567}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97,21 +96,6 @@ MonoBehaviour:
   numberofProjectilesPerShot: 3
   multipleProjectilesAngel: 3
   projectileColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1198454711718467640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7900796188930451891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffd98c5e9697ff47a333f8170ae8134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 0}
-  weaponPivot: {fileID: 0}
-  WeaponPrefab: {fileID: 0}
 --- !u!1 &8924902518974829768
 GameObject:
   m_ObjectHideFlags: 0
