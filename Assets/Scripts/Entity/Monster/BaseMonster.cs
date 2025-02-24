@@ -7,6 +7,7 @@ public abstract class BaseMonster : Character
     protected GameObject Target;
     protected bool TargetFollowMode { get; set; }
     
+    protected float AttackCoolDown;
     public override void Attack()
     {
         base.Attack();
