@@ -10,6 +10,7 @@ public class Player : Character
 
     public void Move()
     {
+        
         // WASD
         float MoveX = Input.GetAxisRaw("Horizontal");
         float MoveY = Input.GetAxisRaw("Vertical");
@@ -25,6 +26,8 @@ public class Player : Character
         {
             animator.SetBool("IsMove", false);
         }
+        animator.SetFloat("MoveX", MoveDirection.x);
+        animator.SetFloat("MoveY", MoveDirection.y);
 
         rb.velocity = MoveDirection * MoveSpeed;
     }
