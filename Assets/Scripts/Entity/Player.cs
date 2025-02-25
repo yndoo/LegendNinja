@@ -11,6 +11,8 @@ public class Player : Character
     private Animator animator;
     private Rigidbody2D rb;
 
+    [SerializeField] private WeaponHandler weaponHandler;
+
     private float AttackCoolDown = 0f; //쿨타임
     public void Move()
     {
@@ -41,15 +43,16 @@ public class Player : Character
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
         if (target != null)
         {
-            // 표창을 발사할 위치에서 발사
-            GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
-            Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
+            //// 표창을 발사할 위치에서 발사
+            //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
+            //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
 
             // 적의 방향 계산
-            Vector2 direction = (target.position - PlayerPivot.transform.position).normalized;
+            Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
 
-            // 표창에 방향과 힘을 적용
-            shurikenRb.velocity = direction * AttackPower;
+            //// 표창에 방향과 힘을 적용
+            //shurikenRb.velocity = direction * AttackPower;
+            weaponHandler.Attack(direction);
         }
         else
         {

@@ -9,8 +9,8 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private int bulletIndex; // 탄환 인덱스 (사용할 탄환 유형 식별)
     public int BulletIndex { get { return bulletIndex; } }
 
-    [SerializeField] private float bulletSize = 1; // 투사체 크기
-    public float BulletSize { get { return bulletSize; } }
+    [SerializeField] public float bulletSize = 1; // 투사체 크기
+    //public float BulletSize { get { return bulletSize; } }
 
     [SerializeField] private float duration; // 투사체 지속 시간
     public float Duration { get { return duration; } }
@@ -41,9 +41,9 @@ public class RangeWeaponHandler : WeaponHandler
     /// <summary>
     /// 공격 시 여러 개의 투사체를 생성하여 발사.
     /// </summary>
-    public override void Attack()
+    public override void Attack(Vector3 direction)
     {
-        base.Attack();
+        base.Attack(direction);
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 투사체 간 간격 설정
         int numberOfProjectilesPerShot = numberofProjectilesPerShot; // 발사할 투사체 개수
@@ -57,12 +57,10 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도 설정
             float randomSpread = Random.Range(-spread, spread); // 랜덤한 퍼짐 효과 추가
             angle += randomSpread;
-            CreateProjectile(Controller.LookDirection, angle);
-            //CreateProjectile(Shoot.LookDirection, angle); // 테스트
-
-
+            CreateProjectile(direction, angle);
         }
     }
+    
 
     /// <summary>
     /// 투사체를 생성하여 발사.

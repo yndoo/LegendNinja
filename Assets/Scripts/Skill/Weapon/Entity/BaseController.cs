@@ -117,6 +117,6 @@ public class BaseController : MonoBehaviour
     protected virtual void Attack()
     {
         if (lookDirection != Vector2.zero)
-            weaponHandler?.Attack();
+            weaponHandler?.Attack(Vector2.zero);
     }
 }

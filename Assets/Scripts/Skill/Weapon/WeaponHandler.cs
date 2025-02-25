@@ -36,8 +36,6 @@ public class WeaponHandler : MonoBehaviour
     // 이 무기를 소유한 BaseController (플레이어나 적 캐릭터)
     public BaseController Controller { get; private set; }
 
-    public Shoot Shoot { get; private set; } // 테스트용
-
     private Animator animator; // 무기의 애니메이션 컨트롤러
     private SpriteRenderer weaponRenderer; // 무기의 스프라이트 렌더러
 
@@ -48,7 +46,6 @@ public class WeaponHandler : MonoBehaviour
     {
         // 부모 객체에서 BaseController를 가져옴
         Controller = GetComponentInParent<BaseController>();
-        Shoot = GetComponentInParent<Shoot>(); // 테스트용
 
         // 하위 객체에서 Animator 및 SpriteRenderer를 가져옴
         animator = GetComponentInChildren<Animator>();
@@ -72,7 +69,7 @@ public class WeaponHandler : MonoBehaviour
     /// <summary>
     /// 공격을 실행하는 메서드 (자식 클래스에서 오버라이드 가능)
     /// </summary>
-    public virtual void Attack()
+    public virtual void Attack(Vector3 direction)
     {
         AttackAnimation();
     }
