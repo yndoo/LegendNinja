@@ -11,6 +11,7 @@ public class SkillData
     public string type;
     public float value;
     public string description;
+    public string sprite;
 }
 
 [Serializable]
