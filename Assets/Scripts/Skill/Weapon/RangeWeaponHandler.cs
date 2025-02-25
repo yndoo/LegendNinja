@@ -57,8 +57,8 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도 설정
             float randomSpread = Random.Range(-spread, spread); // 랜덤한 퍼짐 효과 추가
             angle += randomSpread;
-            //CreateProjectile(Controller.LookDirection, angle);
-            CreateProjectile(Shoot.LookDirection, angle); // 테스트
+            CreateProjectile(Controller.LookDirection, angle);
+            //CreateProjectile(Shoot.LookDirection, angle); // 테스트
 
 
         }

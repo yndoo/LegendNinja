@@ -66,7 +66,7 @@ public class WeaponHandler : MonoBehaviour
     /// </summary>
     protected virtual void Start()
     {
-
+        Debug.Log($"초기 공격력: {Power}, 초기 속도: {Speed}, 초기 딜레이: {Delay}");
     }
 
     /// <summary>

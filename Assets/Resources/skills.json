@@ -1,0 +1,22 @@
+{
+  "skills": [
+    {
+      "id": 1,
+      "name": "PowerUP",
+      "type": "power",
+      "value": 1.0
+    },
+    {
+      "id": 2,
+      "name": "PowerDelay",
+      "type": "delay",
+      "value": -0.1
+    },
+    {
+      "id": 3,
+      "name": "PowerSpeed",
+      "type": "speed",
+      "value": 1.0
+    }
+  ]
+}
