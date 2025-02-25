@@ -1,94 +1,91 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WeaponHandler : MonoBehaviour
 {
-    //  무기 공격 관련 정보
     [Header("Attack Info")]
-
-    [SerializeField] private float delay = 1f;
+    [SerializeField] private float delay = 1f; // 공격 딜레이 (초)
     public float Delay { get => delay; set => delay = value; }
-    // 공격 간격(쿨타임) - 무기가 공격할 때마다 일정 시간 딜레이 적용
 
-    [SerializeField] private float weaponSize = 1f;
+    [SerializeField] private float weaponSize = 1f; // 무기의 크기
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
-    // 무기 크기 - 공격 판정 범위에 영향을 줄 수 있음
 
-    [SerializeField] private float power = 1f;
+    [SerializeField] private float power = 1f; // 공격력
     public float Power { get => power; set => power = value; }
-    // 공격력 - 적에게 가하는 피해량을 결정
 
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 1f; // 공격 속도
     public float Speed { get => speed; set => speed = value; }
-    // 무기 속도 - 발사체가 날아가는 속도
 
-    [SerializeField] private float attackRange = 10f;
+    [SerializeField] private float attackRange = 10f; // 공격 범위
     public float AttackRange { get => attackRange; set => attackRange = value; }
-    // 공격 범위 - 원거리 공격일 경우, 최대 사거리를 의미
 
-    public LayerMask target;
-    // 공격 대상 설정 - 특정 Layer(적, 몬스터 등)만 공격할 수 있도록 설정
+    public LayerMask target; // 공격 대상 레이어 설정
 
-    //  넉백(적을 밀쳐내는 효과) 관련 정보
     [Header("Knock Back Info")]
+    [SerializeField] private bool isOnKnockback = false; // 넉백 적용 여부
+    public bool IsOnKnockback { get => isOnKnockback; set => isOnKnockback = value; }
 
-    [SerializeField] private bool isOnknockBack = false;
-    public bool IsOnknockBack { get => isOnknockBack; set => isOnknockBack = value; }
-    // 넉백 효과 적용 여부 - true면 적이 공격을 맞았을 때 밀려남
-
-    [SerializeField] private float knockbackPower = 0.1f;
+    [SerializeField] private float knockbackPower = 0.1f; // 넉백 힘
     public float KnockbackPower { get => knockbackPower; set => knockbackPower = value; }
-    // 넉백 세기 - 적을 얼마나 강하게 밀쳐낼지 결정
 
-    [SerializeField] private float knockbackTime = 0.5f;
+    [SerializeField] private float knockbackTime = 0.5f; // 넉백 지속 시간
     public float KnockbackTime { get => knockbackTime; set => knockbackTime = value; }
-    // 넉백 지속 시간 - 적이 넉백 상태에 머무는 시간
 
-    //  애니메이션 관련 해시값 (공격 애니메이션 트리거)
+    // 공격 애니메이션 트리거 해시 값
     private static readonly int IsAttack = Animator.StringToHash("IsAttack");
-    // 애니메이터에서 "IsAttack" 파라미터를 해시 값으로 저장하여 성능 최적화
 
+    // 이 무기를 소유한 BaseController (플레이어나 적 캐릭터)
+    public BaseController Controller { get; private set; }
 
-    // Animator 컴포넌트 참조
-    private Animator animator;
-    // SpriteRenderer 컴포넌트 참조
-    private SpriteRenderer weaponRenderer;
+    private Animator animator; // 무기의 애니메이션 컨트롤러
+    private SpriteRenderer weaponRenderer; // 무기의 스프라이트 렌더러
 
-    protected virtual void Start()
-    {
-
-    }
-
-    // 초기화 메서드
+    /// <summary>
+    /// 초기화 작업을 수행하는 메서드
+    /// </summary>
     protected virtual void Awake()
     {
-        // 부모 객체에서 Animator 컴포넌트 가져오기
-        animator = GetComponentInParent<Animator>();
-        // 자식 객체에서 SpriteRenderer 컴포넌트 가져오기
+        // 부모 객체에서 BaseController를 가져옴
+        Controller = GetComponentInParent<BaseController>();
+
+        // 하위 객체에서 Animator 및 SpriteRenderer를 가져옴
+        animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        // 애니메이터 속도 설정
+        // 공격 속도에 따라 애니메이션 속도 조절
         animator.speed = 1.0f / delay;
-        // 무기 크기 설정
+
+        // 무기의 크기 설정
         transform.localScale = Vector3.one * weaponSize;
     }
 
-    // 공격 메서드
-    public virtual void Attack()
+    /// <summary>
+    /// Start에서 수행할 추가적인 동작 (현재는 비워둠, 필요 시 오버라이드 가능)
+    /// </summary>
+    protected virtual void Start()
+    {
+        Debug.Log($"초기 공격력: {Power}, 초기 속도: {Speed}, 초기 딜레이: {Delay}");
+    }
+
+    /// <summary>
+    /// 공격을 실행하는 메서드 (자식 클래스에서 오버라이드 가능)
+    /// </summary>
+    public virtual void Attack(Vector3 direction)
     {
         AttackAnimation();
     }
 
-    // 공격 애니메이션 트리거 메서드
-    private void AttackAnimation()
+    /// <summary>
+    /// 공격 애니메이션을 실행하는 메서드
+    /// </summary>
+    public void AttackAnimation()
     {
         animator.SetTrigger(IsAttack);
     }
 
-    // 무기 회전 메서드
+    /// <summary>
+    /// 무기의 방향을 회전시키는 메서드
+    /// </summary>
+    /// <param name="isLeft">true면 왼쪽, false면 오른쪽</param>
     public virtual void Rotate(bool isLeft)
     {
         weaponRenderer.flipY = isLeft;

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private LayerMask levelCollisionLayer;
@@ -9,7 +10,7 @@ public class ProjectileController : MonoBehaviour
     private float currentDuration;
     private Vector2 direction;
     private bool isReady;
-    private Transform pivot;
+    //private Transform pivot;
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -20,7 +21,7 @@ public class ProjectileController : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        pivot = transform.GetChild(0);
+        //pivot = transform.GetChild(0);
     }
 
     private void Update()
@@ -59,15 +60,15 @@ public class ProjectileController : MonoBehaviour
 
         this.direction = direction;
         currentDuration = 0;
-        transform.localScale = Vector3.one * weaponHandler.BulletSize;
+        transform.localScale = Vector3.one * weaponHandler.bulletSize;
         spriteRenderer.color = weaponHandler.ProjectileColor;
 
-        transform.right = this.direction;
+        //transform.right = this.direction;
 
-        if (this.direction.x < 0)
-            pivot.localRotation = Quaternion.Euler(180, 0, 0);
-        else
-            pivot.localRotation = Quaternion.Euler(0, 0, 0);
+        //if (this.direction.x < 0)
+        //    pivot.localRotation = Quaternion.Euler(180, 0, 0);
+        //else
+        //    pivot.localRotation = Quaternion.Euler(0, 0, 0);
 
         isReady = true;
     }
