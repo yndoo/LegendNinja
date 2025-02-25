@@ -87,18 +87,20 @@
       }
     }
   ],
-  "Boss": {
-    "id": 301,
-    "name": "GiantBamboo",
-    "type": "Melee",
-    "stats": {
-      "MaxHealth": 300.0,
-      "AttackPower": 10.0,
-      "Defense": 10.0,
-      "MoveSpeed": 0.8,
-      "AttackRange": 1.5,
-      "AttackSpeed": 0.2,
-      "AttackTime": 0.5
+  "Boss": [
+    {
+      "id": 301,
+      "name": "GiantBamboo",
+      "type": "Melee",
+      "stats": {
+        "MaxHealth": 300.0,
+        "AttackPower": 10.0,
+        "Defense": 10.0,
+        "MoveSpeed": 0.8,
+        "AttackRange": 1.5,
+        "AttackSpeed": 0.2,
+        "AttackTime": 0.5
+      }
     }
-  }
+  ]
 }

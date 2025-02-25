@@ -30,7 +30,7 @@ public class MonsterDatabase
 {
     public List<MonsterData> Small;
     public List<MonsterData> Medium;
-    public MonsterData Boss;
+    public List<MonsterData> Boss;
 }
 #endregion
 
@@ -56,13 +56,14 @@ public static class DataTableLoader
     /// 스테이지별 몬스터 데이터를 로드하는 함수
     /// </summary>
     /// <param name="jsonFileName">읽어올 json 파일명</param>
-    /// <returns>정해진 형식대로 데이터를 반환</returns>
+    /// <returns>MonsterDatabase에 데이터를 담아 반환</returns>
     public static MonsterDatabase LoadMonsterData(string jsonFileName)
     {
         TextAsset monsterJsonFile = Resources.Load<TextAsset>(jsonFileName);
         if (monsterJsonFile == null)
         {
             Debug.Log("json 파일이 null입니다.");
+            return null;
         }
 
         MonsterDatabase MonsterDB = JsonConvert.DeserializeObject<MonsterDatabase>(monsterJsonFile.text);
@@ -71,12 +72,18 @@ public static class DataTableLoader
         return MonsterDB;
     }
 
+    /// <summary>
+    /// 웨이브별 랜덤 몬스터 데이터를 로드하는 함수
+    /// </summary>
+    /// <param name="jsonFileName">읽어올 json 파일명</param>
+    /// <returns>WaveDatabase에 데이터를 담아 반환</returns>
     public static WaveDatabase LoadWaveData(string jsonFileName)
     {
         TextAsset JsonFile = Resources.Load<TextAsset>(jsonFileName);
         if (JsonFile == null)
         {
             Debug.Log("json 파일이 null입니다.");
+            return null;
         }
 
         WaveDatabase WaveDB = JsonConvert.DeserializeObject<WaveDatabase>(JsonFile.text);

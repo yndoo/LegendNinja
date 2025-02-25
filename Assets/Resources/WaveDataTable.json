@@ -13,7 +13,7 @@
       "smallType": 2,
       "mediumType": 0,
       "smallCount": 3,
-      "MediumCount": 0,
+      "mediumCount": 0,
       "bossType": 0
     },
     {
@@ -21,15 +21,15 @@
       "smallType": 2,
       "mediumType": 1,
       "smallCount": 2,
-      "MediumCount": 1,
+      "mediumCount": 1,
       "bossType": 0
     },
     {
       "wave": 4,
       "smallType": 0,
       "mediumType": 2,
-      "smallCount": 3,
-      "MediumCount": 0,
+      "smallCount": 0,
+      "mediumCount": 3,
       "bossType": 0
     },
     {
@@ -37,7 +37,7 @@
       "smallType": 0,
       "mediumType": 0,
       "smallCount": 0,
-      "MediumCount": 0,
+      "mediumCount": 0,
       "bossType": 1
     }
   ]
