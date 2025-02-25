@@ -8,24 +8,24 @@
         "MaxHealth": 50.0,
         "AttackPower": 10.0,
         "Defense": 5.0,
-        "MoveSpeed": 4,
-        "AttackRange": 1.2,
-        "AttackSpeed": 0.3,
-        "AttackTime": 4.0
+        "MoveSpeed": 2,
+        "AttackRange": 1.1,
+        "AttackSpeed": 0,
+        "AttackTime": 1
       }
     },
     {
       "id": 102,
-      "name": "Mushroom",
+      "name": "DragonYellow",
       "type": "Melee",
       "stats": {
         "MaxHealth": 60.0,
-        "AttackPower": 10.0,
-        "Defense": 5.0,
-        "MoveSpeed": 2,
-        "AttackRange": 1.2,
-        "AttackSpeed": 0.2,
-        "AttackTime": 0.5
+        "AttackPower": 8.0,
+        "Defense": 3.0,
+        "MoveSpeed": 1,
+        "AttackRange": 1.1,
+        "AttackSpeed": 0,
+        "AttackTime": 1.2
       }
     },
     {

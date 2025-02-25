@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Monster : BaseMonster
 {
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
+        monsterAnimator = GetComponentInChildren<Animator>();
     }
 
     public override void Attack()
