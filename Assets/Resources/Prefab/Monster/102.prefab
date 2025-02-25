@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5338604313939901891}
   - component: {fileID: 8174322952999832487}
   - component: {fileID: 8638377856724897455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 102
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5431416472310539257}
   - component: {fileID: 7392173245412328428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2871041696028080003}
   - component: {fileID: 434472821882686088}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
