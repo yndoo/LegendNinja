@@ -10,8 +10,6 @@ public class Player : Character
 
     private Animator animator;
     private Rigidbody2D rb;
-
-    private float AttackCoolDown = 0f; //쿨타임
     public void Move()
     {
         
@@ -97,21 +95,28 @@ public class Player : Character
         Health = 100f;
         AttackPower = 10f;
         MoveSpeed = 3f;
+
+        base.AttackSpeed = 1f;
     }
 
     void Update()
     {
         Move();
+        if (rb.velocity.magnitude > 0)
+        {
+            AttackSpeed = 0.5f; 
+            return;
+        }
 
         // 공격 쿨타임 처리
-        if (AttackCoolDown <= 0f)
+        if (AttackSpeed <= 0f)
         {
             Attack();
-            AttackCoolDown = 1f; // 1초 쿨타임
+            AttackSpeed = 1f; // 1초 쿨타임
         }
         else
         {
-            AttackCoolDown -= Time.deltaTime;
+            AttackSpeed -= Time.deltaTime;
         }
     }
 }
