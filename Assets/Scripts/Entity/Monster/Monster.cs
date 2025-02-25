@@ -1,3 +1,4 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,22 @@ public class Monster : BaseMonster
     {
         base.Start();
     }
-    private void Update()
-    {
-        AttackCoolDown -= Time.deltaTime;
-    }
+
     public override void Attack()
     {
-        if (AttackCoolDown > 0f) return;
-
         base.Attack();
-        Debug.Log("Melee Attack");
-        AttackCoolDown = AttackTime;
+        switch (myData.type)
+        {
+            case EAttackType.Melee:
+                break;
+            case EAttackType.Ranged:
+                break;
+            case EAttackType.AoE:
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

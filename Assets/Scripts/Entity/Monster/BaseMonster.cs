@@ -9,10 +9,16 @@ public abstract class BaseMonster : Character
     
     protected float AttackCoolDown;
     protected MonsterData myData;
+    private void Update()
+    {
+        AttackCoolDown -= Time.deltaTime;
+    }
     public override void Attack()
     {
-        base.Attack();
+        if (AttackCoolDown > 0f) return;
 
+        base.Attack();
+        AttackCoolDown = AttackTime;
     }
 
     protected virtual void Start()
