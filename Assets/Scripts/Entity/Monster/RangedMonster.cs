@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class RangedMonster : BaseMonster
 {
-    
-    protected override void Start()
-    {
-        base.Start();
-        MoveSpeed = 0.2f;
-        AttackRange = 4f;
-        AttackTime = 2f;
-        AttackCoolDown = AttackTime;
-    }
     private void Update()
     {
         AttackCoolDown -= Time.deltaTime;

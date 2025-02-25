@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Monster : BaseMonster
 {
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
+        monsterAnimator = GetComponentInChildren<Animator>();
     }
 
     public override void Attack()
@@ -60,5 +60,14 @@ public class Monster : BaseMonster
         AttackRange = data.stats.AttackRange;
         AttackSpeed = data.stats.AttackSpeed;
         AttackTime = data.stats.AttackTime;
+
+        if(data.type == EAttackType.Melee)
+        {
+            GetComponentInChildren<CircleCollider2D>().radius = 3f;
+        }
+        else
+        {
+            GetComponentInChildren<CircleCollider2D>().radius = 4f;
+        }
     }
 }

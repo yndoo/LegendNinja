@@ -6,7 +6,6 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField]
-    private int stage = 1;
     private int curWave = 2; // 현재 wave 값. 나중에 매니저에서 가져오는 wave값으로 대체될 수 있음.
 
     private MonsterDatabase monsterDB;

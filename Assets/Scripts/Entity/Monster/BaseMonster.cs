@@ -4,26 +4,29 @@ using UnityEngine;
 
 public abstract class BaseMonster : Character
 {
+    private static readonly int MoveX = Animator.StringToHash("MoveX");
+    private static readonly int MoveY = Animator.StringToHash("MoveY");
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+
     protected GameObject Target;
-    protected bool TargetFollowMode { get; set; }
-    
-    protected float AttackCoolDown;
+    protected Animator monsterAnimator;
     protected MonsterData myData;
+    protected bool TargetFollowMode { get; set; }
+    protected float AttackCoolDown;
+
+    private void Awake()
+    {
+        //monsterAnimator = GetComponentInChildren<Animator>();
+    }
     private void Update()
     {
         AttackCoolDown -= Time.deltaTime;
     }
     public override void Attack()
     {
-        if (AttackCoolDown > 0f) return;
-
         base.Attack();
+        if (AttackCoolDown > 0f) return;
         AttackCoolDown = AttackTime;
-    }
-
-    protected virtual void Start()
-    {
-        
     }
 
     /// <summary>
@@ -79,6 +82,9 @@ public abstract class BaseMonster : Character
         }
 
         Vector3 Direction = (Target.transform.position - transform.position).normalized;
-        transform.position += Direction * (0.1f * MoveSpeed);
+        transform.position += Direction * (0.05f * MoveSpeed);
+        // 애니메이션 방향 지정
+        monsterAnimator.SetFloat(MoveX, Direction.x);
+        monsterAnimator.SetFloat(MoveY, Direction.y);
     }
 }
