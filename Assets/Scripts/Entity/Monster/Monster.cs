@@ -7,7 +7,6 @@ public class Monster : BaseMonster
     protected override void Start()
     {
         base.Start();
-
     }
     private void Update()
     {
@@ -38,5 +37,22 @@ public class Monster : BaseMonster
             // 플레이어 감지 해제
             PlayerDetectEnd();
         }
+    }
+
+    /// <summary>
+    /// data와 stat 초기화
+    /// </summary>
+    /// <param name="data">몬스터 데이터</param>
+    public void InitMonster(MonsterData data)
+    {
+        myData = data;
+
+        Health = MaxHealth = data.stats.MaxHealth;
+        AttackPower = data.stats.AttackPower;
+        Defense = data.stats.Defense;
+        MoveSpeed = data.stats.MoveSpeed;
+        AttackRange = data.stats.AttackRange;
+        AttackSpeed = data.stats.AttackSpeed;
+        AttackTime = data.stats.AttackTime;
     }
 }

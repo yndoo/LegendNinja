@@ -31,7 +31,7 @@ public class MonsterSpawner : MonoBehaviour
         for(int i = 0; i < waveData.smallCount; i++)    // 그 중 smallCount마리 소환
         {
             int idx = Random.Range(0, waveData.smallType);
-            Spawn(small[idx].id, small[idx].stats);
+            Spawn(small[idx]);
 
             Debug.Log($"소형 소환 | 인덱스 : {idx}, id : {small[idx].id}");
         }
@@ -41,7 +41,7 @@ public class MonsterSpawner : MonoBehaviour
         for (int i = 0; i < waveData.mediumCount; i++)  // 그 중 mediumCount마리 소환
         {
             int idx = Random.Range(0, waveData.mediumType);
-            Spawn(mid[idx].id, mid[idx].stats);
+            Spawn(mid[idx]);
 
             Debug.Log($"중형 소환 | 인덱스 : {idx}, id : {mid[idx].id}");
         }
@@ -50,18 +50,17 @@ public class MonsterSpawner : MonoBehaviour
         if (waveData.bossType > 0)
         {
             MonsterData boss = monsterDB.Boss.OrderBy(x => Random.value).Take(waveData.bossType).First<MonsterData>();
-            Spawn(boss.id, boss.stats);
+            Spawn(boss);
 
             Debug.Log($"보스 소환 | id : {boss.id}");
         }
     }
 
-    void Spawn(int id, StatData stat)
+    void Spawn(MonsterData data)
     {
-        GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{id}");
+        GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{data.id}");
         if (go == null) return;
 
-        Instantiate(go);
-        go.GetComponent<Monster>().SetDefaultStat(stat);
+        Instantiate(go).GetComponent<Monster>().InitMonster(data);
     }
 }
