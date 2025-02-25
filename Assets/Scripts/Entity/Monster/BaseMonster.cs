@@ -8,14 +8,16 @@ public abstract class BaseMonster : Character
     protected bool TargetFollowMode { get; set; }
     
     protected float AttackCoolDown;
+    protected MonsterData myData;
     public override void Attack()
     {
         base.Attack();
+
     }
 
     protected virtual void Start()
     {
-
+        
     }
 
     /// <summary>

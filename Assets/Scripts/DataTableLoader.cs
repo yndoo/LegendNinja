@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+#region 몬스터 데이터 틀
 public class StatData
 {
     public float MaxHealth;
@@ -29,8 +30,25 @@ public class MonsterDatabase
 {
     public List<MonsterData> Small;
     public List<MonsterData> Medium;
-    public MonsterData Boss;
+    public List<MonsterData> Boss;
 }
+#endregion
+
+#region 웨이브 데이터 틀
+public class WaveData
+{ 
+    public int wave;
+    public int smallType;
+    public int mediumType;
+    public int smallCount;
+    public int mediumCount;
+    public int bossType;
+}
+public class WaveDatabase
+{
+    public List<WaveData> WaveDatas;
+}
+#endregion
 
 public static class DataTableLoader
 {
@@ -38,27 +56,39 @@ public static class DataTableLoader
     /// 스테이지별 몬스터 데이터를 로드하는 함수
     /// </summary>
     /// <param name="jsonFileName">읽어올 json 파일명</param>
-    /// <returns>정해진 형식대로 데이터를 반환</returns>
+    /// <returns>MonsterDatabase에 데이터를 담아 반환</returns>
     public static MonsterDatabase LoadMonsterData(string jsonFileName)
     {
         TextAsset monsterJsonFile = Resources.Load<TextAsset>(jsonFileName);
         if (monsterJsonFile == null)
         {
             Debug.Log("json 파일이 null입니다.");
+            return null;
         }
 
         MonsterDatabase MonsterDB = JsonConvert.DeserializeObject<MonsterDatabase>(monsterJsonFile.text);
 
-        //foreach (MonsterData monster in MonsterDB.Small)
-        //{
-        //    Debug.Log($"소형 몬스터: {monster.name}, 공격력: {monster.stats.AttackPower}");
-        //}
-        //foreach (MonsterData monster in MonsterDB.Medium)
-        //{
-        //    Debug.Log($"중형 몬스터: {monster.name}, 공격력: {monster.stats.AttackPower}");
-        //}
-        //Debug.Log($"보스 : {MonsterDB.Boss.name}");
-
+        Debug.Log("MonsterTable 로드 완료");
         return MonsterDB;
+    }
+
+    /// <summary>
+    /// 웨이브별 랜덤 몬스터 데이터를 로드하는 함수
+    /// </summary>
+    /// <param name="jsonFileName">읽어올 json 파일명</param>
+    /// <returns>WaveDatabase에 데이터를 담아 반환</returns>
+    public static WaveDatabase LoadWaveData(string jsonFileName)
+    {
+        TextAsset JsonFile = Resources.Load<TextAsset>(jsonFileName);
+        if (JsonFile == null)
+        {
+            Debug.Log("json 파일이 null입니다.");
+            return null;
+        }
+
+        WaveDatabase WaveDB = JsonConvert.DeserializeObject<WaveDatabase>(JsonFile.text);
+
+        Debug.Log("WaveDataTable 로드 완료");
+        return WaveDB;
     }
 }
