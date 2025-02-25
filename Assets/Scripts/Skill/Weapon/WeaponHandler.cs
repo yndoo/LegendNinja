@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
@@ -12,8 +13,8 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float power = 1f; // 공격력
     public float Power { get => power; set => power = value; }
 
-    [SerializeField] private float speed = 1f; // 공격 속도
-    public float Speed { get => speed; set => speed = value; }
+    [SerializeField] private float attackSpeed = 1f; // 공격 속도
+    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
 
     [SerializeField] private float attackRange = 10f; // 공격 범위
     public float AttackRange { get => attackRange; set => attackRange = value; }
@@ -63,7 +64,14 @@ public class WeaponHandler : MonoBehaviour
     /// </summary>
     protected virtual void Start()
     {
-        Debug.Log($"초기 공격력: {Power}, 초기 속도: {Speed}, 초기 딜레이: {Delay}");
+        Debug.Log($"초기 공격력: {Power}, 초기 속도: {AttackSpeed}, 초기 딜레이: {Delay}");
+        SkillManager skillManager = FindObjectOfType<SkillManager>();
+        if(skillManager == null)
+        {
+            Debug.LogError("SkillManager를 찾을 수 없습니다.");
+            return;
+        }
+
     }
 
     /// <summary>

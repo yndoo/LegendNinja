@@ -10,7 +10,7 @@ public class RangeWeaponHandler : WeaponHandler
     public int BulletIndex { get { return bulletIndex; } }
 
     [SerializeField] public float bulletSize = 1; // 투사체 크기
-    //public float BulletSize { get { return bulletSize; } }
+    public float BulletSize { get { return bulletSize; } }
 
     [SerializeField] private float duration; // 투사체 지속 시간
     public float Duration { get { return duration; } }
@@ -36,6 +36,11 @@ public class RangeWeaponHandler : WeaponHandler
     {
         base.Start();
         projectileManager = ProjectileManager.Instance; // 싱글톤 인스턴스 가져오기
+
+        if (projectileManager == null)
+        {
+            Debug.LogError("ProjectileManager.Instance가 null입니다. ProjectileManager가 씬에 존재하는지 확인하세요!");
+        }
     }
 
     /// <summary>
@@ -69,6 +74,11 @@ public class RangeWeaponHandler : WeaponHandler
     /// <param name="angle">투사체 회전 각도</param>
     private void CreateProjectile(Vector2 _lookDirection, float angle)
     {
+        if (projectileManager == null)
+        {
+            Debug.LogError("ProjectileManager가 null입니다! 싱글톤이 올바르게 설정되었는지 확인하세요.");
+            return;
+        }
         projectileManager.ShootBullet(
             this,
             projectileSpawnPosition.position,
