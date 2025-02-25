@@ -60,5 +60,14 @@ public class Monster : BaseMonster
         AttackRange = data.stats.AttackRange;
         AttackSpeed = data.stats.AttackSpeed;
         AttackTime = data.stats.AttackTime;
+
+        if(data.type == EAttackType.Melee)
+        {
+            GetComponentInChildren<CircleCollider2D>().radius = 3f;
+        }
+        else
+        {
+            GetComponentInChildren<CircleCollider2D>().radius = 4f;
+        }
     }
 }
