@@ -39,7 +39,8 @@ public class ObstacleSpawner : MonoBehaviour
                 int randomIndex = Random.Range(0, availableObstacles.Count);
                 GameObject obstacle = Instantiate(availableObstacles[randomIndex], randomPos, Quaternion.identity);
                 availableObstacles.RemoveAt(randomIndex); //사용한 장애물 제거(중복 방지)
-                usedPositions.Add(randomPos); 
+                usedPositions.Add(randomPos);
+            }
         }
     }
 }
