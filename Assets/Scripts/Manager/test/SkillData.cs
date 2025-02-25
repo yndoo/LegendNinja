@@ -10,6 +10,7 @@ public class SkillData
     public string name;
     public string type;
     public float value;
+    public string description;
 }
 
 [Serializable]
