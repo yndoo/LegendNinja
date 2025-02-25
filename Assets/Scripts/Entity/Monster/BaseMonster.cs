@@ -15,7 +15,7 @@ public abstract class BaseMonster : Character
 
     protected virtual void Start()
     {
-
+        
     }
 
     /// <summary>
@@ -72,5 +72,16 @@ public abstract class BaseMonster : Character
 
         Vector3 Direction = (Target.transform.position - transform.position).normalized;
         transform.position += Direction * (0.1f * MoveSpeed);
+    }
+
+    public void SetDefaultStat(StatData stat)
+    {
+        Health = MaxHealth = stat.MaxHealth;
+        AttackPower = stat.AttackPower;
+        Defense = stat.Defense;
+        MoveSpeed = stat.MoveSpeed;
+        AttackRange = stat.AttackRange;
+        AttackSpeed = stat.AttackSpeed;
+        AttackTime = stat.AttackTime;
     }
 }

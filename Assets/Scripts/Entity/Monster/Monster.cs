@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeMonster : BaseMonster
+public class Monster : BaseMonster
 {
     protected override void Start()
     {
         base.Start();
-        MoveSpeed = 0.2f;
-        AttackRange = 1f;
-        AttackTime = 1.5f;
-        AttackCoolDown = AttackTime;
+
     }
     private void Update()
     {
