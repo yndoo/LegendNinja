@@ -4,7 +4,7 @@
       "id": 1,
       "name": "공격력 강화",
       "type": "power",
-      "value": 1.0,
+      "value": 10.0,
       "description": "공격력 증가",
       "sprite": "Sprites/Upgrade/AttackUpgrade"
     },
@@ -34,37 +34,42 @@
     },
     {
       "id": 100,
-      "name": "화염구",
+      "name": "[비기] 화염구",
       "type": "Fire",
+      "value": 0.0,
       "description": "화염구 추가",
       "sprite": "Sprites/Weapon/BookFire"
     },
     {
       "id": 101,
-      "name": "흩날리는 눈꽃",
+      "name": "[비기]흩날리는 눈꽃",
       "type": "Ice",
+      "value": 0.0,
       "description": "눈꽃 추가",
       "sprite": "Sprites/Weapon/BookIce"
     },
     {
       "id": 102,
-      "name": "짜릿 짜릿 번개",
-      "type": "Light",
+      "name": "[비기]찌릿 번개",
+      "type": "Thunder",
+      "value": 0.0,
       "description": "번개 추가",
       "sprite": "Sprites/Weapon/BookLight"
     },
     {
       "id": 103,
-      "name": "나뭇잎",
+      "name": "[비기] 칼날잎",
       "type": "Plant",
-      "description": "",
+      "value": 0.0,
+      "description": "칼날잎 추가",
       "sprite": "Sprites/Weapon/BookPlant"
     },
     {
       "id": 104,
-      "name": "돌떨구기",
+      "name": "[비기] 암석포",
       "type": "Rock",
-      "description": "",
+      "value": 1.0,
+      "description": "암석포 추가",
       "sprite": "Sprites/Weapon/BookRock"
     }
   ]

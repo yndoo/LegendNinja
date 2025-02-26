@@ -10,7 +10,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float weaponSize = 1f; // 무기의 크기
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
-    [SerializeField] private float power = 1f; // 공격력
+    [SerializeField] private float power = 10f; // 공격력
     public float Power { get => power; set => power = value; }
 
     [SerializeField] private float attackSpeed = 10f; // 투사체 속도 증가
