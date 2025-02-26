@@ -24,6 +24,15 @@ public abstract class BaseMonster : Character
     {
         AttackCoolDown -= Time.deltaTime;
     }
+
+    private void FixedUpdate()
+    {
+        if(TargetFollowMode == true)
+        {
+            MoveToTarget();
+        }
+    }
+
     public override void Attack()
     {
         base.Attack();
@@ -42,14 +51,6 @@ public abstract class BaseMonster : Character
         {
             // TO DO : 局聪皋捞记 Die 贸府
             Destroy(this.gameObject, 1f);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if(TargetFollowMode == true)
-        {
-            MoveToTarget();
         }
     }
 
