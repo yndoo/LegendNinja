@@ -48,9 +48,9 @@
     },
     {
       "id": 102,
-      "name": "번개",
+      "name": "짜릿 짜릿 번개",
       "type": "Light",
-      "description": "",
+      "description": "번개 추가",
       "sprite": "Sprites/Weapon/BookLight"
     },
     {

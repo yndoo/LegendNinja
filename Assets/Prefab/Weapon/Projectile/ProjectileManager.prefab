@@ -48,6 +48,8 @@ MonoBehaviour:
   projectilePrefabs:
   - {fileID: 6575855587203806836, guid: b7b3fb0c8cf2ce34ba0339aa3582e7ff, type: 3}
   - {fileID: 6575855587203806836, guid: 7f11fb111a8285c49bed02c3b37cc634, type: 3}
+  - {fileID: 6575855587203806836, guid: 3b26ab54bc3db824d92606448046f0b1, type: 3}
+  - {fileID: 6575855587203806836, guid: 1ee4d067e9c80ab49a72579a11e56423, type: 3}
 --- !u!1 &9197246861811254367
 GameObject:
   m_ObjectHideFlags: 0
