@@ -61,6 +61,27 @@ public class ProjectileController : MonoBehaviour
         {
             DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
         }
+
+        // 몬스터와 충돌했을 경우
+        if (collision.CompareTag("Monster"))  // 충돌한 객체가 몬스터라면
+        {
+            // 몬스터 컴포넌트 가져오기
+            BaseMonster monster = collision.GetComponent<BaseMonster>();
+
+            if (monster != null)
+            {
+                // 몬스터에게 데미지 적용
+                monster.Damage(rangeWeaponHandler.Power);
+                Debug.Log($"몬스터의 남은 HP: {monster.Health}");
+
+                // 투사체 제거
+                //DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
+            }
+            else
+            {
+                Debug.LogWarning("BaseMonster 컴포넌트를 찾을 수 없음!");
+            }
+        }
     }
 
     /// <summary>
