@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BossMonster : BaseMonster
 {
+    protected static readonly int IsHidden = Animator.StringToHash("IsHidden");
+
     private SpriteRenderer bossRenderer;
+    private bool IsBossSkillOn = false;
+
     private void Awake()
     {
         monsterAnimator = GetComponentInChildren<Animator>();
@@ -16,12 +20,28 @@ public class BossMonster : BaseMonster
         base.Attack();
 
         if (AttackCoolDown > 0f) return;
+
         AttackCoolDown = AttackTime;
+        TargetPlayer.Damage(AttackPower);
     }
     public override void MoveToTarget()
     {
+        if (IsBossSkillOn)
+        {
+            BossSkill();
+            return;
+        }
+
         if (Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
         {
+            // 확률적으로 Hidden 스킬 사용
+            int p = Random.Range(0, 100);
+            if (p > 80)
+            {
+                IsBossSkillOn = true;
+                return;
+            }
+            // 기본 공격
             Attack();
             return;
         }
@@ -42,6 +62,13 @@ public class BossMonster : BaseMonster
         {
             bossRenderer.flipX = false;
         }
+    }
+
+    void BossSkill()
+    {
+        monsterAnimator.SetBool(IsHidden, true);
+        Debug.Log("보스 스킬 발동");
+        // TO DO : 랜덤 위치로 이동
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
