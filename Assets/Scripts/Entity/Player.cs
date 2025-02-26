@@ -27,7 +27,7 @@ public class Player : Character
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
-        MoveSpeed = 3f;
+        MoveSpeed = 4f;
         base.AttackSpeed = 1f;
     }
     void Update()
