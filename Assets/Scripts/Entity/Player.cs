@@ -14,9 +14,10 @@ public class Player : Character
     private Rigidbody2D rb;
 
     //[SerializeField] private WeaponHandler weaponHandler;
-    public List<WeaponHandler> weaponList;
+    public List<RangeWeaponHandler> weaponList;
 
     private float AttackCoolDown = 0f; //쿨타임
+    public float AttackMaxCoolDown = 1f;
     
     void Start()
     {
@@ -46,7 +47,7 @@ public class Player : Character
         if (AttackCoolDown <= 0f)
         {
             Attack();
-            AttackCoolDown = 1f; // 1초 쿨타임
+            AttackCoolDown = AttackMaxCoolDown; // 1초 쿨타임
         }
         else
         {

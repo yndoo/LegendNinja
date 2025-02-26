@@ -5,6 +5,7 @@ using UnityEngine;
 
 [Serializable]
 public class SkillData
+
 {
     public int id;
     public string name;

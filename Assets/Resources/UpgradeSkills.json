@@ -1,0 +1,36 @@
+{
+  "skills": [
+    {
+      "id": 1,
+      "name": "공격력 강화",
+      "type": "power",
+      "value": 1.0,
+      "description": "공격력 증가",
+      "sprite": "Sprites/Upgrade/AttackUpgrade"
+    },
+    {
+      "id": 2,
+      "name": "딜레이 감소",
+      "type": "delay",
+      "value": -0.1,
+      "description": "공격 딜레이 감소",
+      "sprite": "Sprites/Upgrade/Downgrade"
+    },
+    {
+      "id": 3,
+      "name": "바람의 은총",
+      "type": "speed",
+      "value": 1.0,
+      "description": "투사체 속도 증가",
+      "sprite": "Sprites/Upgrade/Upgrade"
+    },
+    {
+      "id": 4,
+      "name": "하나 더!",
+      "type": "addProjectilesPerShot",
+      "value": 1.0,
+      "description": "투사체 증가",
+      "sprite": "Sprites/Upgrade/Shuriken"
+    }
+  ]
+}
