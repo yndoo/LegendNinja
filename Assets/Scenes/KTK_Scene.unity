@@ -737,11 +737,11 @@ PrefabInstance:
     - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
       propertyPath: projectilePrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 6575855587203806836, guid: 3b26ab54bc3db824d92606448046f0b1, type: 3}
+      objectReference: {fileID: 6575855587203806836, guid: 7f11fb111a8285c49bed02c3b37cc634, type: 3}
     - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
       propertyPath: projectilePrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 6575855587203806836, guid: 7f11fb111a8285c49bed02c3b37cc634, type: 3}
+      objectReference: {fileID: 6575855587203806836, guid: 3b26ab54bc3db824d92606448046f0b1, type: 3}
     - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
       propertyPath: projectilePrefabs.Array.data[4]
       value: 

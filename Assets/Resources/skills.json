@@ -38,7 +38,12 @@
       "type": "Fire",
       "value": 0.0,
       "description": "화염구 추가",
-      "sprite": "Sprites/Weapon/BookFire"
+      "sprite": "Sprites/Weapon/BookFire",
+
+      "weaponPrefab": "Prefab/Elemental/FireProjectile",
+      "damage": 10,
+      "speed": 7.5,
+      "cooldown": 1.2
     },
     {
       "id": 101,
@@ -46,7 +51,12 @@
       "type": "Ice",
       "value": 0.0,
       "description": "눈꽃 추가",
-      "sprite": "Sprites/Weapon/BookIce"
+      "sprite": "Sprites/Weapon/BookIce",
+
+      "weaponPrefab": "Prefab/Elemental/IceProjectile",
+      "damage": 8,
+      "speed": 5.0,
+      "cooldown": 1.5
     },
     {
       "id": 102,
@@ -54,7 +64,12 @@
       "type": "Thunder",
       "value": 0.0,
       "description": "번개 추가",
-      "sprite": "Sprites/Weapon/BookLight"
+      "sprite": "Sprites/Weapon/BookLight",
+
+      "weaponPrefab": "Prefab/Elemental/ThunderProjectile",
+      "damage": 7,
+      "speed": 9.0,
+      "cooldown": 0.8
     },
     {
       "id": 103,
@@ -62,7 +77,12 @@
       "type": "Plant",
       "value": 0.0,
       "description": "칼날잎 추가",
-      "sprite": "Sprites/Weapon/BookPlant"
+      "sprite": "Sprites/Weapon/BookPlant",
+
+      "weaponPrefab": "Prefab/Elemental/PlantProjectile",
+      "damage": 6,
+      "speed": 8.0,
+      "cooldown": 0.5
     },
     {
       "id": 104,
@@ -70,7 +90,12 @@
       "type": "Rock",
       "value": 1.0,
       "description": "암석포 추가",
-      "sprite": "Sprites/Weapon/BookRock"
+      "sprite": "Sprites/Weapon/BookRock",
+
+      "weaponPrefab": "Prefab/Elemental/RockProjectile",
+      "damage": 15,
+      "speed": 7.0,
+      "cooldown": 2.0
     }
   ]
 }

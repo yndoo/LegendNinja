@@ -13,6 +13,12 @@ public class SkillData
     public float value;
     public string description;
     public string sprite;
+
+    // 무기 속성 추가
+    public float damage;    // 주는 공격력
+    public float speed;     // 날아가는 속도
+    public float cooldown;  // 쿨타임
+    public string weaponPrefab;
 }
 
 [Serializable]

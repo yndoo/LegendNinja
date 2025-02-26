@@ -39,8 +39,8 @@ public class SkillManager : MonoBehaviour
             case "power":
                 foreach(WeaponHandler weaponHandler in player.weaponList)
                 {
-                    weaponHandler.Power += skill.value;
-                    Debug.Log($"power{weaponHandler.Power}");
+                    weaponHandler.Damage += skill.value;
+                    Debug.Log($"power{weaponHandler.Damage}");
                 }
                 break;
             case "delay":
@@ -58,28 +58,48 @@ public class SkillManager : MonoBehaviour
                 player.weaponList[0].MultipleProjectilesAngel += 10;
                 break;
             case "Fire":
-                AddweaponList();
-                break;
             case "Ice":
-                AddweaponList();
-                break;
             case "Thunder":
-                AddweaponList();
-                break;
             case "Plant":
-                AddweaponList();
-                break;
             case "Rock":
-                AddweaponList();
+                    AddweaponList(skill); 
                 break;
         }
 
-        Debug.Log($"{skill.name} 적용됨! 현재 Power: {player.weaponList[0].Power}, Speed: {player.weaponList[0].AttackSpeed}");
+        Debug.Log($"{skill.name} 적용됨! 현재 Power: {player.weaponList[0].Damage}, Speed: {player.weaponList[0].AttackSpeed}");
     }
-    
-    public void AddweaponList()
+
+    public void AddweaponList(SkillData skill)
     {
-        player.weaponList.Add(new RangeWeaponHandler(player.PlayerPivot.transform, 1, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+        if(string.IsNullOrEmpty(skill.weaponPrefab))
+        {
+            Debug.LogError($"무기 프리팹이 설정되지 않음 : {skill.name}");
+            return;
+        }
+        GameObject weaponPrefab = Resources.Load<GameObject>(skill.weaponPrefab);
+        if (weaponPrefab == null)
+        {
+            Debug.LogError($"무기 프리팹을 찾을 수 없음: {skill.weaponPrefab}");
+            return;
+        }
+        GameObject newWeapon = Instantiate(weaponPrefab, player.PlayerPivot.transform);
+        RangeWeaponHandler newWeaponHandler = newWeapon.GetComponent<RangeWeaponHandler>();
+        //player.weaponList.Add(new RangeWeaponHandler(player.PlayerPivot.transform, bulletIndex, 1, 5, 0, 1, 10, weaponColor, ProjectileManager.Instance));
+        
+        if(newWeaponHandler != null)
+        {
+            player.weaponList.Add(newWeaponHandler);
+
+            // 스킬 데이터 반영하기
+            newWeaponHandler.Damage = skill.damage;
+            newWeaponHandler.AttackSpeed = skill.speed;
+            newWeaponHandler.Delay = skill.cooldown;
+            //newWeaponHandler.Type = skill.type;
+
+            Debug.Log($"{skill.name} 무기 추가됨! (데미지: {skill.damage}, 속도: {skill.speed}, 쿨타임: {skill.cooldown})");
+        }
+        else Debug.LogError("RangeWeaponHandler가 프리팹에 없음!");
+
     }
     public void AttackWithWeapons(Vector3 direction)
     {
@@ -88,5 +108,6 @@ public class SkillManager : MonoBehaviour
             weaponHandler.Attack(direction);
         }
     }
+
 
 }
