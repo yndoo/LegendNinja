@@ -6,7 +6,8 @@ public abstract class BaseMonster : Character
 {
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int MoveY = Animator.StringToHash("MoveY");
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    protected static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    protected static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
     protected GameObject Target;
     protected Player TargetPlayer;
@@ -33,7 +34,8 @@ public abstract class BaseMonster : Character
     public override void Attack()
     {
         base.Attack();
-        
+        monsterAnimator.SetBool(IsMoving, false);
+        monsterAnimator.SetBool(IsAttack, true);
     }
 
     /// <summary>
@@ -68,6 +70,8 @@ public abstract class BaseMonster : Character
     {
         Target = null;
         TargetFollowMode = false;
+        
+        monsterAnimator.SetBool(IsMoving, false);
     }
     public void MoveToTarget()
     {
@@ -77,9 +81,13 @@ public abstract class BaseMonster : Character
             return;
         }
 
+        // Move
         TargetDir = (Target.transform.position - transform.position).normalized;
         transform.position += TargetDir * (0.05f * MoveSpeed);
-        // 애니메이션 방향 지정
+
+        // 애니메이션 세팅 & 방향 지정
+        monsterAnimator.SetBool(IsAttack, false);
+        monsterAnimator.SetBool(IsMoving, true);
         monsterAnimator.SetFloat(MoveX, TargetDir.x);
         monsterAnimator.SetFloat(MoveY, TargetDir.y);
     }
