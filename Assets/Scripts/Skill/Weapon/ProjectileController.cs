@@ -70,7 +70,7 @@ public class ProjectileController : MonoBehaviour
             if (monster != null)
             {
                 // 몬스터에게 데미지 적용
-                monster.Damage(rangeWeaponHandler.Power);
+                monster.Damage(rangeWeaponHandler.Damage);
                 Debug.Log($"몬스터의 남은 HP: {monster.Health}");
 
                 // 투사체 제거

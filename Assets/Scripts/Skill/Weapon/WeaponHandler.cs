@@ -10,8 +10,8 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float weaponSize = 1f; // 무기의 크기
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
-    [SerializeField] private float power = 10f; // 공격력
-    public float Power { get => power; set => power = value; }
+    [SerializeField] private float damage = 10f; // 공격력
+    public float Damage { get => damage; set => damage = value; }
 
     [SerializeField] private float attackSpeed = 10f; // 투사체 속도 증가
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
@@ -64,7 +64,7 @@ public class WeaponHandler : MonoBehaviour
     /// </summary>
     protected virtual void Start()
     {
-        Debug.Log($"초기 공격력: {Power}, 초기 속도: {AttackSpeed}, 초기 딜레이: {Delay}");
+        Debug.Log($"초기 공격력: {damage}, 초기 속도: {AttackSpeed}, 초기 딜레이: {Delay}");
         SkillManager skillManager = FindObjectOfType<SkillManager>();
         if(skillManager == null)
         {
