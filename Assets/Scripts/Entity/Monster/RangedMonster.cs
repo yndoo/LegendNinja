@@ -6,10 +6,11 @@ using UnityEngine;
 public class RangedMonster : BaseMonster
 {
     private int shootNum;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 4f;
+        GetComponentInChildren<CircleCollider2D>().radius = 5f;
     }
     protected override void Update()
     {

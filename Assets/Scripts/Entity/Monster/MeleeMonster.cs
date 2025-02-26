@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class MeleeMonster : BaseMonster
 {
-    
-    private void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 3f;
+        GetComponentInChildren<CircleCollider2D>().radius = 4f;
     }
     public override void Attack()
     {

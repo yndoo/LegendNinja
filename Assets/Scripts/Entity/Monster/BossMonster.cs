@@ -5,15 +5,14 @@ using UnityEngine;
 public class BossMonster : BaseMonster
 {
     protected static readonly int IsHidden = Animator.StringToHash("IsHidden");
-
-    private SpriteRenderer bossRenderer;
     private bool IsBossSkillOn = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         monsterAnimator = GetComponentInChildren<Animator>();
         GetComponentInChildren<CircleCollider2D>().radius = 6f;
-        bossRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     public override void Attack()
     {
@@ -56,11 +55,11 @@ public class BossMonster : BaseMonster
 
         if(TargetDir.x < 0)
         {
-            bossRenderer.flipX = true;
+            monsterRenderer.flipX = true;
         }
         else
         {
-            bossRenderer.flipX = false;
+            monsterRenderer.flipX = false;
         }
     }
 
