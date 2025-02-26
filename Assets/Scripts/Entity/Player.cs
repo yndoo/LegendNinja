@@ -7,18 +7,23 @@ public class Player : Character
 {
     public GameObject PlayerPivot;
     private Animator animator;
-    //private static readonly int IsAttack = Animator.StringToHash("IsAttack");
-
+    
     private Rigidbody2D rb;
-    protected Vector2 MoveDirection;
 
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
-    //[SerializeField] private WeaponHandler weaponHandler; 삭제 가능
 
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
 
+    protected SpriteRenderer playerRenderer;
+    private Color originalColor;
+
+    private void Awake()
+    {
+        playerRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalColor = playerRenderer.color;
+    }
     void Start()
     {
         weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
@@ -26,7 +31,6 @@ public class Player : Character
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        // 임의로 값 설정 했습니다.
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
@@ -81,13 +85,8 @@ public class Player : Character
         if (target != null)
         {
             animator.SetLayerWeight(2, 1);
-            //// 표창을 발사할 위치에서 발사
-            //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
-            //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
             // 적의 방향 계산
             Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
-            //// 표창에 방향과 힘을 적용
-            //shurikenRb.velocity = direction * AttackPower;
 
             skillManager.AttackWithWeapons(direction); // 추가 기능 : 스킬 가져오기
 
@@ -106,6 +105,17 @@ public class Player : Character
     public override void Damage(float damage)
     {
         Health -= damage;
+        playerRenderer.color = playerRenderer.color - new Color(0, 0.3f, 0.3f, 0f);
+        Invoke("ResetColor", 0.3f);
+        if (Health <= 0)
+        {
+            animator.SetLayerWeight(3, 1);
+            Destroy(this.gameObject, 1f);
+        }
+    }
+    void ResetColor()
+    {
+        playerRenderer.color = originalColor;
     }
     Transform FindCloseMonster()
     {
