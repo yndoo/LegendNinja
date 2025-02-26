@@ -37,6 +37,7 @@ public class RangedMonster : BaseMonster
             GameObject go = Instantiate(Resources.Load<GameObject>($"Prefab/MonsterProjectile"), transform.position, transform.rotation);
             Vector3 dir = (Target.transform.position - this.transform.position);
             dir.Normalize();
+            go.GetComponent<MonsterProjectile>().MyPower = AttackPower;
             go.GetComponent<Rigidbody2D>().velocity = dir * 5;
         }
         catch(System.Exception ex)

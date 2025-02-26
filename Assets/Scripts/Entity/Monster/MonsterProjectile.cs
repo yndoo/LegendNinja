@@ -5,7 +5,6 @@ using UnityEngine;
 public class MonsterProjectile : MonoBehaviour
 {
     public float MyPower { get; set; }
-    public int MyIndex { get; set; }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
