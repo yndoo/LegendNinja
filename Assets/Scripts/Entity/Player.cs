@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,11 +18,27 @@ public class Player : Character
     public List<RangeWeaponHandler> weaponList;
 
     private float AttackCoolDown = 0f; //쿨타임
-    public float AttackMaxCoolDown = 1f;
+    public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
     
+    private IEnumerator DisableAttackLayer()
+    {
+        yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
+        animator.SetLayerWeight(2, 0); // Attack 레이어 비활성화
+    }
+
+
     void Start()
     {
         weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+        protected Vector2 MoveDirection;
+
+        [SerializeField] private WeaponHandler weaponHandler;
+
+        private IEnumerator DisableAttackLayer()
+        {
+            yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
+            animator.SetLayerWeight(2, 0); // Attack 레이어 비활성화
+        }
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -63,14 +80,13 @@ public class Player : Character
 
         Vector2 MoveDirection = new Vector2(MoveX, MoveY).normalized;
 
-        // 애니메이션 처리
-        if (MoveDirection.magnitude > 0)  // 이동 중일 때
+        if (MoveDirection.x != 0 || MoveDirection.y != 0)
         {
-            animator.SetBool("IsMove", true);
+            animator.SetLayerWeight(1, 1);
         }
         else
         {
-            animator.SetBool("IsMove", false);
+            animator.SetLayerWeight(1, 0);
         }
         animator.SetFloat("MoveX", MoveDirection.x);
         animator.SetFloat("MoveY", MoveDirection.y);
@@ -78,13 +94,14 @@ public class Player : Character
         rb.velocity = MoveDirection * MoveSpeed;
     }
 
+
     public override void Attack()
     {
         
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
         if (target != null)
         {
-            animator.SetTrigger(IsAttack);
+            animator.SetLayerWeight(2, 1);
             //// 표창을 발사할 위치에서 발사
             //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
             //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
@@ -98,7 +115,12 @@ public class Player : Character
             {
                 weaponHandler.Attack(direction); // 리스트 인덱스로 받아오기
             }
+            weaponHandler.Attack(direction);
+
+            StartCoroutine(DisableAttackLayer());
+            
         }
+        
         else
         {
             Debug.Log("적이 없음!");

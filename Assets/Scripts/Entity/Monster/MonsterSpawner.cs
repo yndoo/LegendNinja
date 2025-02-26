@@ -1,3 +1,4 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,35 +25,38 @@ public class MonsterSpawner : MonoBehaviour
     void WaveSpawn()
     {
         WaveData waveData = waveDB.WaveDatas[curWave - 1]; // 현재 웨이브 데이터
+        Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
+        Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
+        Spawn(monsterDB.Small[2]); // 103몬스터 테스트용 코드
 
-        // 소형 몬스터 랜덤 뽑기
-        List<MonsterData> small = monsterDB.Small.OrderBy(x => Random.value).Take(waveData.smallType).ToList(); // smallType개 종류 뽑기   
-        for(int i = 0; i < waveData.smallCount; i++)    // 그 중 smallCount마리 소환
-        {
-            int idx = Random.Range(0, waveData.smallType);
-            Spawn(small[idx]);
+        //// 소형 몬스터 랜덤 뽑기
+        //List<MonsterData> small = monsterDB.Small.OrderBy(x => Random.value).Take(waveData.smallType).ToList(); // smallType개 종류 뽑기   
+        //for(int i = 0; i < waveData.smallCount; i++)    // 그 중 smallCount마리 소환
+        //{
+        //    int idx = Random.Range(0, waveData.smallType);
+        //    //Spawn(small[idx]); 
 
-            Debug.Log($"소형 소환 | 인덱스 : {idx}, id : {small[idx].id}");
-        }
+        //    Debug.Log($"소형 소환 | 인덱스 : {idx}, id : {small[idx].id}");
+        //}
 
-        // 중형 몬스터 랜덤 뽑기
-        List<MonsterData> mid = monsterDB.Medium.OrderBy(x => Random.value).Take(waveData.mediumType).ToList(); // {mediumType} 종류 뽑기   
-        for (int i = 0; i < waveData.mediumCount; i++)  // 그 중 mediumCount마리 소환
-        {
-            int idx = Random.Range(0, waveData.mediumType);
-            Spawn(mid[idx]);
+        //// 중형 몬스터 랜덤 뽑기
+        //List<MonsterData> mid = monsterDB.Medium.OrderBy(x => Random.value).Take(waveData.mediumType).ToList(); // {mediumType} 종류 뽑기   
+        //for (int i = 0; i < waveData.mediumCount; i++)  // 그 중 mediumCount마리 소환
+        //{
+        //    int idx = Random.Range(0, waveData.mediumType);
+        //    Spawn(mid[idx]);
 
-            Debug.Log($"중형 소환 | 인덱스 : {idx}, id : {mid[idx].id}");
-        }
+        //    Debug.Log($"중형 소환 | 인덱스 : {idx}, id : {mid[idx].id}");
+        //}
 
-        // 보스 뽑기 
-        if (waveData.bossType > 0)
-        {
-            MonsterData boss = monsterDB.Boss.OrderBy(x => Random.value).Take(waveData.bossType).First<MonsterData>();
-            Spawn(boss);
+        //// 보스 뽑기 
+        //if (waveData.bossType > 0)
+        //{
+        //    MonsterData boss = monsterDB.Boss.OrderBy(x => Random.value).Take(waveData.bossType).First<MonsterData>();
+        //    Spawn(boss);
 
-            Debug.Log($"보스 소환 | id : {boss.id}");
-        }
+        //    Debug.Log($"보스 소환 | id : {boss.id}");
+        //}
     }
 
     void Spawn(MonsterData data)
@@ -60,6 +64,13 @@ public class MonsterSpawner : MonoBehaviour
         GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{data.id}");
         if (go == null) return;
 
-        Instantiate(go).GetComponent<Monster>().InitMonster(data);
+        if(data.type == EAttackType.Melee)
+        { 
+            Instantiate(go).AddComponent<MeleeMonster>().InitMonster(data); 
+        }
+        else
+        {
+            Instantiate(go).AddComponent<RangedMonster>().InitMonster(data);
+        }
     }
 }

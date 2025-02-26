@@ -2,27 +2,27 @@
   "Small": [
     {
       "id": 101,
-      "name": "Bamboo",
+      "name": "Slime1",
       "type": "Melee",
       "stats": {
         "MaxHealth": 50.0,
-        "AttackPower": 10.0,
+        "AttackPower": 4.0,
         "Defense": 5.0,
-        "MoveSpeed": 0.8,
-        "AttackRange": 1.1,
+        "MoveSpeed": 0.6,
+        "AttackRange": 1,
         "AttackSpeed": 0,
         "AttackTime": 1
       }
     },
     {
       "id": 102,
-      "name": "DragonYellow",
+      "name": "Slime2",
       "type": "Melee",
       "stats": {
         "MaxHealth": 60.0,
-        "AttackPower": 8.0,
+        "AttackPower": 6.0,
         "Defense": 3.0,
-        "MoveSpeed": 0.4,
+        "MoveSpeed": 0.7,
         "AttackRange": 1.1,
         "AttackSpeed": 0,
         "AttackTime": 1.2
@@ -30,16 +30,16 @@
     },
     {
       "id": 103,
-      "name": "Owl",
-      "type": "Ranged",
+      "name": "Slime3",
+      "type": "Melee",
       "stats": {
-        "MaxHealth": 60.0,
-        "AttackPower": 4.0,
+        "MaxHealth": 80.0,
+        "AttackPower": 8.0,
         "Defense": 4.0,
-        "MoveSpeed": 0.6,
-        "AttackRange": 3,
-        "AttackSpeed": 0.4,
-        "AttackTime": 2
+        "MoveSpeed": 0.4,
+        "AttackRange": 1.1,
+        "AttackSpeed": 0,
+        "AttackTime": 0.9
       }
     }
   ],

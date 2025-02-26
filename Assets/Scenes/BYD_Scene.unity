@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afed56d0b6ef22d479b2dec9ee394db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: 1
+  curWave: 2
 --- !u!1001 &1518330412
 PrefabInstance:
   m_ObjectHideFlags: 0
