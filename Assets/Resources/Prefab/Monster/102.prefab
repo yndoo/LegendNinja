@@ -68,7 +68,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.85, y: 0.7}
   m_Direction: 0
 --- !u!50 &8638377856724897455
 Rigidbody2D:
@@ -170,7 +170,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 2097787356, guid: 0eb3b82c3b9e823459107b10dfd428f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -213,7 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2871041696028080003}
   - component: {fileID: 434472821882686088}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DetectionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

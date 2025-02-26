@@ -21,6 +21,24 @@ public class MeleeMonster : BaseMonster
         Debug.Log("근거리 공격!");
         AttackCoolDown = AttackTime;
     }
+    public override void MoveToTarget()
+    {
+        if (Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
+        {
+            Attack();
+            return;
+        }
+
+        // Move
+        TargetDir = (Target.transform.position - transform.position).normalized;
+        transform.position += TargetDir * (0.05f * MoveSpeed);
+
+        // 애니메이션 세팅 & 방향 지정
+        monsterAnimator.SetBool(IsAttack, false);
+        monsterAnimator.SetBool(IsMoving, true);
+        monsterAnimator.SetFloat(MoveX, TargetDir.x);
+        monsterAnimator.SetFloat(MoveY, TargetDir.y);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

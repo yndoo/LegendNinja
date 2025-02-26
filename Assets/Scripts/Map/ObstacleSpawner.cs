@@ -1,46 +1,40 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; //Àå¾Ö¹° ¹è¿­
-    public int obstacleCount = 5; //»ı¼ºÇÒ Àå¾Ö¹° °³¼ö
-    public Vector2 mapSize = new Vector2(10, 10); // ¸Ê Å©±â
-    public LayerMask obstacleLayer; //Ã¼Å©¿ë
+    public GameObject[] obstaclePrefabs; //ì¥ì• ë¬¼ í”„ë¦¬íŒ¹ ë°°ì—´
+    public Vector2 mapSize = new Vector2(10, 10); //ë§µ í¬ê¸°
+    private List<GameObject> spawnedObstacles = new List<GameObject>(); //ìƒì„±ëœ ì¥ì• ë¬¼ ë¦¬ìŠ¤íŠ¸
 
-    private List<Vector2> usedPositions = new List<Vector2>(); //ÀÌ¹Ì ¹èÄ¡µÈ À§Ä¡ ÀúÀå
-
-    void Start()
+    public void SpawnObstacles(int count)
     {
-        SpawnObstacles();
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 randomPosition = GetRandomPosition();
+            int randomIndex = Random.Range(0, obstaclePrefabs.Length);
+            GameObject obstacle = Instantiate(obstaclePrefabs[randomIndex], randomPosition, Quaternion.identity);
+            spawnedObstacles.Add(obstacle); //ìƒì„±ëœ ì¥ì• ë¬¼ì„ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+        }
     }
 
-    void SpawnObstacles()
+    Vector2 GetRandomPosition()
     {
-        List<GameObject> availableObstacles = new List<GameObject>(obstaclePrefabs); //Àå¾Ö¹° ¸®½ºÆ® »ı¼º
+        float x = Random.Range(-mapSize.x / 2, mapSize.x / 2);
+        float y = Random.Range(-mapSize.y / 2, mapSize.y / 2);
+        return new Vector2(x, y);
+    }
 
-        for (int i = 0; i < obstacleCount && availableObstacles.Count > 0; i++)
+    //ì›¨ì´ë¸Œê°€ ë³€ê²½ë  ë•Œ ê¸°ì¡´ ì¥ì• ë¬¼ ì‚­ì œ
+    public void ClearObstacles()
+    {
+        foreach (GameObject obstacle in spawnedObstacles)
         {
-            Vector2 randomPos;
-            int maxAttempts = 10;
-
-            //Àå¾Ö¹°ÀÌ °ãÄ¡Áö ¾Êµµ·Ï À§Ä¡ Ã£±â
-            do
+            if (obstacle != null)
             {
-                randomPos = new Vector2(
-                    Random.Range(-mapSize.x / 2, mapSize.x / 2),
-                    Random.Range(-mapSize.y / 2, mapSize.y / 2)
-                );
-                maxAttempts--;
-            } while (usedPositions.Contains(randomPos) || Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer) && maxAttempts > 0);
-
-            if (availableObstacles.Count > 0)
-            {
-                int randomIndex = Random.Range(0, availableObstacles.Count);
-                GameObject obstacle = Instantiate(availableObstacles[randomIndex], randomPos, Quaternion.identity);
-                availableObstacles.RemoveAt(randomIndex); //»ç¿ëÇÑ Àå¾Ö¹° Á¦°Å(Áßº¹ ¹æÁö)
-                usedPositions.Add(randomPos);
+                Destroy(obstacle);
             }
         }
+        spawnedObstacles.Clear(); //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
     }
 }
