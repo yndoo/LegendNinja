@@ -18,16 +18,32 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float spread; // 투사체 발사 각도 랜덤화 (퍼짐 정도)
     public float Spread { get { return spread; } }
 
-    [SerializeField] private int numberofProjectilesPerShot; // 한 번의 공격 시 발사할 투사체 개수
-    public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
+    [SerializeField] private float numberofProjectilesPerShot; // 한 번의 공격 시 발사할 투사체 개수
+    //public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
+    public float NumberofProjectilesPerShot { get => numberofProjectilesPerShot; set => numberofProjectilesPerShot = value; }
+
 
     [SerializeField] private float multipleProjectilesAngel; // 투사체 간 간격 (각도)
-    public float MultipleProjectilesAngel { get { return multipleProjectilesAngel; } }
+    //public float MultipleProjectilesAngel { get { return multipleProjectilesAngel; } }
+    public float MultipleProjectilesAngel { get => multipleProjectilesAngel; set => multipleProjectilesAngel = value; }
 
     [SerializeField] private Color projectileColor; // 투사체 색상
     public Color ProjectileColor { get { return projectileColor; } }
 
     private ProjectileManager projectileManager; // 투사체 생성 및 관리
+
+    public RangeWeaponHandler(Transform projectileSpawnPosition, int bulletIndex, float bulletSize, float duration, float spread, float _numberofProjectilesPerShot, float _multipleProjectilesAngel, Color projectileColor, ProjectileManager projectileManager)
+    {
+        this.projectileSpawnPosition = projectileSpawnPosition;
+        this.bulletIndex = bulletIndex;
+        this.bulletSize = bulletSize;
+        this.duration = duration;
+        this.spread = spread;
+        NumberofProjectilesPerShot = _numberofProjectilesPerShot;
+        MultipleProjectilesAngel = _multipleProjectilesAngel;
+        this.projectileColor = projectileColor;
+        this.projectileManager = projectileManager;
+    }
 
     /// <summary>
     /// Start()에서 ProjectileManager를 가져옴.
@@ -51,7 +67,7 @@ public class RangeWeaponHandler : WeaponHandler
         base.Attack(direction);
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 투사체 간 간격 설정
-        int numberOfProjectilesPerShot = numberofProjectilesPerShot; // 발사할 투사체 개수
+        float numberOfProjectilesPerShot = numberofProjectilesPerShot; // 발사할 투사체 개수
 
         // 투사체를 가운데 정렬하기 위한 최소 각도 계산
         float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace + 0.5f * multipleProjectilesAngel;

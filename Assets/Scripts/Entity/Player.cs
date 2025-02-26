@@ -5,17 +5,54 @@ using UnityEngine.EventSystems;
 
 public class Player : Character
 {
-    public GameObject Shuriken;
+    //public GameObject Shuriken;
     public GameObject PlayerPivot;
 
     private Animator animator;
+    private static readonly int IsAttack = Animator.StringToHash("IsAttack");
+
     private Rigidbody2D rb;
 
-
-    [SerializeField] private WeaponHandler weaponHandler;
+    //[SerializeField] private WeaponHandler weaponHandler;
+    public List<WeaponHandler> weaponList;
 
     private float AttackCoolDown = 0f; //쿨타임
+    
+    void Start()
+    {
+        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
 
+        animator = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        // 임의로 값 설정 했습니다.
+        MaxHealth = 100f;
+        Health = 100f;
+        AttackPower = 10f;
+        MoveSpeed = 3f;
+
+        base.AttackSpeed = 1f;
+    }
+
+    void Update()
+    {
+        Move();
+        if (rb.velocity.magnitude > 0)
+        {
+            AttackCoolDown = 0.5f;
+            return;
+        }
+
+        // 공격 쿨타임 처리
+        if (AttackCoolDown <= 0f)
+        {
+            Attack();
+            AttackCoolDown = 1f; // 1초 쿨타임
+        }
+        else
+        {
+            AttackCoolDown -= Time.deltaTime;
+        }
+    }
     public void Move()
     {
         
@@ -42,9 +79,11 @@ public class Player : Character
 
     public override void Attack()
     {
+        
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
         if (target != null)
         {
+            animator.SetTrigger(IsAttack);
             //// 표창을 발사할 위치에서 발사
             //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
             //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
@@ -54,7 +93,10 @@ public class Player : Character
 
             //// 표창에 방향과 힘을 적용
             //shurikenRb.velocity = direction * AttackPower;
-            weaponHandler.Attack(direction);
+            foreach(WeaponHandler weaponHandler in weaponList)
+            {
+                weaponHandler.Attack(direction); // 리스트 인덱스로 받아오기
+            }
         }
         else
         {
@@ -92,38 +134,5 @@ public class Player : Character
         }
 
         return ClosestEnemy; // 가장 가까운 적 반환 (없으면 null)
-    }
-    void Start()
-    {
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        // 임의로 값 설정 했습니다.
-        MaxHealth = 100f;
-        Health = 100f;
-        AttackPower = 10f;
-        MoveSpeed = 3f;
-
-        base.AttackSpeed = 1f;
-    }
-
-    void Update()
-    {
-        Move();
-        if (rb.velocity.magnitude > 0)
-        {
-            AttackCoolDown = 0.5f; 
-            return;
-        }
-
-        // 공격 쿨타임 처리
-        if (AttackCoolDown <= 0f)
-        {
-            Attack();
-            AttackCoolDown = 1f; // 1초 쿨타임
-        }
-        else
-        {
-            AttackCoolDown -= Time.deltaTime;
-        }
     }
 }

@@ -7,11 +7,14 @@ public class SkillManager : MonoBehaviour
 {
     private SkillList skillList;
     private WeaponHandler weaponHandler;
+    private RangeWeaponHandler rangeWeaponHandler;
+    public Player player;
 
     private void Start()
     {
         skillList = LoadSkills();
         weaponHandler = FindObjectOfType<WeaponHandler>();
+        rangeWeaponHandler = FindAnyObjectByType<RangeWeaponHandler>();
     }
 
     private SkillList LoadSkills()
@@ -46,11 +49,15 @@ public class SkillManager : MonoBehaviour
             case "speed":
                 weaponHandler.AttackSpeed += skill.value;
                 break;
-
+            case "addProjectilesPerShot":
+                rangeWeaponHandler.NumberofProjectilesPerShot += skill.value;
+                rangeWeaponHandler.MultipleProjectilesAngel += 10;
+                break;
+            case "test":
+                player.weaponList.Add(new RangeWeaponHandler(player.PlayerPivot.transform, 1, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+                break;
         }
 
         Debug.Log($"{skill.name} Àû¿ëµÊ! ÇöÀç Power: {weaponHandler.Power}, Speed: {weaponHandler.AttackSpeed}");
     }
-
-
 }

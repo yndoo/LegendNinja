@@ -2,7 +2,7 @@
   "skills": [
     {
       "id": 1,
-      "name": "PowerUP",
+      "name": "공격력 강화",
       "type": "power",
       "value": 1.0,
       "description": "공격력 증가",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "name": "PowerDelay",
+      "name": "딜레이 감소",
       "type": "delay",
       "value": -0.1,
       "description": "공격 딜레이 감소",
@@ -18,11 +18,27 @@
     },
     {
       "id": 3,
-      "name": "PowerSpeed",
+      "name": "바람의 은총",
       "type": "speed",
       "value": 1.0,
       "description": "공격속도 증가",
       "sprite": "Sprites/Upgrade"
+    },
+    {
+      "id": 4,
+      "name": "하나 더!",
+      "type": "addProjectilesPerShot",
+      "value": 1.0,
+      "description": "투사체 증가",
+      "sprite": "Sprites/Shuriken"
+    },
+    {
+      "id": 5,
+      "name": "test",
+      "type": "test",
+      "value": 1.0,
+      "description": "투사체 증가",
+      "sprite": "Sprites/Shuriken"
     }
   ]
 }

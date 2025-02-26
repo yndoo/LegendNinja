@@ -37,7 +37,7 @@ public class WeaponHandler : MonoBehaviour
     // 이 무기를 소유한 BaseController (플레이어나 적 캐릭터)
     public BaseController Controller { get; private set; }
 
-    private Animator animator; // 무기의 애니메이션 컨트롤러
+    //private Animator animator; // 무기의 애니메이션 컨트롤러
     private SpriteRenderer weaponRenderer; // 무기의 스프라이트 렌더러
 
     /// <summary>
@@ -49,11 +49,11 @@ public class WeaponHandler : MonoBehaviour
         Controller = GetComponentInParent<BaseController>();
 
         // 하위 객체에서 Animator 및 SpriteRenderer를 가져옴
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // 공격 속도에 따라 애니메이션 속도 조절
-        animator.speed = 1.0f / delay;
+        //animator.speed = 1.0f / delay;
 
         // 무기의 크기 설정
         transform.localScale = Vector3.one * weaponSize;
@@ -79,16 +79,16 @@ public class WeaponHandler : MonoBehaviour
     /// </summary>
     public virtual void Attack(Vector3 direction)
     {
-        AttackAnimation();
+        //AttackAnimation();
     }
 
     /// <summary>
     /// 공격 애니메이션을 실행하는 메서드
     /// </summary>
-    public void AttackAnimation()
-    {
-        animator.SetTrigger(IsAttack);
-    }
+    //public void AttackAnimation()
+    //{
+    //    animator.SetTrigger(IsAttack);
+    //}
 
     /// <summary>
     /// 무기의 방향을 회전시키는 메서드

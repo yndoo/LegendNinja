@@ -247,9 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13daa41a2bd798447a0054b8aad778c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shuriken: {fileID: 6575855587203806836, guid: b7b3fb0c8cf2ce34ba0339aa3582e7ff, type: 3}
   PlayerPivot: {fileID: 1834430222}
-  weaponHandler: {fileID: 242595899}
+  weaponList: []
 --- !u!61 &242595896
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -354,7 +353,7 @@ MonoBehaviour:
   delay: 1
   weaponSize: 1
   power: 1
-  attackSpeed: 1
+  attackSpeed: 5
   attackRange: 10
   target:
     serializedVersion: 2
@@ -368,7 +367,7 @@ MonoBehaviour:
   duration: 5
   spread: 0
   numberofProjectilesPerShot: 1
-  multipleProjectilesAngel: 1
+  multipleProjectilesAngel: 10
   projectileColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &270405483
 GameObject:
@@ -527,22 +526,6 @@ PrefabInstance:
     - target: {fileID: 4048893732630899918, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
       propertyPath: m_Name
       value: MeleeMonster
-      objectReference: {fileID: 0}
-    - target: {fileID: 4048893732630899918, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4048893732630899918, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
-      propertyPath: m_TagString
-      value: Monster
-      objectReference: {fileID: 0}
-    - target: {fileID: 4090728343522851063, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6008127732670501052, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -809,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc7b1563f063c2428bed48d58c23172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 242595895}
 --- !u!4 &1838230943
 Transform:
   m_ObjectHideFlags: 0
@@ -871,6 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefabs:
   - {fileID: 6575855587203806836, guid: b7b3fb0c8cf2ce34ba0339aa3582e7ff, type: 3}
+  - {fileID: 6575855587203806836, guid: 4257232c8fcd7dd40823a99a1ae83f96, type: 3}
 --- !u!1001 &5955815909252268688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -882,6 +867,10 @@ PrefabInstance:
     - target: {fileID: 958535419732097703, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
       propertyPath: m_Name
       value: SkillUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426730363017260712, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6157939441106777079, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
       propertyPath: m_Pivot.x
@@ -964,7 +953,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8757481551895632381, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
