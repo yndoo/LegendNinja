@@ -3,21 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class SkillData
-{
-    [Serializable]
-    public class Skill
-    {
-        public int id;
-        public string name;
-        public string type;
-        public float value;
-    }
 
-    [Serializable]
-    public class SkillList
-    {
-        public List<Skill> skills;
-    }
-   
+{
+    public int id;
+    public string name;
+    public string type;
+    public float value;
+    public string description;
+    public string sprite;
+}
+
+[Serializable]
+public class SkillList
+{
+    public SkillData[] skills;
 }

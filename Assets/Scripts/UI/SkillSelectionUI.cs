@@ -1,91 +1,111 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-using static SkillData;
 
 public class SkillSelectionUI : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private Button[] skillButtons;
-    [SerializeField] private TextMeshProUGUI skillDescription;
+    [SerializeField] private TextMeshProUGUI[] skillTitle;
+    [SerializeField] private TextMeshProUGUI[] skillDescriptions;
+    [SerializeField] private Image[] skillImages;
 
     private SkillManager skillManager;
-    private WeaponHandler playerWeapon;
-    private List<Skill> availableSkills; // SkillData → Skill 로 변경
+    private SkillList skillList;
 
     private void Start()
     {
-        skillManager = SkillManager.Instance;
-        if (skillManager == null)
-        {
-            Debug.LogError(" SkillManager.Instance가 NULL입니다! SkillManager가 씬에 있는지 확인하세요.");
-        }
-
-        playerWeapon = FindObjectOfType<WeaponHandler>();
-
-        if (playerWeapon == null)
-        {
-            Debug.LogError(" WeaponHandler가 씬에서 발견되지 않았습니다!");
-        }
-
-        panel.SetActive(false);
+        skillManager = FindObjectOfType<SkillManager>();
+        skillList = skillManager.GetSkillList();
+        SetupSkillButtons();
     }
 
-    public void ShowSkillSelection()
+    public void SetupSkillButtons()
     {
-        Debug.Log(" ShowSkillSelection() 호출됨!");
+        // 스킬 리스트에서 랜덤하게 3개 선택
+        List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
+        List<SkillData> randomSkills = new List<SkillData>();
 
-        if (skillManager == null)
+        // 스킬이 3개 이상이면 랜덤 선택, 아니면 그대로 사용
+        int skillCount = Mathf.Min(3, availableSkills.Count);
+        for(int i = 0; i < skillCount; i++)
         {
-            Debug.LogError(" skillManager가 할당되지 않았습니다!");
-            return;
+            int randomIndex = UnityEngine.Random.Range(0, availableSkills.Count);
+            randomSkills.Add(availableSkills[randomIndex]);
+            availableSkills.RemoveAt(randomIndex); // 중복방지
         }
 
-        availableSkills = skillManager.GetSkills();
-
-        if (availableSkills == null || availableSkills.Count == 0)
-        {
-            Debug.LogError(" 스킬 데이터가 비어 있습니다! JSON 파일을 확인하세요.");
-            return;
-        }
-
-        panel.SetActive(true);
+        // 버튼 실행 설정
         for (int i = 0; i < skillButtons.Length; i++)
         {
-            if (skillButtons[i] == null)
+            if (i < skillList.skills.Length)
             {
-                Debug.LogError($" skillButtons[{i}]이(가) null입니다! Unity에서 버튼을 할당했는지 확인하세요.");
-                continue;
-            }
+                SkillData skill = randomSkills[i]; // skill 변수 선언
 
-            if (i < availableSkills.Count)
-            {
-                Skill skill = availableSkills[i];
+                skillButtons[i].gameObject.SetActive(true);
 
-                TMP_Text buttonText = skillButtons[i].GetComponentInChildren<TMP_Text>(); // Text -> TMP_Text
-                if (buttonText == null)
+                if (skillTitle.Length > i)
                 {
-                    Debug.LogError($" skillButtons[{i}]의 TMP_Text 컴포넌트가 존재하지 않습니다!");
-                    continue;
+                    skillTitle[i].gameObject.SetActive(true);
+                    skillTitle[i].text = skill.name;
                 }
 
-                buttonText.text = skill.name;
+                if (skillDescriptions.Length > i) // 스킬 설명 설정
+                {
+                    skillDescriptions[i].gameObject.SetActive(true);
+                    skillDescriptions[i].text = skill.description;
+                }
+
+                // 스프라이트 변경
+                if (skillImages.Length > i)
+                {
+                    Sprite skillSprite = Resources.Load<Sprite>(skill.sprite); // 올바른 변수 사용
+                    if (skillSprite != null)
+                    {
+                        skillImages[i].sprite = skillSprite;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Skill sprite not found: {skill.sprite}");
+                    }
+                }
+
+                // 버튼 클릭 이벤트 설정
+                skillButtons[i].onClick.RemoveAllListeners();
+                skillButtons[i].onClick.AddListener(() => SelectSkill(skill));
+            }
+            else
+            {
+                skillButtons[i].gameObject.SetActive(false);
+                if (skillDescriptions.Length > i)
+                {
+                    skillDescriptions[i].gameObject.SetActive(false);
+                }
             }
         }
-
     }
 
 
-    public void SelectSkill(Skill skill)
+    public void SelectSkill(SkillData skillData)
     {
-        Debug.Log($" SelectSkill() 호출됨! 선택된 스킬: {skill.name} ({skill.type} +{skill.value})");
+        skillManager.ApplySkill(skillData.id);
 
-        skillManager.ApplySkill(skill, playerWeapon);
-        skillDescription.text = $"선택한 스킬: {skill.name} ({skill.type} +{skill.value})";
-        //  현재 공격력 확인용 디버그 로그 추가
-        Debug.Log($"[Skill Applied] {skill.name} 적용됨! 현재 공격력: {playerWeapon.Power}");
+        Debug.Log($"[{skillData.name}] 스킬 선택됨!");
+
+        CloseSkillPanel();  // 스킬 선택 후 패널 닫기
+    }
+
+    private void CloseSkillPanel()
+    {
         panel.SetActive(false);
+    }
+
+    public void OpenPanel()
+    {
+        panel.SetActive(true);
     }
 }
