@@ -5,14 +5,19 @@ using UnityEngine;
 public class BossMonster : BaseMonster
 {
     protected static readonly int IsHidden = Animator.StringToHash("IsHidden");
-    private bool IsBossSkillOn = false;
+
+    [SerializeField] private LayerMask obstacleLayer;
+
+    private readonly float SkillFullTime = 5f;
+    private bool isBossSkillOn = false;
+    private float skillRuntime = 5f;
 
     protected override void Awake()
     {
         base.Awake();
 
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 6f;
+        GetComponentInChildren<CircleCollider2D>().radius = 8f;
     }
     public override void Attack()
     {
@@ -25,8 +30,14 @@ public class BossMonster : BaseMonster
     }
     public override void MoveToTarget()
     {
-        if (IsBossSkillOn)
+        if (isBossSkillOn)
         {
+            skillRuntime -= Time.deltaTime;
+            if (skillRuntime < 0f)
+            {
+                BossSkillEnd();
+                return;
+            }
             BossSkill();
             return;
         }
@@ -34,12 +45,13 @@ public class BossMonster : BaseMonster
         if (Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
         {
             // 확률적으로 Hidden 스킬 사용
-            //int p = Random.Range(0, 100);
-            //if (p > 80)
-            //{
-            //    IsBossSkillOn = true;
-            //    return;
-            //}
+            int p = Random.Range(0, 100);
+            if (p > 80)
+            {
+                isBossSkillOn = true;
+                BossSkillStart();
+                return;
+            }
             // 기본 공격
             Attack();
             return;
@@ -63,11 +75,44 @@ public class BossMonster : BaseMonster
         }
     }
 
-    void BossSkill()
+    /// <summary>
+    /// 보스 스킬 첫 스타트 (랜덤 위치로 이동, 애니메이션 전환)
+    /// </summary>
+    void BossSkillStart()
     {
         monsterAnimator.SetBool(IsHidden, true);
-        Debug.Log("보스 스킬 발동");
-        // TO DO : 랜덤 위치로 이동
+        skillRuntime = SkillFullTime;
+        gameObject.tag = "Untagged";
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    /// <summary>
+    /// 보스 스킬 사용하는 동안 동작
+    /// </summary>
+    void BossSkill()
+    {
+        monsterRenderer.color = monsterRenderer.color - new Color(0, 0, 0, Time.deltaTime * 0.8f);
+    }
+
+    /// <summary>
+    /// 보스 스킬 끝나고 해줘야 하는 것들
+    /// </summary>
+    void BossSkillEnd()
+    {
+        isBossSkillOn = false;
+        monsterRenderer.color = originalColor;
+        monsterAnimator.SetBool(IsHidden, false);
+        GetComponent<Collider2D>().enabled = true;
+        gameObject.tag = "Monster";
+
+        // 랜덤 위치로 이동
+        Vector3 randomPos = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+        while (Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer) != null)
+        {
+            randomPos.x = Random.Range(-3f, 3f);
+            randomPos.y = Random.Range(-3f, 3f);
+        }
+        transform.position = randomPos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

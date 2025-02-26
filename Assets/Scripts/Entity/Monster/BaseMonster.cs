@@ -19,7 +19,7 @@ public abstract class BaseMonster : Character
     protected float AttackCoolDown { get; set; }    // 공격 쿨타임, stat에서 AttackTime를 사용.
     protected Vector3 TargetDir { get; set; }
 
-    private Color originalColor;
+    protected Color originalColor;
     public abstract void MoveToTarget();
 
     protected virtual void Awake()
@@ -61,7 +61,7 @@ public abstract class BaseMonster : Character
             TargetFollowMode = false;
             monsterRenderer.color = monsterRenderer.color - new Color(0f, 1f, 1f, 0.4f);
             monsterAnimator.speed = 0f;
-            gameObject.tag = "Default";
+            gameObject.tag = "Untagged";
             GetComponent<Collider2D>().enabled = false;
             Destroy(this.gameObject, 1f);
         }
