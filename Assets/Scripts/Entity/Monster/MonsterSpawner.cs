@@ -1,3 +1,4 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,13 @@ public class MonsterSpawner : MonoBehaviour
         GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{data.id}");
         if (go == null) return;
 
-        Instantiate(go).GetComponent<Monster>().InitMonster(data);
+        if(data.type == EAttackType.Melee)
+        { 
+            Instantiate(go).AddComponent<MeleeMonster>().InitMonster(data); 
+        }
+        else
+        {
+            Instantiate(go).AddComponent<RangedMonster>().InitMonster(data);
+        }
     }
 }

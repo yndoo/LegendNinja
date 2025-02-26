@@ -1,25 +1,27 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedMonster : BaseMonster
+public class MeleeMonster : BaseMonster
 {
+    
     private void Awake()
     {
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 4f;
+        GetComponentInChildren<CircleCollider2D>().radius = 3f;
     }
+
     private void Update()
     {
-        AttackCoolDown -= Time.deltaTime;
+        
     }
+
     public override void Attack()
     {
-        if (AttackCoolDown > 0f) return;
-
         base.Attack();
-        Debug.Log("Ranged Attack");
-        AttackCoolDown = AttackTime;
+
+        TargetPlayer.Damage(AttackPower);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,4 +41,6 @@ public class RangedMonster : BaseMonster
             PlayerDetectEnd();
         }
     }
+
+    
 }
