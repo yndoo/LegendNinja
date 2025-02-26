@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,6 +17,11 @@ public class Player : Character
     [SerializeField] private WeaponHandler weaponHandler;
 
     private float AttackCoolDown = 0f; //쿨타임
+    private IEnumerator DisableAttackLayer()
+    {
+        yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
+        animator.SetLayerWeight(2, 0); // Attack 레이어 비활성화
+    }
 
     public void Move()
     {
@@ -43,9 +49,11 @@ public class Player : Character
 
     public override void Attack()
     {
+        
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
         if (target != null)
         {
+            animator.SetLayerWeight(2, 1);
             //// 표창을 발사할 위치에서 발사
             //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
             //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
@@ -56,7 +64,11 @@ public class Player : Character
             //// 표창에 방향과 힘을 적용
             //shurikenRb.velocity = direction * AttackPower;
             weaponHandler.Attack(direction);
+
+            StartCoroutine(DisableAttackLayer());
+            
         }
+        
         else
         {
             Debug.Log("적이 없음!");
