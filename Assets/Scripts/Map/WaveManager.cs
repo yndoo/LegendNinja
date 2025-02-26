@@ -10,6 +10,8 @@ public class WaveManager : MonoBehaviour
     public ObstacleSpawner obstacleSpawner; //장애물 랜덤 생성 스크립트
     public WavePortal wavePortal; //포탈 스크립트 (다음 웨이브 시작 트리거)
 
+    public int AliveEnemyCount {  get; set; }
+
     private int currentWave = 0;
     private bool waveCleared = false;
 
@@ -37,7 +39,7 @@ public class WaveManager : MonoBehaviour
 
     public void CheckWaveClear()
     {
-        if (monsterSpawner.GetAliveEnemyCount() == 0) //남은 적이 없으면 웨이브 클리어
+        if (AliveEnemyCount == 0) //남은 적이 없으면 웨이브 클리어
         {
             Debug.Log($"웨이브 {currentWave} 클리어! 포탈로 이동하세요.");
             waveCleared = true;
