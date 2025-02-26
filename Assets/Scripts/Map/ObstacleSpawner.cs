@@ -3,41 +3,38 @@ using System.Collections.Generic;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; // 장애물 배열
-    public int obstacleCount = 5; // 생성할 장애물 개수
-    public Vector2 mapSize = new Vector2(10, 10); // 맵 크기
-    public LayerMask obstacleLayer; // 장애물 체크용 레이어
+    public GameObject[] obstaclePrefabs; //장애물 프리팹 배열
+    public Vector2 mapSize = new Vector2(10, 10); //맵 크기
+    private List<GameObject> spawnedObstacles = new List<GameObject>(); //생성된 장애물 리스트
 
-    private List<Vector2> usedPositions = new List<Vector2>(); // 사용된 위치 저장
-
-    void Start()
+    public void SpawnObstacles(int count)
     {
-        SpawnObstacles();
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 randomPosition = GetRandomPosition();
+            int randomIndex = Random.Range(0, obstaclePrefabs.Length);
+            GameObject obstacle = Instantiate(obstaclePrefabs[randomIndex], randomPosition, Quaternion.identity);
+            spawnedObstacles.Add(obstacle); //생성된 장애물을 리스트에 추가
+        }
     }
 
-    void SpawnObstacles()
+    Vector2 GetRandomPosition()
     {
-        for (int i = 0; i < obstacleCount; i++)
+        float x = Random.Range(-mapSize.x / 2, mapSize.x / 2);
+        float y = Random.Range(-mapSize.y / 2, mapSize.y / 2);
+        return new Vector2(x, y);
+    }
+
+    //웨이브가 변경될 때 기존 장애물 삭제
+    public void ClearObstacles()
+    {
+        foreach (GameObject obstacle in spawnedObstacles)
         {
-            Vector2 randomPos;
-            int maxAttempts = 10;
-
-            // 장애물이 겹치지 않도록 위치 찾기
-            do
+            if (obstacle != null)
             {
-                randomPos = new Vector2(
-                    Random.Range(-mapSize.x / 2, mapSize.x / 2),
-                    Random.Range(-mapSize.y / 2, mapSize.y / 2)
-                );
-                maxAttempts--;
-            } while (usedPositions.Contains(randomPos) || Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer) && maxAttempts > 0);
-
-            if (maxAttempts > 0)
-            {
-                int randomIndex = Random.Range(0, obstaclePrefabs.Length); // 랜덤 장애물 선택
-                GameObject obstacle = Instantiate(obstaclePrefabs[randomIndex], randomPos, Quaternion.identity);
-                usedPositions.Add(randomPos);
+                Destroy(obstacle);
             }
         }
+        spawnedObstacles.Clear(); //리스트 초기화
     }
 }
