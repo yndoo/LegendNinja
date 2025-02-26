@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log($"웨이브 {currentWave} 클리어! 포탈로 이동하세요.");
             waveCleared = true;
-            wavePortal.ActivatePortal(); //포탈 활성화
+            //wavePortal.ActivatePortal(); //포탈 활성화
         }
     }
 
