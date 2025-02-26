@@ -26,19 +26,6 @@ public class Player : Character
 
         Vector2 MoveDirection = new Vector2(MoveX, MoveY).normalized;
 
-        // 애니메이션 처리
-        //if (MoveDirection.magnitude > 0)  // 이동 중일 때
-        //{
-        //    animator.SetBool("IsMove", true);
-        //    
-        //
-        //}
-        //else
-        //{
-        //    animator.SetBool("IsMove", false);
-        //    
-        //}
-
         if (MoveDirection.x != 0 || MoveDirection.y != 0)
         {
             animator.SetLayerWeight(1, 1);
@@ -69,7 +56,6 @@ public class Player : Character
             //// 표창에 방향과 힘을 적용
             //shurikenRb.velocity = direction * AttackPower;
             weaponHandler.Attack(direction);
-            animator.SetLayerWeight(2, 1);
         }
         else
         {
@@ -134,7 +120,6 @@ public class Player : Character
         if (AttackCoolDown <= 0f)
         {
             Attack();
-            animator.SetLayerWeight(2, 0);
             AttackCoolDown = 1f; // 1초 쿨타임
         }
         else
