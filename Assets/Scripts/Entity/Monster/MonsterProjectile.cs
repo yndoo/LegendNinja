@@ -7,15 +7,13 @@ public class MonsterProjectile : MonoBehaviour
     public float MyPower { get; set; }
     public int MyIndex { get; set; }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player>().Damage(MyPower);
+            Destroy(this.gameObject);
         }
-    }
-    private void FixedUpdate()
-    {
-        
     }
 }

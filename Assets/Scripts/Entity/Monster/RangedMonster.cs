@@ -1,3 +1,4 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,19 @@ public class RangedMonster : BaseMonster
     void Shooting()
     {
         Debug.Log("Ranged Attack");
+        
+        try
+        {
+            GameObject go = Instantiate(Resources.Load<GameObject>($"Prefab/MonsterProjectile"), transform.position, transform.rotation);
+            Vector3 dir = (Target.transform.position - this.transform.position);
+            dir.Normalize();
+            go.GetComponent<Rigidbody2D>().velocity = dir * 5;
+        }
+        catch(System.Exception ex)
+        {
+            Debug.LogException(ex);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
