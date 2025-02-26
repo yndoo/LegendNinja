@@ -496,8 +496,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 4090728343522851063, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5300523647760346474, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
       propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008127732670501052, guid: ade0d004a2fcca9419a01db06c378dbb, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -630,6 +638,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1397524123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 621087814565280955, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+  m_PrefabInstance: {fileID: 2082687898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1551570613
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +730,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+      propertyPath: projectilePrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+      propertyPath: projectilePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6575855587203806836, guid: 3b26ab54bc3db824d92606448046f0b1, type: 3}
+    - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+      propertyPath: projectilePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6575855587203806836, guid: 7f11fb111a8285c49bed02c3b37cc634, type: 3}
+    - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+      propertyPath: projectilePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 1397524123}
+    - target: {fileID: 7654565972135087018, guid: ec49d039af407654483a9641b0e121fa, type: 3}
+      propertyPath: projectilePrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 6575855587203806836, guid: 81ebba7c63b368e409f576dd323a6d57, type: 3}
     - target: {fileID: 8806072226621719538, guid: ec49d039af407654483a9641b0e121fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -773,10 +806,6 @@ PrefabInstance:
     - target: {fileID: 958535419732097703, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
       propertyPath: m_Name
       value: SkillUICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426730363017260712, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6157939441106777079, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
       propertyPath: m_Pivot.x
@@ -859,8 +888,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8757481551895632381, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}

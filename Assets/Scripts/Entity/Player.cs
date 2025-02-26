@@ -7,19 +7,22 @@ public class Player : Character
 {
     public GameObject PlayerPivot;
     private Animator animator;
-    private static readonly int IsAttack = Animator.StringToHash("IsAttack");
+    //private static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
     private Rigidbody2D rb;
     protected Vector2 MoveDirection;
 
     public List<RangeWeaponHandler> weaponList;
-    //[SerializeField] private WeaponHandler weaponHandler;
+    private SkillManager skillManager;  // 스킬 따로 관리하기
+    //[SerializeField] private WeaponHandler weaponHandler; 삭제 가능
 
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
+
     void Start()
     {
         weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+        skillManager = FindAnyObjectByType<SkillManager>();
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -86,11 +89,9 @@ public class Player : Character
             //// 표창에 방향과 힘을 적용
             //shurikenRb.velocity = direction * AttackPower;
 
-            foreach (WeaponHandler weaponHandler in weaponList)
-            {
-                weaponHandler.Attack(direction); // 리스트 인덱스로 받아오기
-            }
-            //weaponHandler.Attack(direction);
+            skillManager.AttackWithWeapons(direction); // 추가 기능 : 스킬 가져오기
+
+            //weaponHandler.Attack(direction);  // 삭제 가능
             StartCoroutine(DisableAttackLayer());
         }
         else
