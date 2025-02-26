@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject[] obstaclePrefabs; //Àå¾Ö¹° ¹è¿­
-    public int obstacleCount = 5; //»ı¼ºÇÒ Àå¾Ö¹° °³¼ö
-    public Vector2 mapSize = new Vector2(10, 10); // ¸Ê Å©±â
-    public LayerMask obstacleLayer; //Ã¼Å©¿ë
+    public GameObject[] obstaclePrefabs; // ì¥ì• ë¬¼ ë°°ì—´
+    public int obstacleCount = 5; // ìƒì„±í•  ì¥ì• ë¬¼ ê°œìˆ˜
+    public Vector2 mapSize = new Vector2(10, 10); // ë§µ í¬ê¸°
+    public LayerMask obstacleLayer; // ì¥ì• ë¬¼ ì²´í¬ìš© ë ˆì´ì–´
 
-    private List<Vector2> usedPositions = new List<Vector2>(); //ÀÌ¹Ì ¹èÄ¡µÈ À§Ä¡ ÀúÀå
+    private List<Vector2> usedPositions = new List<Vector2>(); // ì‚¬ìš©ëœ ìœ„ì¹˜ ì €ì¥
 
     void Start()
     {
@@ -17,14 +17,12 @@ public class ObstacleSpawner : MonoBehaviour
 
     void SpawnObstacles()
     {
-        List<GameObject> availableObstacles = new List<GameObject>(obstaclePrefabs); //Àå¾Ö¹° ¸®½ºÆ® »ı¼º
-
-        for (int i = 0; i < obstacleCount && availableObstacles.Count > 0; i++)
+        for (int i = 0; i < obstacleCount; i++)
         {
             Vector2 randomPos;
             int maxAttempts = 10;
 
-            //Àå¾Ö¹°ÀÌ °ãÄ¡Áö ¾Êµµ·Ï À§Ä¡ Ã£±â
+            // ì¥ì• ë¬¼ì´ ê²¹ì¹˜ì§€ ì•Šë„ë¡ ìœ„ì¹˜ ì°¾ê¸°
             do
             {
                 randomPos = new Vector2(
@@ -34,11 +32,10 @@ public class ObstacleSpawner : MonoBehaviour
                 maxAttempts--;
             } while (usedPositions.Contains(randomPos) || Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer) && maxAttempts > 0);
 
-            if (availableObstacles.Count > 0)
+            if (maxAttempts > 0)
             {
-                int randomIndex = Random.Range(0, availableObstacles.Count);
-                GameObject obstacle = Instantiate(availableObstacles[randomIndex], randomPos, Quaternion.identity);
-                availableObstacles.RemoveAt(randomIndex); //»ç¿ëÇÑ Àå¾Ö¹° Á¦°Å(Áßº¹ ¹æÁö)
+                int randomIndex = Random.Range(0, obstaclePrefabs.Length); // ëœë¤ ì¥ì• ë¬¼ ì„ íƒ
+                GameObject obstacle = Instantiate(obstaclePrefabs[randomIndex], randomPos, Quaternion.identity);
                 usedPositions.Add(randomPos);
             }
         }
