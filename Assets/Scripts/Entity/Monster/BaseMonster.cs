@@ -9,24 +9,31 @@ public abstract class BaseMonster : Character
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
     protected GameObject Target;
+    protected Player TargetPlayer;
     protected Animator monsterAnimator;
     protected MonsterData myData;
     protected bool TargetFollowMode { get; set; }
-    protected float AttackCoolDown;
+    protected float AttackCoolDown { get; set; }    // 공격 쿨타임, stat에서 AttackTime를 사용.
+    //protected float AttacksInterval { get; set; }   // 원거리 공격 간격, stat에서 AttackSpeed와 연관.
+    protected Vector3 TargetDir { get; set; }
 
-    private void Awake()
-    {
-        //monsterAnimator = GetComponentInChildren<Animator>();
-    }
-    private void Update()
+    protected virtual void Update()
     {
         AttackCoolDown -= Time.deltaTime;
     }
+
+    private void FixedUpdate()
+    {
+        if(TargetFollowMode == true)
+        {
+            MoveToTarget();
+        }
+    }
+
     public override void Attack()
     {
         base.Attack();
-        if (AttackCoolDown > 0f) return;
-        AttackCoolDown = AttackTime;
+        
     }
 
     /// <summary>
@@ -43,14 +50,6 @@ public abstract class BaseMonster : Character
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(TargetFollowMode == true)
-        {
-            MoveToTarget();
-        }
-    }
-
     /// <summary>
     /// 플레이어 감지됐을 때 처리
     /// </summary>
@@ -58,9 +57,8 @@ public abstract class BaseMonster : Character
     protected void PlayerDetectStart(GameObject player)
     {
         Target = player;
+        TargetPlayer = player.GetComponent<Player>();
         TargetFollowMode = true;
-
-        // TO DO : 애니메이션 Move 처리
     }
 
     /// <summary>
@@ -70,8 +68,6 @@ public abstract class BaseMonster : Character
     {
         Target = null;
         TargetFollowMode = false;
-
-        // TO DO : 애니메이션 Idle 처리
     }
     public void MoveToTarget()
     {
@@ -81,10 +77,27 @@ public abstract class BaseMonster : Character
             return;
         }
 
-        Vector3 Direction = (Target.transform.position - transform.position).normalized;
-        transform.position += Direction * (0.05f * MoveSpeed);
+        TargetDir = (Target.transform.position - transform.position).normalized;
+        transform.position += TargetDir * (0.05f * MoveSpeed);
         // 애니메이션 방향 지정
-        monsterAnimator.SetFloat(MoveX, Direction.x);
-        monsterAnimator.SetFloat(MoveY, Direction.y);
+        monsterAnimator.SetFloat(MoveX, TargetDir.x);
+        monsterAnimator.SetFloat(MoveY, TargetDir.y);
+    }
+
+    /// <summary>
+    /// data와 stat 초기화
+    /// </summary>
+    /// <param name="data">몬스터 데이터</param>
+    public void InitMonster(MonsterData data)
+    {
+        myData = data;
+
+        Health = MaxHealth = data.stats.MaxHealth;
+        AttackPower = data.stats.AttackPower;
+        Defense = data.stats.Defense;
+        MoveSpeed = data.stats.MoveSpeed;
+        AttackRange = data.stats.AttackRange;
+        AttackSpeed = data.stats.AttackSpeed;
+        AttackTime = data.stats.AttackTime;
     }
 }

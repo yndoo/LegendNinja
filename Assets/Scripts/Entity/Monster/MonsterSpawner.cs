@@ -1,3 +1,4 @@
+using PublicDefinitions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,6 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField]
-    private int stage = 1;
     private int curWave = 2; // 현재 wave 값. 나중에 매니저에서 가져오는 wave값으로 대체될 수 있음.
 
     private MonsterDatabase monsterDB;
@@ -61,6 +61,13 @@ public class MonsterSpawner : MonoBehaviour
         GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{data.id}");
         if (go == null) return;
 
-        Instantiate(go).GetComponent<Monster>().InitMonster(data);
+        if(data.type == EAttackType.Melee)
+        { 
+            Instantiate(go).AddComponent<MeleeMonster>().InitMonster(data); 
+        }
+        else
+        {
+            Instantiate(go).AddComponent<RangedMonster>().InitMonster(data);
+        }
     }
 }
