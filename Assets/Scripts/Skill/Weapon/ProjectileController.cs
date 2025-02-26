@@ -63,9 +63,8 @@ public class ProjectileController : MonoBehaviour
         }
 
         // 몬스터와 충돌했을 경우
-        if (collision.CompareTag("Monster"))  // 충돌한 객체가 몬스터라면
+        if (collision.CompareTag("Monster"))
         {
-            // 몬스터 컴포넌트 가져오기
             BaseMonster monster = collision.GetComponent<BaseMonster>();
 
             if (monster != null)
