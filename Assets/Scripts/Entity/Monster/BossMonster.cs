@@ -34,12 +34,12 @@ public class BossMonster : BaseMonster
         if (Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
         {
             // 확률적으로 Hidden 스킬 사용
-            int p = Random.Range(0, 100);
-            if (p > 80)
-            {
-                IsBossSkillOn = true;
-                return;
-            }
+            //int p = Random.Range(0, 100);
+            //if (p > 80)
+            //{
+            //    IsBossSkillOn = true;
+            //    return;
+            //}
             // 기본 공격
             Attack();
             return;

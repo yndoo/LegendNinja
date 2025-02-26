@@ -54,12 +54,16 @@ public abstract class BaseMonster : Character
     public override void Damage(float damage)
     {
         Health -= damage;
-        monsterRenderer.color = monsterRenderer.color - new Color(0, 0.3f, 0.3f, 0f);
+        monsterRenderer.color = monsterRenderer.color - new Color(0, 0.7f, 0.7f, 0f);
         Invoke("ResetColor", 0.3f);
         if (Health <= 0)
         {
-            monsterRenderer.color = monsterRenderer.color - new Color(1f, 1f, 1f, 0.4f);
-            Destroy(this.gameObject, 0.3f);
+            TargetFollowMode = false;
+            monsterRenderer.color = monsterRenderer.color - new Color(0f, 1f, 1f, 0.4f);
+            monsterAnimator.speed = 0f;
+            gameObject.tag = "Default";
+            GetComponent<Collider2D>().enabled = false;
+            Destroy(this.gameObject, 1f);
         }
     }
 
