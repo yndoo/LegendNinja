@@ -90,16 +90,16 @@
   "Boss": [
     {
       "id": 301,
-      "name": "GiantBamboo",
-      "type": "Melee",
+      "name": "Crow",
+      "type": "Boss",
       "stats": {
         "MaxHealth": 300.0,
         "AttackPower": 10.0,
         "Defense": 10.0,
-        "MoveSpeed": 8,
-        "AttackRange": 1.5,
+        "MoveSpeed": 0.8,
+        "AttackRange": 1.1,
         "AttackSpeed": 0.2,
-        "AttackTime": 0.5
+        "AttackTime": 1
       }
     }
   ]

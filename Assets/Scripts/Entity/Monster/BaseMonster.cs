@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class BaseMonster : Character
 {
-    private static readonly int MoveX = Animator.StringToHash("MoveX");
-    private static readonly int MoveY = Animator.StringToHash("MoveY");
+    protected static readonly int MoveX = Animator.StringToHash("MoveX");
+    protected static readonly int MoveY = Animator.StringToHash("MoveY");
     protected static readonly int IsMoving = Animator.StringToHash("IsMoving");
     protected static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
@@ -17,6 +17,7 @@ public abstract class BaseMonster : Character
     protected float AttackCoolDown { get; set; }    // 공격 쿨타임, stat에서 AttackTime를 사용.
     //protected float AttacksInterval { get; set; }   // 원거리 공격 간격, stat에서 AttackSpeed와 연관.
     protected Vector3 TargetDir { get; set; }
+    public abstract void MoveToTarget();
 
     protected virtual void Update()
     {
@@ -72,24 +73,6 @@ public abstract class BaseMonster : Character
         TargetFollowMode = false;
         
         monsterAnimator.SetBool(IsMoving, false);
-    }
-    public void MoveToTarget()
-    {
-        if(Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
-        {
-            Attack();
-            return;
-        }
-
-        // Move
-        TargetDir = (Target.transform.position - transform.position).normalized;
-        transform.position += TargetDir * (0.05f * MoveSpeed);
-
-        // 애니메이션 세팅 & 방향 지정
-        monsterAnimator.SetBool(IsAttack, false);
-        monsterAnimator.SetBool(IsMoving, true);
-        monsterAnimator.SetFloat(MoveX, TargetDir.x);
-        monsterAnimator.SetFloat(MoveY, TargetDir.y);
     }
 
     /// <summary>
