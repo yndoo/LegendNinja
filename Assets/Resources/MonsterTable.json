@@ -38,8 +38,8 @@
         "Defense": 4.0,
         "MoveSpeed": 0.6,
         "AttackRange": 3,
-        "AttackSpeed": 0.4,
-        "AttackTime": 2
+        "AttackSpeed": 0.6,
+        "AttackTime": 6
       }
     }
   ],

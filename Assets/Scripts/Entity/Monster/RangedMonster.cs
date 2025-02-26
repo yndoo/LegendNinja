@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class RangedMonster : BaseMonster
 {
+    private int shootNum;
     private void Awake()
     {
         monsterAnimator = GetComponentInChildren<Animator>();
         GetComponentInChildren<CircleCollider2D>().radius = 4f;
     }
-    private void Update()
+    protected override void Update()
     {
-        AttackCoolDown -= Time.deltaTime;
+        base.Update();
+
     }
     public override void Attack()
     {
+        base.Attack();
+
         if (AttackCoolDown > 0f) return;
 
-        base.Attack();
-        Debug.Log("Ranged Attack");
+        for(int i = 0; i < 5; i++)
+        {
+            Invoke("Shooting", AttackSpeed * i);
+        }
         AttackCoolDown = AttackTime;
+    }
+    void Shooting()
+    {
+        Debug.Log("Ranged Attack");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

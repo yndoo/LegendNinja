@@ -11,17 +11,15 @@ public class MeleeMonster : BaseMonster
         monsterAnimator = GetComponentInChildren<Animator>();
         GetComponentInChildren<CircleCollider2D>().radius = 3f;
     }
-
-    private void Update()
-    {
-        
-    }
-
     public override void Attack()
     {
         base.Attack();
 
+        if (AttackCoolDown > 0f) return;
+        
         TargetPlayer.Damage(AttackPower);
+        Debug.Log("근거리 공격!");
+        AttackCoolDown = AttackTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +39,4 @@ public class MeleeMonster : BaseMonster
             PlayerDetectEnd();
         }
     }
-
-    
 }

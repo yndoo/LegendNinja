@@ -13,14 +13,11 @@ public abstract class BaseMonster : Character
     protected Animator monsterAnimator;
     protected MonsterData myData;
     protected bool TargetFollowMode { get; set; }
-    protected float AttackCoolDown { get; set; }
+    protected float AttackCoolDown { get; set; }    // 공격 쿨타임, stat에서 AttackTime를 사용.
+    //protected float AttacksInterval { get; set; }   // 원거리 공격 간격, stat에서 AttackSpeed와 연관.
     protected Vector3 TargetDir { get; set; }
 
-    private void Awake()
-    {
-        
-    }
-    private void Update()
+    protected virtual void Update()
     {
         AttackCoolDown -= Time.deltaTime;
     }
@@ -36,8 +33,7 @@ public abstract class BaseMonster : Character
     public override void Attack()
     {
         base.Attack();
-        if (AttackCoolDown > 0f) return;
-        AttackCoolDown = AttackTime;
+        
     }
 
     /// <summary>
