@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8030436081346140365}
   - component: {fileID: 5722103328820404879}
   - component: {fileID: 8918032762386142089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TilesetTowers_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

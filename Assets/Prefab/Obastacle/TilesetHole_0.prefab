@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6496174753353585265}
   - component: {fileID: 7909018782598353747}
   - component: {fileID: 3462052771619299597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TilesetHole_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

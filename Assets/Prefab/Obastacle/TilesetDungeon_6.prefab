@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4852024597985918917}
   - component: {fileID: 5470888276646388901}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TilesetDungeon_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

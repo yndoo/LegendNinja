@@ -143,9 +143,6 @@ public class Player : Character
             animator.SetTrigger("IsDie");
             StartCoroutine(FadeOutDieAnimation());
         }
-
-        
-        //Destroy(this.gameObject, 0.7f);
         return;
     }
     void ResetColor()
