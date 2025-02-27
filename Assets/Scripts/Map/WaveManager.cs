@@ -94,6 +94,7 @@ public class WaveManager : MonoBehaviour
     //장애물 위치 겹치는지 확인 (외부용)
     public bool IsPositionOccupied(Vector2 position)
     {
+        if (spawnedPosition == null) return true;
         foreach (Vector2 sPos in spawnedPosition)
         {
             if (Vector2.Distance(position, sPos) < 1f)
