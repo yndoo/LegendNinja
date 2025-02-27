@@ -1,18 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterData : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "NewCharacter", menuName = "Character/New Character")]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class CharacterData : ScriptableObject
+{
+    public string characterName; // 캐릭터 이름
+    public Sprite characterSprite; // 캐릭터 스프라이트
+    public AnimatorOverrideController characterAnimator; //애니메이션 컨트롤러
 }
+
