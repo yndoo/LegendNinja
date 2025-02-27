@@ -32,22 +32,21 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float knockbackTime = 0.5f; // 넉백 지속 시간
     public float KnockbackTime { get => knockbackTime; set => knockbackTime = value; }
 
-    // 공격 애니메이션 트리거 해시 값
-    private static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
     // 이 무기를 소유한 BaseController (플레이어나 적 캐릭터)
-    public BaseController Controller { get; private set; }
+    public Player player { get; private set; }
 
     //private Animator animator; // 무기의 애니메이션 컨트롤러
     private SpriteRenderer weaponRenderer; // 무기의 스프라이트 렌더러
 
+
     /// <summary>
     /// 초기화 작업을 수행하는 메서드
     /// </summary>
-    protected virtual void Awake()
+    public virtual void Init()
     {
         // 부모 객체에서 BaseController를 가져옴
-        Controller = GetComponentInParent<BaseController>();
+        player = transform.parent.parent.GetComponent<Player>();
 
         // 하위 객체에서 Animator 및 SpriteRenderer를 가져옴
         //animator = GetComponentInChildren<Animator>();
@@ -78,7 +77,7 @@ public class WeaponHandler : MonoBehaviour
     /// <summary>
     /// 공격을 실행하는 메서드 (자식 클래스에서 오버라이드 가능)
     /// </summary>
-    public virtual void Attack(Vector3 direction)
+    public virtual void Attack()
     {
         //AttackAnimation();
 
