@@ -105,7 +105,7 @@ public class WaveManager : MonoBehaviour
         if (spawnedPosition == null) return true;
         foreach (Vector2 sPos in spawnedPosition)
         {
-            if (Vector2.Distance(position, sPos) < 1f)
+            if (Vector2.Distance(position, sPos) < 3f)
             {
                 return true;
             }
@@ -120,7 +120,7 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log($"웨이브 {CurrentWave} 클리어! 포탈로 이동하세요.");
             waveCleared = true;
-            //wavePortal.ActivatePortal(); //포탈 활성화
+            wavePortal.ActivePortal(); //포탈 활성화
         }
     }
 
@@ -128,6 +128,7 @@ public class WaveManager : MonoBehaviour
     {
         if (waveCleared)
         {
+            wavePortal.DeactivePortal(); //포탈 비활성화
             StartNextWave();
         }
     }
