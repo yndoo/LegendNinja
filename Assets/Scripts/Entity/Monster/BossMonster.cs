@@ -67,7 +67,7 @@ public class BossMonster : BaseMonster
         {
             // 확률적으로 Hidden 스킬 사용
             float p = Random.Range(0f, 100f);
-            if (p < 1f)
+            if (p < 10f)
             {
                 isBossSkillOn = true;
                 BossSkillStart();
@@ -138,13 +138,17 @@ public class BossMonster : BaseMonster
         GetComponent<Collider2D>().enabled = true;
         gameObject.tag = "Monster";
 
-        // 랜덤 위치로 이동
-        Vector3 randomPos = waveManager.GetRandomPosition();
-        while (!waveManager.IsPositionOccupied(randomPos))
-        {
-            randomPos = waveManager.GetRandomPosition();
-        }
-        transform.position = randomPos;
+        // 1.랜덤 위치로 이동
+        //Vector3 randomPos = waveManager.GetRandomPosition();
+        //while (!waveManager.IsPositionOccupied(randomPos))
+        //{
+        //    randomPos = waveManager.GetRandomPosition();
+        //}
+        //transform.position = randomPos;
+
+        // 2. 플레이어 근처로 이동
+        Vector3 nextPos = Target.transform.position + Vector3.up * 2;
+        transform.position = nextPos;
 
         TargetDir = (Target.transform.position - transform.position).normalized;
         if (TargetDir.x < 0)
