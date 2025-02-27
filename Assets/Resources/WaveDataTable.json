@@ -4,13 +4,13 @@
       "wave": 1,
       "smallType": 2,
       "mediumType": 0,
-      "smallCount": 1,
+      "smallCount": 2,
       "mediumCount": 0,
       "bossType": 0
     },
     {
       "wave": 2,
-      "smallType": 2,
+      "smallType": 3,
       "mediumType": 0,
       "smallCount": 3,
       "mediumCount": 0,
@@ -28,7 +28,7 @@
       "wave": 4,
       "smallType": 3,
       "mediumType": 1,
-      "smallCount": 2,
+      "smallCount": 1,
       "mediumCount": 2,
       "bossType": 0
     },

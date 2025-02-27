@@ -330,6 +330,7 @@ MonoBehaviour:
   monsterSpawner: {fileID: 1504732787}
   obstacleSpawner: {fileID: 747335306105288253, guid: f9751052afcea9e41b37a89862022eed, type: 3}
   wavePortal: {fileID: 0}
+  skillSelectionUI: {fileID: 810397693}
   mapSize: {x: 10, y: 10}
 --- !u!1 &519420028
 GameObject:
@@ -437,6 +438,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1532692327}
+--- !u!114 &810397693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3398162700504155978, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
+  m_PrefabInstance: {fileID: 1700258844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53adb6ad636b92d4fa84d3e62c3534d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1501843171
 GameObject:
   m_ObjectHideFlags: 0

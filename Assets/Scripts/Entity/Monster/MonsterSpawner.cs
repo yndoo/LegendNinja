@@ -10,19 +10,24 @@ public class MonsterSpawner : MonoBehaviour
     private WaveDatabase waveDB;
     private WaveManager waveManager;
 
-    void Start()
+    void Awake()
     {
         monsterDB = DataTableLoader.LoadMonsterData("MonsterTable");
         waveDB = DataTableLoader.LoadWaveData("WaveDataTable");
         waveManager = WaveManager.instance;
 
-        WaveSpawn();
+        //WaveSpawn();
     }
     /// <summary>
     /// 현재 wave에 맞는 몬스터를 랜덤 소환.
     /// </summary>
-    void WaveSpawn()
+    public void WaveSpawn()
     {
+        if(waveManager == null)
+        {
+            waveManager = WaveManager.instance;
+        }
+
         WaveData waveData = waveDB.WaveDatas[waveManager.CurrentWave - 1]; // 현재 웨이브 데이터
         //Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
         //Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
@@ -34,7 +39,7 @@ public class MonsterSpawner : MonoBehaviour
         for (int i = 0; i < waveData.smallCount; i++)    // 그 중 smallCount마리 소환
         {
             int idx = Random.Range(0, waveData.smallType);
-            Spawn(small[idx]); 
+            Spawn(small[idx]);
 
             Debug.Log($"소형 소환 | 인덱스 : {idx}, id : {small[idx].id}");
         }

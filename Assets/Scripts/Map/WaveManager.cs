@@ -13,7 +13,8 @@ public class WaveManager : MonoBehaviour
     public MonsterSpawner monsterSpawner; //몬스터 랜덤 스폰 스크립트
     public ObstacleSpawner obstacleSpawner; //장애물 랜덤 생성 스크립트
     public WavePortal wavePortal; //포탈 스크립트 (다음 웨이브 시작 트리거)
-    
+    public SkillSelectionUI skillSelectionUI; // 스킬 UI
+
 
     public int AliveEnemyCount {  get; set; }
     public int CurrentWave {  get; set; }
@@ -33,9 +34,9 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(!waveCleared && AliveEnemyCount == 0 )
+        if(CheckWaveClear())
         {
-            CheckWaveClear();
+            StartNextWave();
         }
     }
 
@@ -54,13 +55,14 @@ public class WaveManager : MonoBehaviour
         CurrentWave++;
         waveCleared = false; // 새 웨이브 시작
 
-        int obstacleCount = Mathf.Clamp(3 + (CurrentWave - 1) * 2, 3, 9); //웨이브마다 장애물 증가
-        //몬스터 수 증가       
+        //웨이브마다 장애물 증가
+        int obstacleCount = Mathf.Clamp(3 + (CurrentWave - 1) * 2, 3, 9); 
 
         obstacleSpawner.ClearObstacles(); //기존 장애물 제거
 
         spawnedPosition = new List<Vector2>(); //생성된 위치 리스트
 
+        // 새로운 장애물 배치
         for (int i = 0; i < obstacleCount; i++)
         {
             Vector2 randomPosition = GetRandomPosition();
@@ -74,7 +76,12 @@ public class WaveManager : MonoBehaviour
 
             spawnedPosition.Add(randomPosition);
         }
-        
+
+        // 현재 웨이브 몬스터 스폰
+        monsterSpawner.WaveSpawn();
+
+        // 스킬 UI On
+        skillSelectionUI.OpenPanel();
     }
 
     //랜덤위치생성
@@ -114,7 +121,7 @@ public class WaveManager : MonoBehaviour
         return false;
     }
 
-    public void CheckWaveClear()
+    public bool CheckWaveClear()
     {
         if (AliveEnemyCount == 0) //남은 적이 없으면 웨이브 클리어
         {
@@ -122,6 +129,7 @@ public class WaveManager : MonoBehaviour
             waveCleared = true;
             //wavePortal.ActivatePortal(); //포탈 활성화
         }
+        return waveCleared;
     }
 
     public void TryStartNextWave()
