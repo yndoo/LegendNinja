@@ -31,13 +31,13 @@ public class MonsterSpawner : MonoBehaviour
             waveManager = WaveManager.instance;
         }
 
-        waveText.text = $"1스테이지 - {waveManager.CurrentWave}웨이브";
+        waveText.text = $"{waveManager.CurrentStage}스테이지 - {waveManager.CurrentWave}웨이브";
 
         WaveData waveData = waveDB.WaveDatas[waveManager.CurrentWave - 1]; // 현재 웨이브 데이터
         //Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
         //Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
         //Spawn(monsterDB.Small[2]); // 103몬스터 테스트용 코드
-        Spawn(monsterDB.Medium[0]); // 201몬스터 테스트용 코드
+        //Spawn(monsterDB.Medium[0]); // 201몬스터 테스트용 코드
         //Spawn(monsterDB.Boss[0]); // 301몬스터 테스트용 코드
 
         // 소형 몬스터 랜덤 뽑기
