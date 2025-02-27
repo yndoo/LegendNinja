@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5566045299384508716}
-  progress: {fileID: 0}
+  progress: {fileID: 9149374012171698030}
   offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &8676508240851217807
 GameObject:
