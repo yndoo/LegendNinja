@@ -32,11 +32,12 @@ public class BossMonster : BaseMonster
         base.Damage(damage);
         if(Health <= 0)
         {
-            TargetFollowMode = false;
             monsterAnimator.SetBool(IsDeath, true);
+            TargetFollowMode = false;
             gameObject.tag = "Untagged";
+            GetComponentInChildren<Collider2D>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
-            Destroy(this.gameObject, 3f);
+            Invoke("Die", 3f);
         }
     }
     public override void Attack()

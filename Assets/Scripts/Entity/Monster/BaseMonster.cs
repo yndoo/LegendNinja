@@ -60,11 +60,18 @@ public abstract class BaseMonster : Character
         {
             TargetFollowMode = false;
             monsterRenderer.color = monsterRenderer.color - new Color(0f, 1f, 1f, 0.4f);
+            originalColor = monsterRenderer.color;
             monsterAnimator.speed = 0f;
             gameObject.tag = "Untagged";
             GetComponent<Collider2D>().enabled = false;
-            Destroy(this.gameObject, 1f);
+            Invoke("Die", 1f);
         }
+    }
+
+    protected void Die()
+    {
+        WaveManager.instance.AliveEnemyCount--;
+        Destroy(this.gameObject);
     }
 
     /// <summary>

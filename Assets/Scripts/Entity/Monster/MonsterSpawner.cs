@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private int curWave = 2; // 현재 wave 값. 나중에 매니저에서 가져오는 wave값으로 대체될 수 있음.
-
     private MonsterDatabase monsterDB;
     private WaveDatabase waveDB;
     private WaveManager waveManager;
@@ -26,7 +23,7 @@ public class MonsterSpawner : MonoBehaviour
     /// </summary>
     void WaveSpawn()
     {
-        WaveData waveData = waveDB.WaveDatas[curWave - 1]; // 현재 웨이브 데이터
+        WaveData waveData = waveDB.WaveDatas[waveManager.CurrentWave - 1]; // 현재 웨이브 데이터
         Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
         Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
         Spawn(monsterDB.Small[2]); // 103몬스터 테스트용 코드
@@ -85,5 +82,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             Instantiate(go, randomPos, Quaternion.identity).AddComponent<BossMonster>().InitMonster(data);
         }
+
+        waveManager.AliveEnemyCount++;
     }
 }

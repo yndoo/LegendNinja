@@ -16,8 +16,8 @@ public class WaveManager : MonoBehaviour
     
 
     public int AliveEnemyCount {  get; set; }
+    public int CurrentWave {  get; set; }
 
-    private int currentWave = 0;
     private bool waveCleared = false;
     private List<Vector2> spawnedPosition;
     public Vector2 mapSize = new Vector2(10, 10); //맵크기
@@ -38,15 +38,15 @@ public class WaveManager : MonoBehaviour
 
     public void StartNextWave()
     {
-        if (currentWave >= totalWaves)
+        if (CurrentWave >= totalWaves)
         {         
             return;
         }
 
-        currentWave++;
+        CurrentWave++;
         waveCleared = false; // 새 웨이브 시작
 
-        int obstacleCount = Mathf.Clamp(3 + (currentWave - 1) * 2, 3, 9); //웨이브마다 장애물 증가
+        int obstacleCount = Mathf.Clamp(3 + (CurrentWave - 1) * 2, 3, 9); //웨이브마다 장애물 증가
         //몬스터 수 증가       
 
         obstacleSpawner.ClearObstacles(); //기존 장애물 제거
@@ -110,7 +110,7 @@ public class WaveManager : MonoBehaviour
     {
         if (AliveEnemyCount == 0) //남은 적이 없으면 웨이브 클리어
         {
-            Debug.Log($"웨이브 {currentWave} 클리어! 포탈로 이동하세요.");
+            Debug.Log($"웨이브 {CurrentWave} 클리어! 포탈로 이동하세요.");
             waveCleared = true;
             //wavePortal.ActivatePortal(); //포탈 활성화
         }
