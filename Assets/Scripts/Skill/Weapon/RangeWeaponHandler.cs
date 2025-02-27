@@ -21,7 +21,6 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float numberofProjectilesPerShot; // 한 번의 공격 시 발사할 투사체 개수
     public float NumberOfProjectilesPerShot { get => numberofProjectilesPerShot; set => numberofProjectilesPerShot = value; }
 
-
     [SerializeField] private float multipleProjectilesAngel; // 투사체 간 간격 (각도)
     public float MultipleProjectilesAngle { get => multipleProjectilesAngel; set => multipleProjectilesAngel = value; }
 
@@ -30,7 +29,14 @@ public class RangeWeaponHandler : WeaponHandler
 
     private ProjectileManager projectileManager; // 투사체 생성 및 관리
 
-    public RangeWeaponHandler(Transform projectileSpawnPosition, float damage, float speed, float cooldown, int bulletIndex, float bulletSize, float duration, float spread, float _numberofProjectilesPerShot, float _multipleProjectilesAngel, Color projectileColor, ProjectileManager projectileManager)
+    [SerializeField] private string weaponType;  
+    public string WeaponType { get => weaponType; set => weaponType = value; }
+
+
+    public RangeWeaponHandler(Transform projectileSpawnPosition, float damage, float speed, float cooldown, 
+        int bulletIndex, float bulletSize, float duration, float spread, 
+        float _numberofProjectilesPerShot, float _multipleProjectilesAngel, 
+        Color projectileColor, ProjectileManager projectileManager, string weaponType)
     {
         this.projectileSpawnPosition = projectileSpawnPosition;
         Damage = damage;
@@ -45,6 +51,8 @@ public class RangeWeaponHandler : WeaponHandler
         MultipleProjectilesAngle = _multipleProjectilesAngel;
         this.projectileColor = projectileColor;
         this.projectileManager = projectileManager;
+
+        this.weaponType = weaponType;
     }
 
     /// <summary>

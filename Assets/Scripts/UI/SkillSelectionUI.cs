@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -18,10 +19,6 @@ public class SkillSelectionUI : MonoBehaviour
     private SkillManager skillManager;
     private SkillList skillList;
 
-    private HashSet<string> selectedSkilltypes = new HashSet<string>();
-
-    private readonly string[] uniqueSkillTypes = { "Fire", "Ice", "Thunder", "Plant", "Rock" }; // 중복 불가 스킬 타입
-
     private void Start()
     {
         skillManager = FindObjectOfType<SkillManager>();
@@ -31,14 +28,10 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SetupSkillButtons()
     {
+        Time.timeScale = 0f;    // 게임 시간 멈추기
+
         // 스킬 리스트에서 랜덤하게 3개 선택
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
-        // 중복 선택 불가한 스킬 타입 필터링
-        foreach (SkillData skill in skillList.skills)
-        {
-            if (!selectedSkilltypes.Contains(skill.type)) // 이미 선택한 스킬
-                availableSkills.Add(skill);
-        }
 
         List<SkillData> randomSkills = new List<SkillData>();
 
@@ -107,8 +100,6 @@ public class SkillSelectionUI : MonoBehaviour
 
         skillManager.ApplySkill(skillData.id);
 
-        if (Array.Exists(uniqueSkillTypes, type => type == skillData.type))
-            selectedSkilltypes.Add(skillData.type);
 
         CloseSkillPanel();  // 스킬 선택 후 패널 닫기
     }
@@ -123,11 +114,6 @@ public class SkillSelectionUI : MonoBehaviour
     {
         panel.SetActive(true);
         SetupSkillButtons();
-        Time.timeScale = 0f;    // 게임 시간 멈추기
-    }
-    // 태그 타입이 속성일 경우
-    private string OneSkills(SkillData skill)
-    {
-        return skill.type = "Fire";
+        //Time.timeScale = 0f;    // 게임 시간 멈추기
     }
 }

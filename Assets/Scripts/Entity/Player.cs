@@ -37,7 +37,8 @@ public class Player : Character
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
 
-        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, AttackPower, 10, 1, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, AttackPower, 10, 1, 0, 1, 5, 0, 1, 10, 
+            Color.white, ProjectileManager.Instance, "shuriken"));
         skillManager = FindAnyObjectByType<SkillManager>();
 
         animator = GetComponentInChildren<Animator>();
@@ -67,7 +68,7 @@ public class Player : Character
 
     public void AttackCooldwonDivide()  // 코루틴 추가 시 삭제
     {
-        AttackMaxCoolDown *= 0.7f; 
+        AttackMaxCoolDown = 1f; 
     }
 
     // 코루틴 딜레이 추가 (weaponHandler에서 가지고 있어도 됨)

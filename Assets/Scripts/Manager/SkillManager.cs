@@ -63,11 +63,22 @@ public class SkillManager : MonoBehaviour
             case "Thunder":
             case "Plant":
             case "Rock":
-                AddweaponList(skill);
+                RangeWeaponHandler existingWeapon = player.weaponList
+                    .FirstOrDefault(w => w.WeaponType == skill.type);
+
+                if (existingWeapon != null)
+                {
+                    // 무기 강화
+                    existingWeapon.Damage += skill.value;
+                    Debug.Log($"{skill.name} 강화됨! (새로운 Damage: {existingWeapon.Damage})");
+                }
+                else
+                {
+                    // 새로운 무기 추가
+                    AddweaponList(skill);
+                }
                 break;
         }
-
-        Debug.Log($"{skill.name} 적용됨! 현재 Power: {player.weaponList[0].Damage}, Speed: {player.weaponList[0].AttackSpeed}");
     }
 
     public void AddweaponList(SkillData skill)
@@ -77,8 +88,8 @@ public class SkillManager : MonoBehaviour
         player.weaponList.Add(new RangeWeaponHandler(player.PlayerPivot.transform, skill.damage, skill.speed, skill.cooldown,
             skill.bulletIndex, skill.bulletSize,
             skill.duration, skill.spread, skill.numberofProjectilesPerShot, skill.multipleProjectilesAngel, 
-            Color.white, ProjectileManager.Instance));
-        //player.AttackCooldwonDivide();
+            Color.white, ProjectileManager.Instance, skill.type));
+        player.AttackCooldwonDivide();
 
         // 코루틴 딜레이 메소드 적용
         // 플레이어에서 코루틴 가져오기
