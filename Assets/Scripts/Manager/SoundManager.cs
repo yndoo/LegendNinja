@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource bgmSource; // 배경음
     private AudioSource sfxSource; // 효과음
 
-    public AudioClip bgmClip; // 배경음 클립
+    public AudioClip[] bgmClips; // 배경음 클립
     public AudioClip[] sfxClips; // 여러 개의 효과음 저장
     private void Awake()
     {
@@ -22,6 +24,8 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded; 
     }
     private void Start()
     {
@@ -35,26 +39,40 @@ public class SoundManager : MonoBehaviour
             sfxSource = gameObject.AddComponent<AudioSource>();
         }
 
-        bgmClip = Resources.Load<AudioClip>("Audio/TestBGM2"); 
-        sfxClips = new AudioClip[3]; 
+        bgmClips = new AudioClip[2];
+        sfxClips = new AudioClip[3];
+
+        bgmClips[0] = Resources.Load<AudioClip>("Audio/Rain");
+        bgmClips[1] = Resources.Load<AudioClip>("Audio/TestBGM2");
 
         sfxClips[0] = Resources.Load<AudioClip>("Audio/Shuriken");
-        //sfxClips[1] = Resources.Load<AudioClip>("Sound/");
-        //sfxClips[2] = Resources.Load<AudioClip>("Sound/");
+        sfxClips[1] = Resources.Load<AudioClip>("Audio/Click2");
+        //sfxClips[2] = Resources.Load<AudioClip>("Audio/");
 
 
         // 볼륨 설정
         bgmSource.volume = 0.4f;
-        sfxSource.volume = 0.25f;
+        sfxSource.volume = 0.5f;
 
-        PlayBGM(); // 배경음 시작
+        PlayBGM(0); // 배경음 시작
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "StartScene")
+        {
+            PlayBGM(0); 
+        }
+        else if (scene.name == "SampleScene")
+        {
+            PlayBGM(1); 
+        }
     }
 
-    public void PlayBGM()
+    public void PlayBGM(int index)
     {
-        if (bgmSource != null && bgmClip != null)
+        if (bgmSource != null && index >= 0 && index < bgmClips.Length)
         {
-            bgmSource.clip = bgmClip;
+            bgmSource.clip = bgmClips[index];
             bgmSource.loop = true;
             bgmSource.Play();
         }
