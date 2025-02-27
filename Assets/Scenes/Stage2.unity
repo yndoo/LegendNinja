@@ -616,6 +616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4166988956533315265, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8500924914999302525, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
@@ -962,6 +966,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1899861384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4166988956533315265, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
+  m_PrefabInstance: {fileID: 1595089622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &749022177775049008
 GameObject:
   m_ObjectHideFlags: 0
@@ -21812,6 +21821,8 @@ MonoBehaviour:
   obstacleSpawner: {fileID: 747335306105288253, guid: f9751052afcea9e41b37a89862022eed, type: 3}
   wavePortal: {fileID: 8589948922418784109}
   skillSelectionUI: {fileID: 810397693}
+  ClearText: {fileID: 1899861384}
+  CurrentStage: 2
   mapSize: {x: 10, y: 10}
 --- !u!1 &3290097867490911702
 GameObject:

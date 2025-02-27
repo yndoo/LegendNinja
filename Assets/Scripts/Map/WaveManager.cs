@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 
 public class WaveManager : MonoBehaviour
 {
@@ -14,11 +15,12 @@ public class WaveManager : MonoBehaviour
     public ObstacleSpawner obstacleSpawner; //장애물 랜덤 생성 스크립트
     public WavePortal wavePortal; //포탈 스크립트 (다음 웨이브 시작 트리거)
     public SkillSelectionUI skillSelectionUI; // 스킬 UI
+    public GameObject ClearText;
 
 
     public int AliveEnemyCount {  get; set; }
     public int CurrentWave {  get; set; }
-    public int CurrentStage { get; set; }
+    public int CurrentStage;
 
     private bool waveCleared = false;
     private List<Vector2> spawnedPosition;
@@ -57,7 +59,7 @@ public class WaveManager : MonoBehaviour
         waveCleared = false; // 새 웨이브 시작
 
         //웨이브마다 장애물 증가
-        int obstacleCount = Mathf.Clamp(3 + (CurrentWave - 1) * 2, 3, 9); 
+        int obstacleCount = Mathf.Clamp(2 + CurrentWave, 2, 4); 
 
         obstacleSpawner.ClearObstacles(); //기존 장애물 제거
 
@@ -98,7 +100,7 @@ public class WaveManager : MonoBehaviour
     {
         foreach (Vector2 spawnedPosiotion in _spawnedPosition)
         {
-            if (Vector2.Distance(position, spawnedPosiotion) < 1f) 
+            if (Vector2.Distance(position, spawnedPosiotion) < 2f) 
             {
                 return true;
             }
@@ -113,7 +115,7 @@ public class WaveManager : MonoBehaviour
         if (spawnedPosition == null) return true;
         foreach (Vector2 sPos in spawnedPosition)
         {
-            if (Vector2.Distance(position, sPos) < 3f)
+            if (Vector2.Distance(position, sPos) < 2f)
             {
                 return true;
             }
@@ -135,10 +137,30 @@ public class WaveManager : MonoBehaviour
 
     public void TryStartNextWave()
     {
+        if(CurrentWave >= 5)
+        {
+            ClearText.SetActive(true);
+            Invoke("StageEnd", 1f);
+            return;
+        }
+
         if (waveCleared)
         {
             wavePortal.DeactivePortal(); //포탈 비활성화
             StartNextWave();
+        }
+    }
+
+    void StageEnd()
+    {
+        if (CurrentStage == 1)
+        {
+            wavePortal.DeactivePortal(); //포탈 비활성화
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Stage2");
+        }
+        else if (CurrentStage == 2)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
         }
     }
 }
