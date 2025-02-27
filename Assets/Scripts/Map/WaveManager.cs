@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditorInternal;
+using System.Runtime.CompilerServices;
 
 public class WaveManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWave = 0;
     private bool waveCleared = false;
+    public Vector2 mapSize = new Vector2(10, 10); //맵크기
 
     void Start()
     {
@@ -34,7 +37,45 @@ public class WaveManager : MonoBehaviour
         //몬스터 수 증가       
 
         obstacleSpawner.ClearObstacles(); //기존 장애물 제거
-        obstacleSpawner.SpawnObstacles(obstacleCount); //새로운 장애물 생성     
+
+        List<Vector2> spawnedPosition = new List<Vector2>(); //생성된 위치 리스트
+
+        for (int i = 0; i < obstacleCount; i++)
+        {
+            Vector2 randomPosition = GetRandomPosition();
+            while (IsPositionOccupied(randomPosition,spawnedPosition))
+            {
+                randomPosition = GetRandomPosition();
+            }
+           
+            int randomIndex = Random.Range(0, obstacleSpawner.obstaclePrefabs.Length);
+            obstacleSpawner.SpawnObstacles(randomPosition, randomIndex);
+
+            spawnedPosition.Add(randomPosition);
+        }
+        
+    }
+
+    //랜덤위치생성
+    Vector2 GetRandomPosition()
+    {
+        float x = Random.Range(-mapSize.x / 2 ,mapSize.y / 2);
+        float y = Random.Range(-mapSize.y /2 ,mapSize.x / 2);
+        return new Vector2(x, y);
+    }
+
+    //장애물 위치 겹치는지 확인
+    bool IsPositionOccupied(Vector2 position,List<Vector2> spawnedPosition)
+    {
+        foreach (Vector2 spawnedPosiotion in spawnedPosition)
+        {
+            if (Vector2.Distance(position, spawnedPosiotion) < 1f)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void CheckWaveClear()
