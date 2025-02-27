@@ -34,7 +34,7 @@ public class MonsterSpawner : MonoBehaviour
         for (int i = 0; i < waveData.smallCount; i++)    // 그 중 smallCount마리 소환
         {
             int idx = Random.Range(0, waveData.smallType);
-            //Spawn(small[idx]); 
+            Spawn(small[idx]); 
 
             Debug.Log($"소형 소환 | 인덱스 : {idx}, id : {small[idx].id}");
         }
