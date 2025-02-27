@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,18 +12,18 @@ public class SoundManager : MonoBehaviour
     public AudioClip bgmClip; // 배경음 클립
     public AudioClip[] sfxClips; // 여러 개의 효과음 저장
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 유지
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 유지
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     private void Start()
     {
