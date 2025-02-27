@@ -7,15 +7,14 @@ public class ObstacleSpawner : MonoBehaviour
     public Vector2 mapSize = new Vector2(10, 10); //맵 크기
     private List<GameObject> spawnedObstacles = new List<GameObject>(); //생성된 장애물 리스트
 
-    public void SpawnObstacles(int count)
+    public void SpawnObstacles(Vector2 position, int prefabIndex)
     {
-        for (int i = 0; i < count; i++)
-        {
-            Vector2 randomPosition = GetRandomPosition();
-            int randomIndex = Random.Range(0, obstaclePrefabs.Length);
-            GameObject obstacle = Instantiate(obstaclePrefabs[randomIndex], randomPosition, Quaternion.identity);
-            spawnedObstacles.Add(obstacle); //생성된 장애물을 리스트에 추가
-        }
+        if (obstaclePrefabs.Length == 0) return;
+
+        prefabIndex = Mathf.Clamp(prefabIndex, 0, obstaclePrefabs.Length - 1);
+        GameObject obstacle = Instantiate(obstaclePrefabs[prefabIndex], position, Quaternion.identity);
+        spawnedObstacles.Add(obstacle); //생성된 장애물을 리스트에 추가
+       
     }
 
     Vector2 GetRandomPosition()
