@@ -21,9 +21,14 @@ public class RangedMonster : BaseMonster
     {
         base.Attack();
 
-        if (AttackCoolDown > 0f) return;
+        if (AttackCoolDown > 0f)
+        {
+            monsterAnimator.SetBool(IsAttack, false);
+            return;
+        }
 
-        for(int i = 0; i < 5; i++)
+        monsterAnimator.SetBool(IsAttack, true);
+        for (int i = 0; i < 5; i++)
         {
             Invoke("Shooting", AttackSpeed * i);
         }
@@ -33,19 +38,21 @@ public class RangedMonster : BaseMonster
     void Shooting()
     {
         Debug.Log("Ranged Attack");
-        
         try
         {
             GameObject go = Instantiate(Resources.Load<GameObject>($"Prefab/MonsterProjectile"), transform.position, transform.rotation);
-            Vector3 dir = (Target.transform.position - this.transform.position);
+            Vector3 dir = Target.transform.position - this.transform.position;
+            monsterAnimator.SetFloat(MoveX, dir.x);
+            monsterAnimator.SetFloat(MoveY, dir.y);
             dir.Normalize();
             go.GetComponent<MonsterProjectile>().MyPower = AttackPower;
-            go.GetComponent<Rigidbody2D>().velocity = dir * 5;
+            go.GetComponent<Rigidbody2D>().velocity = dir * 7;
         }
         catch(System.Exception ex)
         {
             Debug.LogException(ex);
         }
+
 
     }
     public override void MoveToTarget()

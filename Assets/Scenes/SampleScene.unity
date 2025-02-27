@@ -289,14 +289,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2488356502061152822, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5409176629223755820, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
+    - target: {fileID: 2961694547503399361, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+      propertyPath: monsterSpawner
+      value: 
+      objectReference: {fileID: 1504732787}
+    - target: {fileID: 2961694547503399361, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+      propertyPath: skillSelectionUI
+      value: 
+      objectReference: {fileID: 810397693}
     - target: {fileID: 8337844224319982503, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
       propertyPath: m_Name
       value: Pasture
@@ -304,33 +304,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8337844224319982503, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 493461846}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
---- !u!1 &493461845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8337844224319982503, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
-  m_PrefabInstance: {fileID: 493461844}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &493461846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493461845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0cecbac3009bb140b72d355c1aa3e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalWaves: 5
-  monsterSpawner: {fileID: 1504732787}
-  obstacleSpawner: {fileID: 747335306105288253, guid: f9751052afcea9e41b37a89862022eed, type: 3}
-  wavePortal: {fileID: 0}
-  mapSize: {x: 10, y: 10}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +343,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.43921572, g: 0.8705883, b: 0.93725497, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -437,6 +412,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1532692327}
+--- !u!1001 &631494477
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5545646806196913780, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6472264990701813764, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43598e95faf93a842a216c691f5c5055, type: 3}
+--- !u!114 &810397693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3398162700504155978, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
+  m_PrefabInstance: {fileID: 1700258844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53adb6ad636b92d4fa84d3e62c3534d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1504732787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6728346471402118992, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
@@ -475,10 +518,6 @@ PrefabInstance:
     - target: {fileID: 6925342170728503326, guid: f9751052afcea9e41b37a89862022eed, type: 3}
       propertyPath: m_Name
       value: ObstacleSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 6925342170728503326, guid: f9751052afcea9e41b37a89862022eed, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7763720259657975508, guid: f9751052afcea9e41b37a89862022eed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -651,10 +690,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillUICanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5426730363017260712, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6157939441106777079, guid: df5abb1ed18788145a04173ec71c3e7d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -810,3 +845,4 @@ SceneRoots:
   - {fileID: 9038258489601866571}
   - {fileID: 203765648}
   - {fileID: 275549731}
+  - {fileID: 631494477}

@@ -3,18 +3,34 @@ using UnityEngine.SceneManagement;
 
 public class WavePortal : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private Collider2D portalCollider;
+    //private SpriteRenderer spriteRenderer;
+
+
+    private void Start()
     {
-        if (other.CompareTag("Player")) //플레이어가 포탈에 들어갔을 때
-        {
-            FindObjectOfType<WaveManager>().TryStartNextWave();
-            //SceneManager.LoadScene(0,LoadSceneMode.) 옆에 맵만들고 다음 스테이지
-
-
-        }
-
-
+        portalCollider = GetComponent<Collider2D>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+        DeactivePortal(); //시작 시 비활성화
     }
 
+    public void ActivePortal()
+    {
+        portalCollider.enabled = true;
+        //spriteRenderer.enabled = true;
+    }
 
+    public void DeactivePortal()
+    {
+        portalCollider.enabled = false;
+        //spriteRenderer.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) //플레이어가 포탈에 들어갔을 때
+        {
+            WaveManager.instance.TryStartNextWave();
+        }
+    }
 }

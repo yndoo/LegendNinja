@@ -6,10 +6,10 @@
       "type": "Melee",
       "stats": {
         "MaxHealth": 50.0,
-        "AttackPower": 4.0,
+        "AttackPower": 2.0,
         "Defense": 5.0,
-        "MoveSpeed": 0.6,
-        "AttackRange": 1,
+        "MoveSpeed": 0.8,
+        "AttackRange": 1.2,
         "AttackSpeed": 0,
         "AttackTime": 1
       }
@@ -19,10 +19,10 @@
       "name": "Slime2",
       "type": "Melee",
       "stats": {
-        "MaxHealth": 60.0,
-        "AttackPower": 6.0,
+        "MaxHealth": 50.0,
+        "AttackPower": 3.0,
         "Defense": 3.0,
-        "MoveSpeed": 0.7,
+        "MoveSpeed": 1.1,
         "AttackRange": 1.1,
         "AttackSpeed": 0,
         "AttackTime": 1.2
@@ -33,10 +33,10 @@
       "name": "Slime3",
       "type": "Melee",
       "stats": {
-        "MaxHealth": 80.0,
-        "AttackPower": 8.0,
+        "MaxHealth": 60.0,
+        "AttackPower": 4.0,
         "Defense": 4.0,
-        "MoveSpeed": 0.4,
+        "MoveSpeed": 1,
         "AttackRange": 1.1,
         "AttackSpeed": 0,
         "AttackTime": 0.9
@@ -46,44 +46,16 @@
   "Medium": [
     {
       "id": 201,
-      "name": "Bear",
-      "type": "Melee",
-      "stats": {
-        "MaxHealth": 100.0,
-        "AttackPower": 15.0,
-        "Defense": 10.0,
-        "MoveSpeed": 6,
-        "AttackRange": 1.1,
-        "AttackSpeed": 0.5,
-        "AttackTime": 1.5
-      }
-    },
-    {
-      "id": 202,
-      "name": "GreenSnake",
+      "name": "Plant1",
       "type": "Ranged",
       "stats": {
-        "MaxHealth": 100.0,
+        "MaxHealth": 45.0,
         "AttackPower": 10.0,
-        "Defense": 5.0,
-        "MoveSpeed": 10,
-        "AttackRange": 3,
-        "AttackSpeed": 0.2,
-        "AttackTime": 0.7
-      }
-    },
-    {
-      "id": 203,
-      "name": "Reptile",
-      "type": "Melee",
-      "stats": {
-        "MaxHealth": 100.0,
-        "AttackPower": 12.0,
-        "Defense": 14.0,
+        "Defense": 10.0,
         "MoveSpeed": 6,
-        "AttackRange": 1,
+        "AttackRange": 9,
         "AttackSpeed": 0.5,
-        "AttackTime": 1.6
+        "AttackTime": 5
       }
     }
   ],
@@ -93,10 +65,10 @@
       "name": "Crow",
       "type": "Boss",
       "stats": {
-        "MaxHealth": 50.0,
-        "AttackPower": 10.0,
+        "MaxHealth": 300.0,
+        "AttackPower": 12.0,
         "Defense": 10.0,
-        "MoveSpeed": 0.8,
+        "MoveSpeed": 1.1,
         "AttackRange": 1.2,
         "AttackSpeed": 0.2,
         "AttackTime": 1
