@@ -36,7 +36,7 @@ public class WaveManager : MonoBehaviour
     {
         if(CheckWaveClear())
         {
-            StartNextWave();
+            //StartNextWave();
         }
     }
 

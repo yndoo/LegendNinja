@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7763720259657975508}
   - component: {fileID: 747335306105288253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ObstacleSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
