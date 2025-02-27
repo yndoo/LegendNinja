@@ -14,8 +14,10 @@ public class Player : Character
 
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
-    //[SerializeField] private WeaponHandler weaponHandler; 삭제 가능
 
+    private float[] timeSinceLastAttack;
+
+    private int index = 0;
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
 
@@ -29,7 +31,8 @@ public class Player : Character
     }
     void Start()
     {
-        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+
+        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 10, 10, 1, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
         skillManager = FindAnyObjectByType<SkillManager>();
 
         animator = GetComponentInChildren<Animator>();
@@ -55,12 +58,20 @@ public class Player : Character
         {
             Attack();
             AttackCoolDown = AttackMaxCoolDown; // 1초 쿨타임
+          
         }
         else
         {
             AttackCoolDown -= Time.deltaTime;
         }
     }
+
+    public void AttackCooldwonDivide()  // 코루틴 추가 시 삭제
+    {
+        AttackMaxCoolDown *= 0.7f; 
+    }
+
+    // 코루틴 딜레이 추가 (weaponHandler에서 가지고 있어도 됨)
     private IEnumerator DisableAttackLayer()
     {
         yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
@@ -99,9 +110,9 @@ public class Player : Character
             // 적의 방향 계산
             Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
 
-            skillManager.AttackWithWeapons(direction); // 추가 기능 : 스킬 가져오기
 
-            //weaponHandler.Attack(direction);  // 삭제 가능
+            skillManager.AttackWithWeapons(direction, ref index, weaponList); // 추가 기능 : 스킬 가져오기
+
             StartCoroutine(DisableAttackLayer());
         }
         else
@@ -132,9 +143,6 @@ public class Player : Character
             animator.SetTrigger("IsDie");
             StartCoroutine(FadeOutDieAnimation());
         }
-
-        
-        //Destroy(this.gameObject, 0.7f);
         return;
     }
     void ResetColor()

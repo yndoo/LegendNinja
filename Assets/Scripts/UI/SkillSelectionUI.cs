@@ -42,7 +42,7 @@ public class SkillSelectionUI : MonoBehaviour
         // 버튼 실행 설정
         for (int i = 0; i < skillButtons.Length; i++)
         {
-            if (i < skillList.skills.Length)
+            if (i < randomSkills.Count)
             {
                 SkillData skill = randomSkills[i]; // skill 변수 선언
 
@@ -92,9 +92,9 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SelectSkill(SkillData skillData)
     {
-        skillManager.ApplySkill(skillData.id);
+        Debug.Log($"[{skillData.name}] 스킬 선택됨! (ID: {skillData.id})");
 
-        Debug.Log($"[{skillData.name}] 스킬 선택됨!");
+        skillManager.ApplySkill(skillData.id);
 
         CloseSkillPanel();  // 스킬 선택 후 패널 닫기
     }
@@ -107,5 +107,6 @@ public class SkillSelectionUI : MonoBehaviour
     public void OpenPanel()
     {
         panel.SetActive(true);
+        SetupSkillButtons();
     }
 }
