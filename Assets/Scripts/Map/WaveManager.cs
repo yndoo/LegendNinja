@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
 
     public int AliveEnemyCount {  get; set; }
     public int CurrentWave {  get; set; }
+    public int CurrentStage { get; set; }
 
     private bool waveCleared = false;
     private List<Vector2> spawnedPosition;
