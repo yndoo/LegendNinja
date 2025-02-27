@@ -290,6 +290,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2961694547503399361, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+      propertyPath: ClearText
+      value: 
+      objectReference: {fileID: 1595089623}
+    - target: {fileID: 2961694547503399361, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+      propertyPath: CurrentStage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961694547503399361, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
       propertyPath: monsterSpawner
       value: 
       objectReference: {fileID: 1504732787}
@@ -681,6 +689,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4166988956533315265, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8500924914999302525, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
@@ -690,6 +702,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
+--- !u!1 &1595089623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4166988956533315265, guid: 898aee6ce8830b443aedcb96894d3dfb, type: 3}
+  m_PrefabInstance: {fileID: 1595089622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1700258844
 PrefabInstance:
   m_ObjectHideFlags: 0

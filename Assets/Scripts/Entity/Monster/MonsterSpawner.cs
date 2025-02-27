@@ -31,7 +31,7 @@ public class MonsterSpawner : MonoBehaviour
             waveManager = WaveManager.instance;
         }
 
-        waveText.text = $"1스테이지 - {waveManager.CurrentWave}웨이브";
+        waveText.text = $"{waveManager.CurrentStage}스테이지 - {waveManager.CurrentWave}웨이브";
 
         WaveData waveData = waveDB.WaveDatas[waveManager.CurrentWave - 1]; // 현재 웨이브 데이터
         //Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
