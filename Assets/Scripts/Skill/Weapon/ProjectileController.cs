@@ -52,7 +52,12 @@ public class ProjectileController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 레벨 지형과 충돌했을 경우
-        if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
+        //if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
+        //{
+        //    DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
+        //}
+        // 레벨 지형과 충돌했을 경우
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Level"))
         {
             DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
