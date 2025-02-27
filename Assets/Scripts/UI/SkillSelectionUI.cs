@@ -28,28 +28,28 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SetupSkillButtons()
     {
-        Time.timeScale = 0f;    // °ÔÀÓ ½Ã°£ ¸ØÃß±â
+        Time.timeScale = 0f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
 
-        // ½ºÅ³ ¸®½ºÆ®¿¡¼­ ·£´ýÇÏ°Ô 3°³ ¼±ÅÃ
+        // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
 
         List<SkillData> randomSkills = new List<SkillData>();
 
-        // ½ºÅ³ÀÌ 3°³ ÀÌ»óÀÌ¸é ·£´ý ¼±ÅÃ, ¾Æ´Ï¸é ±×´ë·Î »ç¿ë
+        // ï¿½ï¿½Å³ï¿½ï¿½ 3ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½Æ´Ï¸ï¿½ ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½
         int skillCount = Mathf.Min(3, availableSkills.Count);
         for(int i = 0; i < skillCount; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, availableSkills.Count);
             randomSkills.Add(availableSkills[randomIndex]);
-            availableSkills.RemoveAt(randomIndex); // Áßº¹¹æÁö
+            availableSkills.RemoveAt(randomIndex); // ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
-        // ¹öÆ° ½ÇÇà ¼³Á¤
+        // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < skillButtons.Length; i++)
         {
             if (i < randomSkills.Count)
             {
-                SkillData skill = randomSkills[i]; // skill º¯¼ö ¼±¾ð
+                SkillData skill = randomSkills[i]; // skill ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                 skillButtons[i].gameObject.SetActive(true);
 
@@ -59,13 +59,13 @@ public class SkillSelectionUI : MonoBehaviour
                     skillTitle[i].text = skill.name;
                 }
 
-                if (skillDescriptions.Length > i) // ½ºÅ³ ¼³¸í ¼³Á¤
+                if (skillDescriptions.Length > i) // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 {
                     skillDescriptions[i].gameObject.SetActive(true);
                     skillDescriptions[i].text = skill.description;
                 }
 
-                // ½ºÇÁ¶óÀÌÆ® º¯°æ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                 if (skillImages.Length > i)
                 {
                     Sprite skillSprite = Resources.Load<Sprite>(skill.sprite);
@@ -79,7 +79,7 @@ public class SkillSelectionUI : MonoBehaviour
                     }
                 }
 
-                // ¹öÆ° Å¬¸¯ ÀÌº¥Æ® ¼³Á¤
+                // ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                 skillButtons[i].onClick.RemoveAllListeners();
                 skillButtons[i].onClick.AddListener(() => SelectSkill(skill));
             }
@@ -96,24 +96,24 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SelectSkill(SkillData skillData)
     {
-        Debug.Log($"[{skillData.name}] ½ºÅ³ ¼±ÅÃµÊ! (ID: {skillData.id})");
+        Debug.Log($"[{skillData.name}] ï¿½ï¿½Å³ ï¿½ï¿½ï¿½Ãµï¿½! (ID: {skillData.id})");
 
         skillManager.ApplySkill(skillData.id);
 
 
-        CloseSkillPanel();  // ½ºÅ³ ¼±ÅÃ ÈÄ ÆÐ³Î ´Ý±â
+        CloseSkillPanel();  // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½Ý±ï¿½
     }
 
     private void CloseSkillPanel()
     {
         panel.SetActive(false);
-        Time.timeScale = 1f;    // °ÔÀÓ ½Ã°£ ´Ù½Ã Èå¸£°Ô
+        Time.timeScale = 1f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ù½ï¿½ ï¿½å¸£ï¿½ï¿½
     }
 
     public void OpenPanel()
     {
         panel.SetActive(true);
         SetupSkillButtons();
-        //Time.timeScale = 0f;    // °ÔÀÓ ½Ã°£ ¸ØÃß±â
+        //Time.timeScale = 0f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
     }
 }

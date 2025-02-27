@@ -5,7 +5,7 @@
       "name": "Slime1",
       "type": "Melee",
       "stats": {
-        "MaxHealth": 50.0,
+        "MaxHealth": 10.0,
         "AttackPower": 2.0,
         "Defense": 5.0,
         "MoveSpeed": 0.8,
@@ -19,7 +19,7 @@
       "name": "Slime2",
       "type": "Melee",
       "stats": {
-        "MaxHealth": 50.0,
+        "MaxHealth": 10.0,
         "AttackPower": 3.0,
         "Defense": 3.0,
         "MoveSpeed": 1.1,
@@ -33,7 +33,7 @@
       "name": "Slime3",
       "type": "Melee",
       "stats": {
-        "MaxHealth": 60.0,
+        "MaxHealth": 10.0,
         "AttackPower": 4.0,
         "Defense": 4.0,
         "MoveSpeed": 1,
@@ -49,7 +49,7 @@
       "name": "Plant1",
       "type": "Ranged",
       "stats": {
-        "MaxHealth": 45.0,
+        "MaxHealth": 10.0,
         "AttackPower": 10.0,
         "Defense": 10.0,
         "MoveSpeed": 6,
@@ -65,7 +65,7 @@
       "name": "Crow",
       "type": "Boss",
       "stats": {
-        "MaxHealth": 300.0,
+        "MaxHealth": 30.0,
         "AttackPower": 12.0,
         "Defense": 10.0,
         "MoveSpeed": 1.1,

@@ -125,6 +125,11 @@ public class Player : Character
         animator.SetFloat("MoveY", MoveDirection.y);
         rb.velocity = MoveDirection * MoveSpeed;
     }
+
+    public void ResetPlayerPosition()
+    {
+        transform.position = Vector3.zero;
+    }
     public override void Attack()
     {
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
