@@ -10,7 +10,7 @@ public class RangedMonster : BaseMonster
     {
         base.Awake();
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 5f;
+        GetComponentInChildren<CircleCollider2D>().radius = 9f;
     }
     protected override void Update()
     {

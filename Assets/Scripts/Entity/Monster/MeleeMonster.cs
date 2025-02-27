@@ -10,7 +10,7 @@ public class MeleeMonster : BaseMonster
     {
         base.Awake();
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 4f;
+        GetComponentInChildren<CircleCollider2D>().radius = 9f;
     }
     public override void Attack()
     {
