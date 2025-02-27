@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1361105231302455279}
   - component: {fileID: 7182228875439000832}
   - component: {fileID: 9086639628058818722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TilesetNature_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}

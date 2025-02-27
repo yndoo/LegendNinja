@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
@@ -80,6 +81,7 @@ public class WeaponHandler : MonoBehaviour
     public virtual void Attack(Vector3 direction)
     {
         //AttackAnimation();
+
     }
 
     /// <summary>

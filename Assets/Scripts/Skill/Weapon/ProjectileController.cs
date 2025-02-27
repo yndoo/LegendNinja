@@ -57,10 +57,10 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
         // 공격 대상(Enemy 등)과 충돌했을 경우
-        else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
-        {
-            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
-        }
+        //else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
+        //{
+        //    DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
+        //}
 
         // 몬스터와 충돌했을 경우
         if (collision.CompareTag("Monster"))
@@ -73,8 +73,6 @@ public class ProjectileController : MonoBehaviour
                 monster.Damage(rangeWeaponHandler.Damage);
                 Debug.Log($"몬스터의 남은 HP: {monster.Health}");
 
-                // 투사체 제거
-                //DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
             }
             else
             {
@@ -88,6 +86,7 @@ public class ProjectileController : MonoBehaviour
     /// </summary>
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler)
     {
+
         rangeWeaponHandler = weaponHandler; // 발사한 무기 핸들러 저장
 
         this.direction = direction; // 투사체 이동 방향 설정
