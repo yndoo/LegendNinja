@@ -19,6 +19,14 @@ public class Player : Character
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
 
+    protected SpriteRenderer playerRenderer;
+    private Color originalColor;
+
+    private void Awake()
+    {
+        playerRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalColor = playerRenderer.color;
+    }
     void Start()
     {
         weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
@@ -32,6 +40,7 @@ public class Player : Character
         AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
+
     }
     void Update()
     {
@@ -57,6 +66,12 @@ public class Player : Character
         yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
         animator.SetLayerWeight(2, 0); // Attack 레이어 비활성화
     }
+    private IEnumerator FadeOutDieAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // 애니메이션 길이만큼 대기
+        playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f); 
+        Destroy(this.gameObject, 0.3f);
+    }
     public void Move()
     {
         // WASD
@@ -81,13 +96,8 @@ public class Player : Character
         if (target != null)
         {
             animator.SetLayerWeight(2, 1);
-            //// 표창을 발사할 위치에서 발사
-            //GameObject shuriken = Instantiate(Shuriken, PlayerPivot.transform.position, Quaternion.identity);
-            //Rigidbody2D shurikenRb = shuriken.GetComponent<Rigidbody2D>();
             // 적의 방향 계산
             Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
-            //// 표창에 방향과 힘을 적용
-            //shurikenRb.velocity = direction * AttackPower;
 
             skillManager.AttackWithWeapons(direction); // 추가 기능 : 스킬 가져오기
 
@@ -106,6 +116,30 @@ public class Player : Character
     public override void Damage(float damage)
     {
         Health -= damage;
+        playerRenderer.color = playerRenderer.color - new Color(0, 0.3f, 0.3f, 0f);
+        Invoke("ResetColor", 0.3f);
+        if (Health <= 0)
+        {
+            //죽으면 어택 X 
+            animator.SetLayerWeight(2, 0);
+            Die();
+        }
+    }
+    private void Die()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("IsDie");
+            StartCoroutine(FadeOutDieAnimation());
+        }
+
+        
+        //Destroy(this.gameObject, 0.7f);
+        return;
+    }
+    void ResetColor()
+    {
+        playerRenderer.color = originalColor;
     }
     Transform FindCloseMonster()
     {
