@@ -19,7 +19,7 @@ public class BossMonster : BaseMonster
         base.Awake();
 
         monsterAnimator = GetComponentInChildren<Animator>();
-        GetComponentInChildren<CircleCollider2D>().radius = 8f;
+        GetComponentInChildren<CircleCollider2D>().radius = 9f;
     }
 
     private void Start()
