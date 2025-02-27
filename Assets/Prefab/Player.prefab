@@ -499,7 +499,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5566045299384508716}
   progress: {fileID: 9149374012171698030}
+<<<<<<< Updated upstream
   offset: {x: 0, y: 1.5, z: 0}
+=======
+  offset: {x: 0, y: 0.02, z: 0}
+>>>>>>> Stashed changes
 --- !u!1 &8676508240851217807
 GameObject:
   m_ObjectHideFlags: 0

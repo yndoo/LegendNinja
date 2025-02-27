@@ -26,8 +26,6 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SetupSkillButtons()
     {
-        List<SkillData> OneSkills = new List<SkillData>();  // 한번만 선택할 수 있는 스킬
-
         // 스킬 리스트에서 랜덤하게 3개 선택
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
         List<SkillData> randomSkills = new List<SkillData>();
