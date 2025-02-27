@@ -24,8 +24,6 @@ public class SkillData
     public float spread;    // °¢µµ ·£´ýÈ­
     public float numberofProjectilesPerShot;    // Åº °³¼ö
     public float multipleProjectilesAngel;  //Åº °¢µµ
-
-    public string weaponPrefab;
 }
 
 [Serializable]
