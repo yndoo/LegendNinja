@@ -37,7 +37,6 @@ public class RangedMonster : BaseMonster
     
     void Shooting()
     {
-        Debug.Log("Ranged Attack");
         try
         {
             GameObject go = Instantiate(Resources.Load<GameObject>($"Prefab/MonsterProjectile"), transform.position, transform.rotation);
@@ -47,6 +46,7 @@ public class RangedMonster : BaseMonster
             dir.Normalize();
             go.GetComponent<MonsterProjectile>().MyPower = AttackPower;
             go.GetComponent<Rigidbody2D>().velocity = dir * 7;
+            Debug.Log("Ranged Attack");
         }
         catch(System.Exception ex)
         {
