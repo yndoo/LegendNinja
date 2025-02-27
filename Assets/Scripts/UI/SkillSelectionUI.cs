@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 public class SkillSelectionUI : MonoBehaviour
@@ -17,6 +18,10 @@ public class SkillSelectionUI : MonoBehaviour
     private SkillManager skillManager;
     private SkillList skillList;
 
+    private HashSet<string> selectedSkilltypes = new HashSet<string>();
+
+    private readonly string[] uniqueSkillTypes = { "Fire", "Ice", "Thunder", "Plant", "Rock" }; // 중복 불가 스킬 타입
+
     private void Start()
     {
         skillManager = FindObjectOfType<SkillManager>();
@@ -26,10 +31,15 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SetupSkillButtons()
     {
-        List<SkillData> OneSkills = new List<SkillData>();  // 한번만 선택할 수 있는 스킬
-
         // 스킬 리스트에서 랜덤하게 3개 선택
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
+        // 중복 선택 불가한 스킬 타입 필터링
+        foreach (SkillData skill in skillList.skills)
+        {
+            if (!selectedSkilltypes.Contains(skill.type)) // 이미 선택한 스킬
+                availableSkills.Add(skill);
+        }
+
         List<SkillData> randomSkills = new List<SkillData>();
 
         // 스킬이 3개 이상이면 랜덤 선택, 아니면 그대로 사용
@@ -65,7 +75,7 @@ public class SkillSelectionUI : MonoBehaviour
                 // 스프라이트 변경
                 if (skillImages.Length > i)
                 {
-                    Sprite skillSprite = Resources.Load<Sprite>(skill.sprite); // 올바른 변수 사용
+                    Sprite skillSprite = Resources.Load<Sprite>(skill.sprite);
                     if (skillSprite != null)
                     {
                         skillImages[i].sprite = skillSprite;
@@ -88,17 +98,7 @@ public class SkillSelectionUI : MonoBehaviour
                     skillDescriptions[i].gameObject.SetActive(false);
                 }
             }
-
-            //  사용한 스킬일 경우 배제
-
         }
-    }
-
-    private void removeSkills()
-    {
-        // 사용한 스킬을 사용하면
-
-        //OneSkills()
     }
 
     public void SelectSkill(SkillData skillData)
@@ -107,18 +107,23 @@ public class SkillSelectionUI : MonoBehaviour
 
         skillManager.ApplySkill(skillData.id);
 
+        if (Array.Exists(uniqueSkillTypes, type => type == skillData.type))
+            selectedSkilltypes.Add(skillData.type);
+
         CloseSkillPanel();  // 스킬 선택 후 패널 닫기
     }
 
     private void CloseSkillPanel()
     {
         panel.SetActive(false);
+        Time.timeScale = 1f;    // 게임 시간 다시 흐르게
     }
 
     public void OpenPanel()
     {
         panel.SetActive(true);
         SetupSkillButtons();
+        Time.timeScale = 0f;    // 게임 시간 멈추기
     }
     // 태그 타입이 속성일 경우
     private string OneSkills(SkillData skill)

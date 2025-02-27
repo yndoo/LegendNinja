@@ -15,7 +15,6 @@ public class Player : Character
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
 
-    private float[] timeSinceLastAttack;
 
     private int index = 0;
     private float AttackCoolDown = 0f; //쿨타임
@@ -31,18 +30,18 @@ public class Player : Character
     }
     void Start()
     {
-
-        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 10, 10, 1, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
-        skillManager = FindAnyObjectByType<SkillManager>();
-
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         // 임의로 값 설정 했습니다.
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
+
+        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, AttackPower, 10, 1, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+        skillManager = FindAnyObjectByType<SkillManager>();
+
+        animator = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
     }
     void Update()

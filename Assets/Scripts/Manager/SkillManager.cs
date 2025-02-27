@@ -8,6 +8,7 @@ public class SkillManager : MonoBehaviour
     private SkillList skillList;
     public Player player;
 
+
     private void Start()
     {
         skillList = LoadSkills();
