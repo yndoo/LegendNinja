@@ -55,7 +55,7 @@ public class WaveManager : MonoBehaviour
     }
 
     //랜덤위치생성
-    Vector2 GenRandomPosition()
+    Vector2 GetRandomPosition()
     {
         float x = Random.Range(-mapSize.x / 2 ,mapSize.y / 2);
         float y = Random.Range(-mapSize.y /2 ,mapSize.x / 2);
@@ -72,6 +72,8 @@ public class WaveManager : MonoBehaviour
                 return true;
             }
         }
+
+        return false;
     }
 
     public void CheckWaveClear()
