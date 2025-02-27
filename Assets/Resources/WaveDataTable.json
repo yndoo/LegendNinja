@@ -18,18 +18,18 @@
     },
     {
       "wave": 3,
-      "smallType": 2,
-      "mediumType": 1,
+      "smallType": 3,
+      "mediumType": 0,
       "smallCount": 2,
-      "mediumCount": 1,
+      "mediumCount": 0,
       "bossType": 0
     },
     {
       "wave": 4,
-      "smallType": 0,
-      "mediumType": 2,
-      "smallCount": 0,
-      "mediumCount": 3,
+      "smallType": 3,
+      "mediumType": 0,
+      "smallCount": 3,
+      "mediumCount": 0,
       "bossType": 0
     },
     {
