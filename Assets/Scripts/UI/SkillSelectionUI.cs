@@ -1,69 +1,76 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 public class SkillSelectionUI : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
-    [SerializeField] private Button[] skillButtons;
-    [SerializeField] private TextMeshProUGUI[] skillTitle;
-    [SerializeField] private TextMeshProUGUI[] skillDescriptions;
-    [SerializeField] private Image[] skillImages;
+    [SerializeField] private GameObject panel; // ìŠ¤í‚¬ ì„ íƒ UI íŒ¨ë„
+    [SerializeField] private Button[] skillButtons; // ìŠ¤í‚¬ ì„ íƒ ë²„íŠ¼ ë°°ì—´
+    [SerializeField] private TextMeshProUGUI[] skillTitle; // ìŠ¤í‚¬ ì œëª© UI
+    [SerializeField] private TextMeshProUGUI[] skillDescriptions; // ìŠ¤í‚¬ ì„¤ëª… UI
+    [SerializeField] private Image[] skillImages; // ìŠ¤í‚¬ ì•„ì´ì½˜ ì´ë¯¸ì§€
 
-    private SkillManager skillManager;
-    private SkillList skillList;
+    private SkillManager skillManager; // ìŠ¤í‚¬ ê´€ë¦¬ í´ë˜ìŠ¤
+    private SkillList skillList; // ì „ì²´ ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸
 
     private void Start()
     {
-        skillManager = FindObjectOfType<SkillManager>();
-        skillList = skillManager.GetSkillList();
-        SetupSkillButtons();
+        skillManager = FindObjectOfType<SkillManager>(); // SkillManager ì°¾ê¸°
+        skillList = skillManager.GetSkillList(); // SkillManagerì—ì„œ ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+        SetupSkillButtons(); // ìŠ¤í‚¬ ë²„íŠ¼ ì„¤ì •
     }
 
+    /// <summary>
+    /// ìŠ¤í‚¬ ì„ íƒ UIë¥¼ ì„¤ì •í•˜ê³  3ê°œì˜ ëœë¤í•œ ìŠ¤í‚¬ì„ í‘œì‹œ
+    /// </summary>
     public void SetupSkillButtons()
     {
-        // ½ºÅ³ ¸®½ºÆ®¿¡¼­ ·£´ıÇÏ°Ô 3°³ ¼±ÅÃ
+        Time.timeScale = 0f; // ê²Œì„ ì¼ì‹œì •ì§€ (ìŠ¤í‚¬ ì„ íƒ ì‹œ ì§„í–‰ ë©ˆì¶¤)
+
+        // ì „ì²´ ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸ ë³µì‚¬í•˜ì—¬ ì‚¬ìš©
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
         List<SkillData> randomSkills = new List<SkillData>();
 
-        // ½ºÅ³ÀÌ 3°³ ÀÌ»óÀÌ¸é ·£´ı ¼±ÅÃ, ¾Æ´Ï¸é ±×´ë·Î »ç¿ë
+        // ìµœì†Œ 3ê°œì˜ ìŠ¤í‚¬ì„ ëœë¤ìœ¼ë¡œ ì„ íƒ (ìŠ¤í‚¬ì´ ë¶€ì¡±í•˜ë©´ ê°€ëŠ¥í•œ ë§Œí¼ë§Œ ì„ íƒ)
         int skillCount = Mathf.Min(3, availableSkills.Count);
-        for(int i = 0; i < skillCount; i++)
+        for (int i = 0; i < skillCount; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, availableSkills.Count);
             randomSkills.Add(availableSkills[randomIndex]);
-            availableSkills.RemoveAt(randomIndex); // Áßº¹¹æÁö
+            availableSkills.RemoveAt(randomIndex); // ì¤‘ë³µ ë°©ì§€ë¥¼ ìœ„í•´ ë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
         }
 
-        // ¹öÆ° ½ÇÇà ¼³Á¤
+        // ìŠ¤í‚¬ ë²„íŠ¼ UI ì—…ë°ì´íŠ¸
         for (int i = 0; i < skillButtons.Length; i++)
         {
-            if (i < randomSkills.Count)
+            if (i < randomSkills.Count) // ì„ íƒëœ ìŠ¤í‚¬ì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°
             {
-                SkillData skill = randomSkills[i]; // skill º¯¼ö ¼±¾ğ
+                SkillData skill = randomSkills[i];
 
-                skillButtons[i].gameObject.SetActive(true);
+                skillButtons[i].gameObject.SetActive(true); // ë²„íŠ¼ í™œì„±í™”
 
-                if (skillTitle.Length > i)
+                if (skillTitle.Length > i) // ìŠ¤í‚¬ ì œëª© ì„¤ì •
                 {
                     skillTitle[i].gameObject.SetActive(true);
                     skillTitle[i].text = skill.name;
                 }
 
-                if (skillDescriptions.Length > i) // ½ºÅ³ ¼³¸í ¼³Á¤
+                if (skillDescriptions.Length > i) // ìŠ¤í‚¬ ì„¤ëª… ì„¤ì •
                 {
                     skillDescriptions[i].gameObject.SetActive(true);
                     skillDescriptions[i].text = skill.description;
                 }
 
-                // ½ºÇÁ¶óÀÌÆ® º¯°æ
+                // ìŠ¤í‚¬ ì•„ì´ì½˜ ì„¤ì •
                 if (skillImages.Length > i)
                 {
-                    Sprite skillSprite = Resources.Load<Sprite>(skill.sprite); // ¿Ã¹Ù¸¥ º¯¼ö »ç¿ë
+                    Sprite skillSprite = Resources.Load<Sprite>(skill.sprite);
                     if (skillSprite != null)
                     {
                         skillImages[i].sprite = skillSprite;
@@ -74,11 +81,11 @@ public class SkillSelectionUI : MonoBehaviour
                     }
                 }
 
-                // ¹öÆ° Å¬¸¯ ÀÌº¥Æ® ¼³Á¤
+                // ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸ ì„¤ì •
                 skillButtons[i].onClick.RemoveAllListeners();
                 skillButtons[i].onClick.AddListener(() => SelectSkill(skill));
             }
-            else
+            else // ì„ íƒëœ ìŠ¤í‚¬ì´ ë¶€ì¡±í•˜ë©´ ë²„íŠ¼ ìˆ¨ê¸°ê¸°
             {
                 skillButtons[i].gameObject.SetActive(false);
                 if (skillDescriptions.Length > i)
@@ -86,41 +93,37 @@ public class SkillSelectionUI : MonoBehaviour
                     skillDescriptions[i].gameObject.SetActive(false);
                 }
             }
-
-            //  »ç¿ëÇÑ ½ºÅ³ÀÏ °æ¿ì ¹èÁ¦
-
         }
     }
 
-    private void removeSkills()
-    {
-        // »ç¿ëÇÑ ½ºÅ³À» »ç¿ëÇÏ¸é
-
-        //OneSkills()
-    }
-
+    /// <summary>
+    /// ì„ íƒí•œ ìŠ¤í‚¬ì„ ì ìš©í•˜ê³  íŒ¨ë„ì„ ë‹«ìŒ
+    /// </summary>
+    /// <param name="skillData">ì„ íƒí•œ ìŠ¤í‚¬ ë°ì´í„°</param>
     public void SelectSkill(SkillData skillData)
     {
-        Debug.Log($"[{skillData.name}] ½ºÅ³ ¼±ÅÃµÊ! (ID: {skillData.id})");
+        Debug.Log($"[{skillData.name}] ìŠ¤í‚¬ ì„ íƒë¨! (ID: {skillData.id})");
 
-        skillManager.ApplySkill(skillData.id);
+        skillManager.ApplySkill(skillData.id); // ì„ íƒí•œ ìŠ¤í‚¬ ì ìš©
 
-        CloseSkillPanel();  // ½ºÅ³ ¼±ÅÃ ÈÄ ÆĞ³Î ´İ±â
+        CloseSkillPanel(); // ìŠ¤í‚¬ ì„ íƒ ì°½ ë‹«ê¸°
     }
 
+    /// <summary>
+    /// ìŠ¤í‚¬ ì„ íƒ íŒ¨ë„ ë‹«ê¸° ë° ê²Œì„ ì¬ê°œ
+    /// </summary>
     private void CloseSkillPanel()
     {
         panel.SetActive(false);
+        Time.timeScale = 1f; // ê²Œì„ ì§„í–‰ ì¬ê°œ
     }
 
+    /// <summary>
+    /// ìŠ¤í‚¬ ì„ íƒ íŒ¨ë„ì„ ì—´ê³  ìŠ¤í‚¬ ë²„íŠ¼ì„ ì´ˆê¸°í™”
+    /// </summary>
     public void OpenPanel()
     {
         panel.SetActive(true);
-        SetupSkillButtons();
-    }
-    // ÅÂ±× Å¸ÀÔÀÌ ¼Ó¼ºÀÏ °æ¿ì
-    private string OneSkills(SkillData skill)
-    {
-        return skill.type = "Fire";
+        SetupSkillButtons(); // ìƒˆë¡œìš´ ìŠ¤í‚¬ ì„ íƒ ì„¤ì •
     }
 }

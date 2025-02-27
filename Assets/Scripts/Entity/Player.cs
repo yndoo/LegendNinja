@@ -7,18 +7,19 @@ public class Player : Character
 {
     public GameObject PlayerPivot;
     private Animator animator;
-    //private static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     protected Vector2 MoveDirection;
 
+    public Vector2 AttackDirection;
+
+    bool IsAttacking = false;
+    bool IsMoving = false;
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
     public HpBar hpBar;
 
-    private float[] timeSinceLastAttack;
 
-    private int index = 0;
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
 
@@ -32,45 +33,65 @@ public class Player : Character
     }
     void Start()
     {
+        // 임의로 값 설정 했습니다.
+        MaxHealth = 100f;
+        Health = 100f;
+        AttackPower = 100f;
+        MoveSpeed = 4f;
+        base.AttackSpeed = 1f;
 
-        weaponList.Add(new RangeWeaponHandler(PlayerPivot.transform, 10, 10, 1, 0, 1, 5, 0, 1, 10, Color.white, ProjectileManager.Instance));
+
+        RangeWeaponHandler rangeWeaponHandler = new GameObject("Shuriken").AddComponent<RangeWeaponHandler>();
+        rangeWeaponHandler.transform.SetParent(PlayerPivot.transform);
+        rangeWeaponHandler.Init();
+        //
+        rangeWeaponHandler.SetData(PlayerPivot.transform, AttackPower, 15, 1, 0, 1, 5, 0, 1, 10,
+            Color.white, ProjectileManager.Instance, "shuriken");
+        weaponList.Add(rangeWeaponHandler);
+
         skillManager = FindAnyObjectByType<SkillManager>();
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        // 임의로 값 설정 했습니다.
-        MaxHealth = 100f;
-        Health = 100f;
-        AttackPower = 10f;
-        MoveSpeed = 4f;
-        base.AttackSpeed = 1f;
 
         Health = MaxHealth;
     }
     void Update()
     {
         Move();
+        // 공격 상태
         if (rb.velocity.magnitude > 0)
         {
             AttackCoolDown = 0.5f;
+            if(!IsMoving)
+            {
+                IsAttacking = false;
+                IsMoving = true;
+                foreach (RangeWeaponHandler rangeWeaponHandler in weaponList)
+                {
+                    rangeWeaponHandler.StopAttackCor();
+                }
+            }
             return;
         }
         // 공격 쿨타임 처리
-        if (AttackCoolDown <= 0f)
-        {
-            Attack();
-            AttackCoolDown = AttackMaxCoolDown; // 1초 쿨타임
-          
-        }
-        else
-        {
-            AttackCoolDown -= Time.deltaTime;
-        }
+        //if (AttackCoolDown <= 0f)
+        //{
+        //    Attack();
+        //    AttackCoolDown = AttackMaxCoolDown; // 1초 쿨타임
+
+        //}
+        //else
+        //{
+        //    AttackCoolDown -= Time.deltaTime;
+        //}
+        IsMoving = false;
+        Attack();
     }
 
     public void AttackCooldwonDivide()  // 코루틴 추가 시 삭제
     {
-        AttackMaxCoolDown *= 0.7f; 
+        AttackMaxCoolDown = 1f; 
     }
 
     // 코루틴 딜레이 추가 (weaponHandler에서 가지고 있어도 됨)
@@ -81,7 +102,7 @@ public class Player : Character
     }
     private IEnumerator FadeOutDieAnimation()
     {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // 애니메이션 길이만큼 대기
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(10).length); // 애니메이션 길이만큼 대기
         playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f); 
         Destroy(this.gameObject, 0.3f);
         WaveManager.instance.GameOverOn();
@@ -114,19 +135,34 @@ public class Player : Character
         Transform target = FindCloseMonster();  // 가장 가까운 적 찾기
         if (target != null)
         {
+            if (!IsAttacking)
+            {
+                IsAttacking = true;
+                foreach (RangeWeaponHandler rangeWeaponHandler in weaponList)
+                {
+                    rangeWeaponHandler.StartAttackCor();
+                }
+            }
+            
             animator.SetLayerWeight(2, 1);
-            SoundManager.instance.PlaySFX(0);
+            //SoundManager.instance.PlaySFX(0); // 효과음
             // 적의 방향 계산
-            Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
+            AttackDirection = (target.position - PlayerPivot.transform.position).normalized;
 
 
-            skillManager.AttackWithWeapons(direction, ref index, weaponList); // 추가 기능 : 스킬 가져오기
+            //skillManager.AttackWithWeapons(direction, ref index, weaponList); // 추가 기능 : 스킬 가져오기
 
             StartCoroutine(DisableAttackLayer());
         }
         else
         {
-            Debug.Log("적이 없음!");
+            //Debug.Log("적이 없음!");
+            IsAttacking = false;
+            foreach (RangeWeaponHandler rangeWeaponHandler in weaponList)
+            {
+                rangeWeaponHandler.StopAttackCor();
+            }
+
         }
     }
     public void UseSkill()

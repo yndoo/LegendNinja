@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
+[SerializeField]
 public class RangeWeaponHandler : WeaponHandler
 {
     [Header("Ranged Attack Data")]
@@ -21,7 +22,6 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float numberofProjectilesPerShot; // 한 번의 공격 시 발사할 투사체 개수
     public float NumberOfProjectilesPerShot { get => numberofProjectilesPerShot; set => numberofProjectilesPerShot = value; }
 
-
     [SerializeField] private float multipleProjectilesAngel; // 투사체 간 간격 (각도)
     public float MultipleProjectilesAngle { get => multipleProjectilesAngel; set => multipleProjectilesAngel = value; }
 
@@ -30,7 +30,17 @@ public class RangeWeaponHandler : WeaponHandler
 
     private ProjectileManager projectileManager; // 투사체 생성 및 관리
 
-    public RangeWeaponHandler(Transform projectileSpawnPosition, float damage, float speed, float cooldown, int bulletIndex, float bulletSize, float duration, float spread, float _numberofProjectilesPerShot, float _multipleProjectilesAngel, Color projectileColor, ProjectileManager projectileManager)
+    [SerializeField] private string weaponType;
+    public string WeaponType { get => weaponType; set => weaponType = value; }
+
+    public Vector2 direction => player.AttackDirection;
+
+    public Coroutine coroutine;
+
+    public void SetData(Transform projectileSpawnPosition, float damage, float speed, float cooldown, 
+        int bulletIndex, float bulletSize, float duration, float spread, 
+        float _numberofProjectilesPerShot, float _multipleProjectilesAngel, 
+        Color projectileColor, ProjectileManager projectileManager, string weaponType)
     {
         this.projectileSpawnPosition = projectileSpawnPosition;
         Damage = damage;
@@ -45,8 +55,10 @@ public class RangeWeaponHandler : WeaponHandler
         MultipleProjectilesAngle = _multipleProjectilesAngel;
         this.projectileColor = projectileColor;
         this.projectileManager = projectileManager;
-    }
 
+        this.weaponType = weaponType;
+    }
+    
     /// <summary>
     /// Start()에서 ProjectileManager를 가져옴.
     /// </summary>
@@ -60,13 +72,39 @@ public class RangeWeaponHandler : WeaponHandler
             Debug.LogError("ProjectileManager.Instance가 null입니다. ProjectileManager가 씬에 존재하는지 확인하세요!");
         }
     }
+    public void StartAttackCor()
+    {
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+
+        coroutine = StartCoroutine(Attackcor());
+    }
+
+    IEnumerator Attackcor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Delay);
+            Attack();
+            yield return new WaitForSeconds(Delay);
+
+        }
+    }
+
+    public void StopAttackCor()
+    {
+        StopCoroutine(coroutine);
+    }
 
     /// <summary>
     /// 공격 시 여러 개의 투사체를 생성하여 발사.
     /// </summary>
-    public override void Attack(Vector3 direction)
+    public override void Attack()
     {
-        base.Attack(direction);
+        // 공격 효과음을 한 번만 재생 (효과음 인덱스 0 사용, 필요에 따라 인덱스 변경)
+        SoundManager.instance.PlaySFX(0);
+
+        base.Attack();
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 투사체 간 간격 설정
         float numberOfProjectilesPerShot = numberofProjectilesPerShot; // 발사할 투사체 개수
@@ -80,7 +118,7 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도 설정
             float randomSpread = Random.Range(-spread, spread); // 랜덤한 퍼짐 효과 추가
             angle += randomSpread;
-            CreateProjectile(direction, angle);
+            CreateProjectile(angle);
         }
     }
     
@@ -90,7 +128,7 @@ public class RangeWeaponHandler : WeaponHandler
     /// </summary>
     /// <param name="_lookDirection">캐릭터가 바라보는 방향</param>
     /// <param name="angle">투사체 회전 각도</param>
-    private void CreateProjectile(Vector2 _lookDirection, float angle)
+    private void CreateProjectile(float angle)
     {
         if (projectileManager == null)
         {
@@ -100,7 +138,7 @@ public class RangeWeaponHandler : WeaponHandler
         projectileManager.ShootBullet(
             this,
             projectileSpawnPosition.position,
-            RotateVector2(_lookDirection, angle)); // 투사체 방향 회전 후 발사
+            RotateVector2(direction, angle)); // 투사체 방향 회전 후 발사
     }
 
     /// <summary>
