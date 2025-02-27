@@ -14,6 +14,7 @@ public class Player : Character
 
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
+    public HpBar hpBar;
 
     private float[] timeSinceLastAttack;
 
@@ -43,6 +44,8 @@ public class Player : Character
         AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
+
+        Health = MaxHealth;
     }
     void Update()
     {
@@ -127,13 +130,29 @@ public class Player : Character
     public override void Damage(float damage)
     {
         Health -= damage;
+        Debug.Log($"플레이어 체력 : {Health}");
+        Health = Mathf.Clamp(Health, 0, MaxHealth);
         playerRenderer.color = playerRenderer.color - new Color(0, 0.3f, 0.3f, 0f);
         Invoke("ResetColor", 0.3f);
         if (Health <= 0)
         {
+            Health = 0;
             //죽으면 어택 X 
             animator.SetLayerWeight(2, 0);
             Die();
+        }
+
+        
+    }
+    public void Heal(float amount)
+    {
+        Health += amount;
+        if (Health > MaxHealth) Health = MaxHealth;
+
+        if (hpBar != null)
+        {
+            Health += amount;
+            Health = Mathf.Clamp(Health, 0, MaxHealth);
         }
     }
     private void Die()
