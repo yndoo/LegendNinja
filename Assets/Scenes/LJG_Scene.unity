@@ -193,11 +193,7 @@ MonoBehaviour:
   - {fileID: 9190491940098714043, guid: a7a7ae4e93f2d1349afa1e12c8d55c5f, type: 3}
   - {fileID: 2045474074084195787, guid: b3278c625a9092244b5fa6723c98d949, type: 3}
   - {fileID: 2458771157509147911, guid: 2a6ff5ebc32d90947a6d30c9a6dcbc8c, type: 3}
-  obstacleCount: 5
   mapSize: {x: 10, y: 10}
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &491324313
 Transform:
   m_ObjectHideFlags: 0
@@ -337,11 +333,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1931031837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8337844224319982503, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+  m_PrefabInstance: {fileID: 5280453626015394078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2058650479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1844072224866923806, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
   m_PrefabInstance: {fileID: 5280453626015394078}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2058650481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931031837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cecbac3009bb140b72d355c1aa3e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalWaves: 5
+  monsterSpawner: {fileID: 0}
+  obstacleSpawner: {fileID: 491324312}
+  wavePortal: {fileID: 0}
+  mapSize: {x: 10, y: 10}
 --- !u!1001 &5280453626015394078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,7 +415,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8337844224319982503, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2058650481}
   m_SourcePrefab: {fileID: 100100000, guid: cd63ebed8a8077b41a51f554e4ea6c4d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
