@@ -13,11 +13,20 @@ public abstract class BaseMonster : Character
     protected Player TargetPlayer;
     protected Animator monsterAnimator;
     protected MonsterData myData;
+    protected SpriteRenderer monsterRenderer;
+
     protected bool TargetFollowMode { get; set; }
     protected float AttackCoolDown { get; set; }    // 공격 쿨타임, stat에서 AttackTime를 사용.
     protected Vector3 TargetDir { get; set; }
+
+    protected Color originalColor;
     public abstract void MoveToTarget();
 
+    protected virtual void Awake()
+    {
+        monsterRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalColor = monsterRenderer.color;
+    }
     protected virtual void Update()
     {
         AttackCoolDown -= Time.deltaTime;
@@ -45,11 +54,24 @@ public abstract class BaseMonster : Character
     public override void Damage(float damage)
     {
         Health -= damage;
-        if(Health <= 0)
+        monsterRenderer.color = monsterRenderer.color - new Color(0, 0.9f, 0.9f, 0f);
+        Invoke("ResetColor", 0.3f);
+        if (Health <= 0 && myData.type != PublicDefinitions.EAttackType.Boss)
         {
-            // TO DO : 애니메이션 Die 처리
-            Destroy(this.gameObject, 0.1f);
+            TargetFollowMode = false;
+            monsterRenderer.color = monsterRenderer.color - new Color(0f, 1f, 1f, 0.4f);
+            originalColor = monsterRenderer.color;
+            monsterAnimator.speed = 0f;
+            gameObject.tag = "Untagged";
+            GetComponent<Collider2D>().enabled = false;
+            Invoke("Die", 1f);
         }
+    }
+
+    protected void Die()
+    {
+        WaveManager.instance.AliveEnemyCount--;
+        Destroy(this.gameObject);
     }
 
     /// <summary>
@@ -89,5 +111,10 @@ public abstract class BaseMonster : Character
         AttackRange = data.stats.AttackRange;
         AttackSpeed = data.stats.AttackSpeed;
         AttackTime = data.stats.AttackTime;
+    }
+
+    void ResetColor()
+    {
+        monsterRenderer.color = originalColor;
     }
 }

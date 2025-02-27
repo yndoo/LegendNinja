@@ -6,16 +6,15 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private int curWave = 2; // 현재 wave 값. 나중에 매니저에서 가져오는 wave값으로 대체될 수 있음.
-
     private MonsterDatabase monsterDB;
     private WaveDatabase waveDB;
+    private WaveManager waveManager;
 
     void Start()
     {
         monsterDB = DataTableLoader.LoadMonsterData("MonsterTable");
         waveDB = DataTableLoader.LoadWaveData("WaveDataTable");
+        waveManager = WaveManager.instance;
 
         WaveSpawn();
     }
@@ -24,10 +23,10 @@ public class MonsterSpawner : MonoBehaviour
     /// </summary>
     void WaveSpawn()
     {
-        WaveData waveData = waveDB.WaveDatas[curWave - 1]; // 현재 웨이브 데이터
-        //Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
-        //Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
-        //Spawn(monsterDB.Small[2]); // 103몬스터 테스트용 코드
+        WaveData waveData = waveDB.WaveDatas[waveManager.CurrentWave - 1]; // 현재 웨이브 데이터
+        Spawn(monsterDB.Small[0]); // 101몬스터 테스트용 코드
+        Spawn(monsterDB.Small[1]); // 102몬스터 테스트용 코드
+        Spawn(monsterDB.Small[2]); // 103몬스터 테스트용 코드
         Spawn(monsterDB.Boss[0]); // 301몬스터 테스트용 코드
 
         //// 소형 몬스터 랜덤 뽑기
@@ -65,17 +64,25 @@ public class MonsterSpawner : MonoBehaviour
         GameObject go = Resources.Load<GameObject>($"Prefab/Monster/{data.id}");
         if (go == null) return;
 
-        if(data.type == EAttackType.Melee)
+        Vector3 randomPos = waveManager.GetRandomPosition();
+        while (!waveManager.IsPositionOccupied(randomPos))
+        {
+            randomPos = waveManager.GetRandomPosition();
+        }
+
+        if (data.type == EAttackType.Melee)
         { 
-            Instantiate(go).AddComponent<MeleeMonster>().InitMonster(data); 
+            Instantiate(go, randomPos, Quaternion.identity).AddComponent<MeleeMonster>().InitMonster(data); 
         }
         else if (data.type == EAttackType.Ranged)
         {
-            Instantiate(go).AddComponent<RangedMonster>().InitMonster(data);
+            Instantiate(go, randomPos, Quaternion.identity).AddComponent<RangedMonster>().InitMonster(data);
         }
         else if (data.id >= 300)
         {
-            Instantiate(go).AddComponent<BossMonster>().InitMonster(data);
+            Instantiate(go, randomPos, Quaternion.identity).AddComponent<BossMonster>().InitMonster(data);
         }
+
+        waveManager.AliveEnemyCount++;
     }
 }
