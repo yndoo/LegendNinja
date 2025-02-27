@@ -120,7 +120,7 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log($"웨이브 {CurrentWave} 클리어! 포탈로 이동하세요.");
             waveCleared = true;
-            //wavePortal.ActivatePortal(); //포탈 활성화
+            wavePortal.ActivePortal(); //포탈 활성화
         }
     }
 
@@ -128,6 +128,7 @@ public class WaveManager : MonoBehaviour
     {
         if (waveCleared)
         {
+            wavePortal.DeactivePortal(); //포탈 비활성화
             StartNextWave();
         }
     }
