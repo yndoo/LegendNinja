@@ -110,17 +110,4 @@ public class SkillManager : MonoBehaviour
         }
         Debug.Log($" {skill.name} 무기 추가됨! (데미지: {skill.damage}, 속도: {skill.speed}, 쿨타임: {skill.cooldown})");
     }
-   
-    //public void AttackWithWeapons(Vector3 direction, ref int index, List<RangeWeaponHandler> rangeWeaponHandlers)
-    //{
-    //    rangeWeaponHandlers[index].Attack();
-    //    index++;
-
-    //    if(index >= rangeWeaponHandlers.Count)
-    //    {
-    //        index = 0;
-    //    }
-    //}
-
-
 }
