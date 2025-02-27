@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWave = 0;
     private bool waveCleared = false;
+    private List<Vector2> spawnedPosition;
     public Vector2 mapSize = new Vector2(10, 10); //맵크기
 
 
@@ -50,7 +51,7 @@ public class WaveManager : MonoBehaviour
 
         obstacleSpawner.ClearObstacles(); //기존 장애물 제거
 
-        List<Vector2> spawnedPosition = new List<Vector2>(); //생성된 위치 리스트
+        spawnedPosition = new List<Vector2>(); //생성된 위치 리스트
 
         for (int i = 0; i < obstacleCount; i++)
         {
@@ -69,7 +70,7 @@ public class WaveManager : MonoBehaviour
     }
 
     //랜덤위치생성
-    private Vector2 GetRandomPosition()
+    public Vector2 GetRandomPosition()
     {
         float x = Random.Range(-mapSize.x / 2 ,mapSize.y / 2);
         float y = Random.Range(-mapSize.y /2 ,mapSize.x / 2);
@@ -77,11 +78,25 @@ public class WaveManager : MonoBehaviour
     }
 
     //장애물 위치 겹치는지 확인
-    private bool IsPositionOccupied(Vector2 position,List<Vector2> spawnedPosition)
+    private bool IsPositionOccupied(Vector2 position,List<Vector2> _spawnedPosition)
     {
-        foreach (Vector2 spawnedPosiotion in spawnedPosition)
+        foreach (Vector2 spawnedPosiotion in _spawnedPosition)
         {
             if (Vector2.Distance(position, spawnedPosiotion) < 1f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //장애물 위치 겹치는지 확인 (외부용)
+    public bool IsPositionOccupied(Vector2 position)
+    {
+        foreach (Vector2 sPos in spawnedPosition)
+        {
+            if (Vector2.Distance(position, sPos) < 1f)
             {
                 return true;
             }

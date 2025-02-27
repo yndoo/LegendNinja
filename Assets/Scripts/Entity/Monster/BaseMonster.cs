@@ -54,7 +54,7 @@ public abstract class BaseMonster : Character
     public override void Damage(float damage)
     {
         Health -= damage;
-        monsterRenderer.color = monsterRenderer.color - new Color(0, 0.7f, 0.7f, 0f);
+        monsterRenderer.color = monsterRenderer.color - new Color(0, 0.9f, 0.9f, 0f);
         Invoke("ResetColor", 0.3f);
         if (Health <= 0 && myData.type != PublicDefinitions.EAttackType.Boss)
         {

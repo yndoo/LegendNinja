@@ -12,6 +12,7 @@ public class BossMonster : BaseMonster
     private readonly float SkillFullTime = 3f;
     private bool isBossSkillOn = false;
     private float skillRuntime = 3f;
+    private WaveManager waveManager;
 
     protected override void Awake()
     {
@@ -19,6 +20,11 @@ public class BossMonster : BaseMonster
 
         monsterAnimator = GetComponentInChildren<Animator>();
         GetComponentInChildren<CircleCollider2D>().radius = 8f;
+    }
+
+    private void Start()
+    {
+        waveManager = WaveManager.instance;
     }
 
     public override void Damage(float damage)
@@ -132,11 +138,10 @@ public class BossMonster : BaseMonster
         gameObject.tag = "Monster";
 
         // 랜덤 위치로 이동
-        Vector3 randomPos = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
-        while (Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer) != null)
+        Vector3 randomPos = waveManager.GetRandomPosition();
+        while (!waveManager.IsPositionOccupied(randomPos))
         {
-            randomPos.x = Random.Range(-3f, 3f);
-            randomPos.y = Random.Range(-3f, 3f);
+            randomPos = waveManager.GetRandomPosition();
         }
         transform.position = randomPos;
 
