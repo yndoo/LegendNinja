@@ -114,9 +114,18 @@ public class Player : Character
         Invoke("ResetColor", 0.3f);
         if (Health <= 0)
         {
-            playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f);
-            Destroy(this.gameObject, 0.3f);
+            Die();
         }
+    }
+    private void Die()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("IsDie"); // 사망 애니메이션 실행
+        }
+
+        playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f);
+        Destroy(this.gameObject, 1f); 
     }
     void ResetColor()
     {
