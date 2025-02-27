@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SceneManager_ : MonoBehaviour
 {
+    public GameObject settingUI;
     public void StartScene()
     {
         SceneManager.LoadScene("SampleScene");
@@ -20,5 +22,14 @@ public class SceneManager_ : MonoBehaviour
         // 빌드에서 실행 중일 경우
         Application.Quit();
 #endif
+    }
+
+    public void OffSettingUI()
+    {
+        settingUI.SetActive(false);
+    }
+    public void OnSettingUI()
+    {
+        settingUI.SetActive(true);
     }
 }
