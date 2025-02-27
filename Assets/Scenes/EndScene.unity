@@ -152,6 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01c17c64214c3d478ad9582d12d5f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartButton: {fileID: 0}
+  SettingButton: {fileID: 0}
+  ExitButton: {fileID: 0}
+  CloseButton: {fileID: 0}
   settingUI: {fileID: 0}
 --- !u!4 &13075099
 Transform:
@@ -293,7 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cad4f397f4e10e4f8785ab88eb962da, type: 2}
   m_sharedMaterial: {fileID: 1266946245172895017, guid: 1cad4f397f4e10e4f8785ab88eb962da, type: 2}
@@ -519,7 +523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE40\uD0DC\uACB8\n\uBC30\uC5F0\uB450\n\uC190\uD6A8\uC815\n\uC774\uC815\uAD6C"
+  m_text: "35\uC870\n\uAE40\uD0DC\uACB8\n\uBC30\uC5F0\uB450\n\uC190\uD6A8\uC815\n\uC774\uC815\uAD6C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cad4f397f4e10e4f8785ab88eb962da, type: 2}
   m_sharedMaterial: {fileID: 1266946245172895017, guid: 1cad4f397f4e10e4f8785ab88eb962da, type: 2}
