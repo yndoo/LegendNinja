@@ -58,6 +58,13 @@ public class WaveManager : MonoBehaviour
         CurrentWave++;
         waveCleared = false; // 새 웨이브 시작
 
+        //플레이어 위치 초기화
+        Player playerScript = FindObjectOfType<Player>();
+        if (playerScript != null)
+        {
+            playerScript.ResetPlayerPosition();
+        }
+
         //웨이브마다 장애물 증가
         int obstacleCount = Mathf.Clamp(2 + CurrentWave, 2, 4); 
 
