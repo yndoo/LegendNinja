@@ -71,13 +71,13 @@ public class SkillManager : MonoBehaviour
 
     public void AddweaponList(SkillData skill)
     {
-        Debug.Log($"[] {skill.name} 무기 추가 시도 (ID: {skill.id})");
+        Debug.Log($"{skill.name} 무기 추가 시도 (ID: {skill.id})");
 
         player.weaponList.Add(new RangeWeaponHandler(player.PlayerPivot.transform, skill.damage, skill.speed, skill.cooldown,
             skill.bulletIndex, skill.bulletSize,
             skill.duration, skill.spread, skill.numberofProjectilesPerShot, skill.multipleProjectilesAngel, 
             Color.white, ProjectileManager.Instance));
-        player.AttackCooldwonDivide();
+        //player.AttackCooldwonDivide();
 
         // 코루틴 딜레이 메소드 적용
         // 플레이어에서 코루틴 가져오기

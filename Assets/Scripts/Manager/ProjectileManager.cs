@@ -14,11 +14,7 @@ public class ProjectileManager : MonoBehaviour
 
     public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPostiion, Vector2 direction)
     {
-        //if (rangeWeaponHandler == null)
-        //{
-        //    Debug.LogError("ShootBullet() 호출 시 weaponHandler가 null입니다! SkillManager에서 무기 생성 확인 필요!");
-        //    return;
-        //}
+
         GameObject origin = projectilePrefabs[rangeWeaponHandler.BulletIndex];
         GameObject obj = Instantiate(origin, startPostiion, Quaternion.identity);
 
