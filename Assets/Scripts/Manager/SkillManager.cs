@@ -79,9 +79,12 @@ public class SkillManager : MonoBehaviour
             Color.white, ProjectileManager.Instance));
         player.AttackCooldwonDivide();
 
+        // 코루틴 딜레이 메소드 적용
+        // 플레이어에서 코루틴 가져오기
+
         Debug.Log($" {skill.name} 무기 추가됨! (데미지: {skill.damage}, 속도: {skill.speed}, 쿨타임: {skill.cooldown})");
     }
-
+   
     public void AttackWithWeapons(Vector3 direction, ref int index, List<RangeWeaponHandler> rangeWeaponHandlers)
     {
         rangeWeaponHandlers[index].Attack(direction);
