@@ -61,6 +61,9 @@ public class ProjectileController : MonoBehaviour
         {
             DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
+
         // 공격 대상(Enemy 등)과 충돌했을 경우
         //else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         //{
