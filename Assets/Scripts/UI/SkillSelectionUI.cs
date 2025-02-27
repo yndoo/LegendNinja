@@ -26,6 +26,8 @@ public class SkillSelectionUI : MonoBehaviour
 
     public void SetupSkillButtons()
     {
+        List<SkillData> OneSkills = new List<SkillData>();  // 한번만 선택할 수 있는 스킬
+
         // 스킬 리스트에서 랜덤하게 3개 선택
         List<SkillData> availableSkills = new List<SkillData>(skillList.skills);
         List<SkillData> randomSkills = new List<SkillData>();
@@ -86,9 +88,18 @@ public class SkillSelectionUI : MonoBehaviour
                     skillDescriptions[i].gameObject.SetActive(false);
                 }
             }
+
+            //  사용한 스킬일 경우 배제
+
         }
     }
 
+    private void removeSkills()
+    {
+        // 사용한 스킬을 사용하면
+
+        //OneSkills()
+    }
 
     public void SelectSkill(SkillData skillData)
     {
@@ -108,5 +119,10 @@ public class SkillSelectionUI : MonoBehaviour
     {
         panel.SetActive(true);
         SetupSkillButtons();
+    }
+    // 태그 타입이 속성일 경우
+    private string OneSkills(SkillData skill)
+    {
+        return skill.type = "Fire";
     }
 }
