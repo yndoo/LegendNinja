@@ -56,7 +56,7 @@ public abstract class BaseMonster : Character
         Health -= damage;
         monsterRenderer.color = monsterRenderer.color - new Color(0, 0.7f, 0.7f, 0f);
         Invoke("ResetColor", 0.3f);
-        if (Health <= 0)
+        if (Health <= 0 && myData.type != PublicDefinitions.EAttackType.Boss)
         {
             TargetFollowMode = false;
             monsterRenderer.color = monsterRenderer.color - new Color(0f, 1f, 1f, 0.4f);

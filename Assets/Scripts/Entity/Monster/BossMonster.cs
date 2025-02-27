@@ -5,12 +5,13 @@ using UnityEngine;
 public class BossMonster : BaseMonster
 {
     protected static readonly int IsHidden = Animator.StringToHash("IsHidden");
+    protected static readonly int IsDeath = Animator.StringToHash("IsDeath");
 
     [SerializeField] private LayerMask obstacleLayer;
 
-    private readonly float SkillFullTime = 5f;
+    private readonly float SkillFullTime = 3f;
     private bool isBossSkillOn = false;
-    private float skillRuntime = 5f;
+    private float skillRuntime = 3f;
 
     protected override void Awake()
     {
@@ -18,6 +19,19 @@ public class BossMonster : BaseMonster
 
         monsterAnimator = GetComponentInChildren<Animator>();
         GetComponentInChildren<CircleCollider2D>().radius = 8f;
+    }
+
+    public override void Damage(float damage)
+    {
+        base.Damage(damage);
+        if(Health <= 0)
+        {
+            TargetFollowMode = false;
+            monsterAnimator.SetBool(IsDeath, true);
+            gameObject.tag = "Untagged";
+            GetComponent<Collider2D>().enabled = false;
+            Destroy(this.gameObject, 3f);
+        }
     }
     public override void Attack()
     {
@@ -45,8 +59,8 @@ public class BossMonster : BaseMonster
         if (Vector3.Distance(transform.position, Target.transform.position) <= AttackRange)
         {
             // 확률적으로 Hidden 스킬 사용
-            int p = Random.Range(0, 100);
-            if (p > 80)
+            float p = Random.Range(0f, 100f);
+            if (p < 1f)
             {
                 isBossSkillOn = true;
                 BossSkillStart();
@@ -80,10 +94,21 @@ public class BossMonster : BaseMonster
     /// </summary>
     void BossSkillStart()
     {
+        monsterAnimator.SetBool(IsMoving, false);
+        monsterAnimator.SetBool(IsAttack, false);
         monsterAnimator.SetBool(IsHidden, true);
-        skillRuntime = SkillFullTime;
         gameObject.tag = "Untagged";
         GetComponent<Collider2D>().enabled = false;
+
+        TargetDir = (Target.transform.position - transform.position).normalized;
+        if (TargetDir.x < 0)
+        {
+            monsterRenderer.flipX = true;
+        }
+        else
+        {
+            monsterRenderer.flipX = false;
+        }
     }
 
     /// <summary>
@@ -91,7 +116,7 @@ public class BossMonster : BaseMonster
     /// </summary>
     void BossSkill()
     {
-        monsterRenderer.color = monsterRenderer.color - new Color(0, 0, 0, Time.deltaTime * 0.8f);
+        monsterRenderer.color = monsterRenderer.color - new Color(0, 0, 0, Time.deltaTime * 1.1f);
     }
 
     /// <summary>
@@ -100,6 +125,7 @@ public class BossMonster : BaseMonster
     void BossSkillEnd()
     {
         isBossSkillOn = false;
+        skillRuntime = SkillFullTime;
         monsterRenderer.color = originalColor;
         monsterAnimator.SetBool(IsHidden, false);
         GetComponent<Collider2D>().enabled = true;
@@ -113,6 +139,16 @@ public class BossMonster : BaseMonster
             randomPos.y = Random.Range(-3f, 3f);
         }
         transform.position = randomPos;
+
+        TargetDir = (Target.transform.position - transform.position).normalized;
+        if (TargetDir.x < 0)
+        {
+            monsterRenderer.flipX = true;
+        }
+        else
+        {
+            monsterRenderer.flipX = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
