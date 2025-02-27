@@ -84,9 +84,9 @@ public class RangeWeaponHandler : WeaponHandler
     {
         while (true)
         {
-            yield return new WaitForSeconds(Delay / 2);
+            yield return new WaitForSeconds(Delay);
             Attack();
-            yield return new WaitForSeconds(Delay / 2);
+            yield return new WaitForSeconds(Delay);
 
         }
     }
@@ -101,6 +101,9 @@ public class RangeWeaponHandler : WeaponHandler
     /// </summary>
     public override void Attack()
     {
+        // 공격 효과음을 한 번만 재생 (효과음 인덱스 0 사용, 필요에 따라 인덱스 변경)
+        SoundManager.instance.PlaySFX(0);
+
         base.Attack();
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 투사체 간 간격 설정

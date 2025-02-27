@@ -34,8 +34,6 @@ public class SkillManager : MonoBehaviour
         SkillData skill = skillList.skills.FirstOrDefault(s => s.id == skillId);
         if (skill == null) return;
 
-       
-
         switch (skill.type)
         {
             case "power":
@@ -46,7 +44,11 @@ public class SkillManager : MonoBehaviour
                 }
                 break;
             case "delay":
-                player.AttackMaxCoolDown += skill.value;
+                foreach (WeaponHandler weaponHandler in player.weaponList)
+                {
+                    weaponHandler.Delay += skill.value;
+                    Debug.Log($"power{weaponHandler.Delay}");
+                }
                 break;
             case "speed":
                 foreach (WeaponHandler weaponHandler in player.weaponList)

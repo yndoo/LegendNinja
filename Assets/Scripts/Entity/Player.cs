@@ -7,7 +7,6 @@ public class Player : Character
 {
     public GameObject PlayerPivot;
     private Animator animator;
-    //private static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
     public Rigidbody2D rb;
     protected Vector2 MoveDirection;
@@ -21,7 +20,6 @@ public class Player : Character
     public HpBar hpBar;
 
 
-    private int index = 0;
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
 
@@ -46,6 +44,7 @@ public class Player : Character
         RangeWeaponHandler rangeWeaponHandler = new GameObject("Shuriken").AddComponent<RangeWeaponHandler>();
         rangeWeaponHandler.transform.SetParent(PlayerPivot.transform);
         rangeWeaponHandler.Init();
+        //
         rangeWeaponHandler.SetData(PlayerPivot.transform, AttackPower, 15, 1, 0, 1, 5, 0, 1, 10,
             Color.white, ProjectileManager.Instance, "shuriken");
         weaponList.Add(rangeWeaponHandler);
@@ -103,7 +102,7 @@ public class Player : Character
     }
     private IEnumerator FadeOutDieAnimation()
     {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // 애니메이션 길이만큼 대기
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(10).length); // 애니메이션 길이만큼 대기
         playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f); 
         Destroy(this.gameObject, 0.3f);
     }
@@ -145,7 +144,7 @@ public class Player : Character
             }
             
             animator.SetLayerWeight(2, 1);
-            SoundManager.instance.PlaySFX(0);
+            //SoundManager.instance.PlaySFX(0); // 효과음
             // 적의 방향 계산
             AttackDirection = (target.position - PlayerPivot.transform.position).normalized;
 
