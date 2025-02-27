@@ -5,12 +5,15 @@ using System.Runtime.CompilerServices;
 
 public class WaveManager : MonoBehaviour
 {
+
+    public static WaveManager instance { get; private set; }
     public int totalWaves = 5; // 총 웨이브 수
 
     [Header("스폰 스크립트 연결")]
     public MonsterSpawner monsterSpawner; //몬스터 랜덤 스폰 스크립트
     public ObstacleSpawner obstacleSpawner; //장애물 랜덤 생성 스크립트
     public WavePortal wavePortal; //포탈 스크립트 (다음 웨이브 시작 트리거)
+    
 
     public int AliveEnemyCount {  get; set; }
 
@@ -18,12 +21,21 @@ public class WaveManager : MonoBehaviour
     private bool waveCleared = false;
     public Vector2 mapSize = new Vector2(10, 10); //맵크기
 
-    void Start()
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    private void Start()
     {
         StartNextWave();
     }
 
-    void StartNextWave()
+    public void StartNextWave()
     {
         if (currentWave >= totalWaves)
         {         
@@ -57,7 +69,7 @@ public class WaveManager : MonoBehaviour
     }
 
     //랜덤위치생성
-    Vector2 GetRandomPosition()
+    private Vector2 GetRandomPosition()
     {
         float x = Random.Range(-mapSize.x / 2 ,mapSize.y / 2);
         float y = Random.Range(-mapSize.y /2 ,mapSize.x / 2);
@@ -65,7 +77,7 @@ public class WaveManager : MonoBehaviour
     }
 
     //장애물 위치 겹치는지 확인
-    bool IsPositionOccupied(Vector2 position,List<Vector2> spawnedPosition)
+    private bool IsPositionOccupied(Vector2 position,List<Vector2> spawnedPosition)
     {
         foreach (Vector2 spawnedPosiotion in spawnedPosition)
         {
