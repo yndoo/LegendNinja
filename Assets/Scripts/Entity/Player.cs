@@ -43,7 +43,6 @@ public class Player : Character
         AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
-
     }
     void Update()
     {
@@ -107,6 +106,7 @@ public class Player : Character
         if (target != null)
         {
             animator.SetLayerWeight(2, 1);
+            SoundManager.instance.PlaySFX(0);
             // 적의 방향 계산
             Vector3 direction = (target.position - PlayerPivot.transform.position).normalized;
 
