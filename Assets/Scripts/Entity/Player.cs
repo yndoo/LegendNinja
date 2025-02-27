@@ -7,11 +7,14 @@ public class Player : Character
 {
     public GameObject PlayerPivot;
     private Animator animator;
-    
+    //private static readonly int IsAttack = Animator.StringToHash("IsAttack");
+
     private Rigidbody2D rb;
+    protected Vector2 MoveDirection;
 
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
+    //[SerializeField] private WeaponHandler weaponHandler; 삭제 가능
 
     private float AttackCoolDown = 0f; //쿨타임
     public float AttackMaxCoolDown = 1f; // 플레이어 딜레이 줄이기 위해 추가
@@ -31,11 +34,13 @@ public class Player : Character
 
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        // 임의로 값 설정 했습니다.
         MaxHealth = 100f;
         Health = 100f;
         AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
+
     }
     void Update()
     {
@@ -109,8 +114,8 @@ public class Player : Character
         Invoke("ResetColor", 0.3f);
         if (Health <= 0)
         {
-            animator.SetLayerWeight(3, 1);
-            Destroy(this.gameObject, 1f);
+            playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f);
+            Destroy(this.gameObject, 0.3f);
         }
     }
     void ResetColor()
