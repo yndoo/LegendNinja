@@ -66,6 +66,12 @@ public class Player : Character
         yield return new WaitForSeconds(0.5f); // 공격 애니메이션 길이에 맞게 조정
         animator.SetLayerWeight(2, 0); // Attack 레이어 비활성화
     }
+    private IEnumerator FadeOutDieAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // 애니메이션 길이만큼 대기
+        playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f); 
+        Destroy(this.gameObject, 0.3f);
+    }
     public void Move()
     {
         // WASD
@@ -114,6 +120,8 @@ public class Player : Character
         Invoke("ResetColor", 0.3f);
         if (Health <= 0)
         {
+            //죽으면 어택 X 
+            animator.SetLayerWeight(2, 0);
             Die();
         }
     }
@@ -121,11 +129,13 @@ public class Player : Character
     {
         if (animator != null)
         {
-            animator.SetTrigger("IsDie"); // 사망 애니메이션 실행
+            animator.SetTrigger("IsDie");
+            StartCoroutine(FadeOutDieAnimation());
         }
 
-        playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f);
-        Destroy(this.gameObject, 1f); 
+        
+        //Destroy(this.gameObject, 0.7f);
+        return;
     }
     void ResetColor()
     {
