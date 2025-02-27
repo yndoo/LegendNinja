@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalWaves: 5
   monsterSpawner: {fileID: 1504732787}
-  obstacleSpawner: {fileID: 0}
+  obstacleSpawner: {fileID: 747335306105288253, guid: f9751052afcea9e41b37a89862022eed, type: 3}
   wavePortal: {fileID: 0}
   mapSize: {x: 10, y: 10}
 --- !u!1 &519420028
