@@ -84,6 +84,7 @@ public class Player : Character
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length); // 애니메이션 길이만큼 대기
         playerRenderer.color = playerRenderer.color - new Color(1f, 1f, 1f, 0.4f); 
         Destroy(this.gameObject, 0.3f);
+        WaveManager.instance.GameOverOn();
     }
     public void Move()
     {

@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
     public WavePortal wavePortal; //포탈 스크립트 (다음 웨이브 시작 트리거)
     public SkillSelectionUI skillSelectionUI; // 스킬 UI
     public GameObject ClearText;
-
+    public GameObject FailPanel;
 
     public int AliveEnemyCount {  get; set; }
     public int CurrentWave {  get; set; }
@@ -158,6 +158,9 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 스테이지 넘기는 기능
+    /// </summary>
     void StageEnd()
     {
         if (CurrentStage == 1)
@@ -169,5 +172,10 @@ public class WaveManager : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("EndScene");
         }
+    }
+
+    public void GameOverOn()
+    {
+        FailPanel.SetActive(true);
     }
 }
