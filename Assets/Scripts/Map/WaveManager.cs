@@ -31,6 +31,14 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(!waveCleared && AliveEnemyCount == 0 )
+        {
+            CheckWaveClear();
+        }
+    }
+
     private void Start()
     {
         StartNextWave();
