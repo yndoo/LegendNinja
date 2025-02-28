@@ -125,6 +125,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 - 주요 기능 설명
 ## 스테이지
 - [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+- [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
 
 총 2개의 스테이지로 구성.
 
@@ -132,7 +133,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
 웨이브는 클리어할 때 마다 난이도가 증가(장애물 개수증가, 몬스터 종류와 몬스터 마리수 증가) 
 
-- [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
+
 
 
 
