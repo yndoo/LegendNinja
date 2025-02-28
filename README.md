@@ -45,6 +45,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
   <details>
     <summary>장애물끼리 겹치는지 확인</summary>
+    
     ```
     private bool IsPositionOccupied(Vector2 position,List<Vector2> _spawnedPosition)
     {
@@ -58,7 +59,8 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
         return false;
     }
-  ```
+    ```
+    
   </details>
   
 
