@@ -33,7 +33,7 @@ public class SceneManager_ : MonoBehaviour
 
     private void OnButtonClick()
     {
-        SoundManager.instance.PlaySFX(1);  
+        SoundManager.instance.PlaySFX(1);
     }
     public void StartScene()
     {

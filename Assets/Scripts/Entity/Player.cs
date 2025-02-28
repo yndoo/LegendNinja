@@ -17,7 +17,7 @@ public class Player : Character
     bool IsMoving = false;
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
-    public HpBar hpBar;
+    private HpBar hpBar;
 
 
     private float AttackCoolDown = 0f; //쿨타임
@@ -34,8 +34,8 @@ public class Player : Character
     void Start()
     {
         // 임의로 값 설정 했습니다.
-        MaxHealth = 100f;
-        Health = 100f;
+        MaxHealth = 1000f;
+        Health = 1000f;
         AttackPower = 100f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;

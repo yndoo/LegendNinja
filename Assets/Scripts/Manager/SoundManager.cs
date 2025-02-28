@@ -39,11 +39,12 @@ public class SoundManager : MonoBehaviour
             sfxSource = gameObject.AddComponent<AudioSource>();
         }
 
-        bgmClips = new AudioClip[2];
+        bgmClips = new AudioClip[3];
         sfxClips = new AudioClip[3];
 
         bgmClips[0] = Resources.Load<AudioClip>("Audio/Rain");
         bgmClips[1] = Resources.Load<AudioClip>("Audio/TestBGM2");
+        bgmClips[2] = Resources.Load<AudioClip>("Audio/TestBGM");
 
         sfxClips[0] = Resources.Load<AudioClip>("Audio/Shuriken");
         sfxClips[1] = Resources.Load<AudioClip>("Audio/Click2");
@@ -65,6 +66,10 @@ public class SoundManager : MonoBehaviour
         else if (scene.name == "SampleScene")
         {
             PlayBGM(1); 
+        }
+        else if (scene.name == "EndScene")
+        {
+            PlayBGM(2);
         }
     }
 
