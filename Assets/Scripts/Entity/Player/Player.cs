@@ -45,7 +45,7 @@ public class Player : Character
         rangeWeaponHandler.transform.SetParent(PlayerPivot.transform);
         rangeWeaponHandler.Init();
         //
-        rangeWeaponHandler.SetData(PlayerPivot.transform, AttackPower, 15, 1, 0, 1, 5, 0, 1, 10,
+        rangeWeaponHandler.SetData(PlayerPivot.transform, AttackPower, 10, 1, 0, 1, 5, 0, 1, 10,
             Color.white, ProjectileManager.Instance, "shuriken");
         weaponList.Add(rangeWeaponHandler);
 
@@ -128,7 +128,7 @@ public class Player : Character
 
     public void ResetPlayerPosition()
     {
-        transform.position = Vector3.zero;
+        transform.position = Vector3.down * 7;
     }
     public override void Attack()
     {
