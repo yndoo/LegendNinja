@@ -7,23 +7,20 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌자가 되어 몰려오는 적들을 물리치는 게임입니다.
 다양한 **스킬**과 **무기**를 조합해 생존을 목표로 합니다.
 [빌드 링크](https://play.unity.com/en/games/39c7b41f-32cd-4582-9b28-952342f04667/legend-ninja)
-# 팀원
-팀장 : 김태겸
+# 🏆 팀 정보
+- 팀장 : 김태겸
+- 팀원 : 배연두, 손효정, 이정구
+- 제작기간 : 2025.02.21 ~ 2025.02.28 (7일)
 
-팀원 : 배연두, 손효정, 이정구
 
-제작기간 : 2025.02.21 ~ 2025.02.28 (7일)
 # 🔥 주요 기능
 ![Frame 1 (1)](https://github.com/user-attachments/assets/74a80a53-f719-47fd-b28e-9d63c8c5f428)
 
 ## 타일맵
-- [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
-
-  타일맵 무료 에셋
+- [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack) 무료 타일셋
 
 - [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
-
-  맵에 장애물을 소환
+맵에 장애물을 소환
   <details>
   <summary>랜덤하게 장애물 배치</summary>
 
@@ -138,11 +135,11 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 - [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
 - [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
 
-총 2개의 스테이지로 구성.
-
-각 스테이지는 5개의 웨이브를 가진다. 맵에있는 몬스터를 전부 처치하면 웨이브 클리어, 이후 포탈을 통해 다음 웨이브로 진입가능. 마지막인 5웨이브 에서는 보스몬스터 등장. 5개의 웨이브를 전부 클리어하면 다음 스테이지로 진출.
-
-웨이브는 클리어할 때 마다 난이도가 증가(장애물 개수증가, 몬스터 종류와 몬스터 마리수 증가) 
+스테이지 구성
+- 총 2개의 스테이지, 각 스테이지는 5개의 웨이브 포함
+- 맵의 모든 몬스터를 처치하면 웨이브 클리어
+- 5웨이브마다 보스 몬스터 등장, 클리어 시 다음 스테이지로 이동 가능
+- 웨이브가 진행될수록 난이도 증가 (장애물 개수 증가, 몬스터 종류/마리 수 증가)
 
 
 
