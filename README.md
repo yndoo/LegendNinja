@@ -42,6 +42,24 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
     }
    ```
   </details>
+
+  <details>
+    <summary>장애물끼리 겹치는지 확인</summary>
+    ```
+    private bool IsPositionOccupied(Vector2 position,List<Vector2> _spawnedPosition)
+    {
+        foreach (Vector2 spawnedPosiotion in _spawnedPosition)
+        {
+            if (Vector2.Distance(position, spawnedPosiotion) < 4f) 
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+  ```
+  </details>
   
 
 
