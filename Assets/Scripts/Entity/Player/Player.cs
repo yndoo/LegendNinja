@@ -17,7 +17,7 @@ public class Player : Character
     bool IsMoving = false;
     public List<RangeWeaponHandler> weaponList;
     private SkillManager skillManager;  // 스킬 따로 관리하기
-    public HpBar hpBar;
+    private HpBar hpBar;
 
 
     private float AttackCoolDown = 0f; //쿨타임
