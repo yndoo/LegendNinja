@@ -84,9 +84,9 @@ public class RangeWeaponHandler : WeaponHandler
     {
         while (true)
         {
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(Delay/1.1f);
             Attack();
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(Delay/1.1f);
 
         }
     }
