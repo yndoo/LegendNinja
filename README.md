@@ -18,7 +18,8 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
   타일맵
 
 - [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
-  장애물을 소환
+
+  맵에 장애물을 소환
   <details>
   <summary>랜덤하게 장애물 배치</summary>
 
