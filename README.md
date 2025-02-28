@@ -16,8 +16,42 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 ## 타일맵
 - 에셋출처 및 주요 기능 설명
 ## 플레이어 
-- 코드 링크 설정
-- 주요 기능 설명
+<details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
+
+  ```
+  Transform FindCloseMonster()
+  {
+    GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); 
+    Transform ClosestEnemy = null;
+    float MaxDistance = 50f; 
+    float ClosestDistance = MaxDistance;
+    Vector2 PlayerPos = transform.position; 
+    foreach (GameObject monster in monsters)
+        {
+            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); 
+            if (Distance < ClosestDistance) 
+            {
+                ClosestDistance = Distance; 
+                ClosestEnemy = monster.transform; 
+        }
+    }
+    return ClosestEnemy; 
+  }
+  ```
+</details>
+
+## 설명 (각 1줄씩 설명)<br>
+1. 몬스터 태그를 가진 오브젝트를 찾습니다.<br>
+2. 가장 가까운 적 오브젝트를 저장할 변수를 만들고 처음엔 없으니 Null로 지정합니다.<br>
+3. 처음에 볼 거리를 50f로 설정합니다. (탐색할 최대거리)<br>
+4. 가장 가까운 거리를 처음에 탐색할 최대거리로 초기화 시킵니다.<br>
+5. 플레이어의 위치를 받아옵니다.<br>
+6. foreach문을 돌려서 플레이어와 적 사이의 거리를 Distance를 통해 계산합니다.<br>
+6-1. 만약 지금까지 저장된 가장 가까운 거리보다 작으면<br>
+6-2. 그 거리를 새로운 가장 가까운 거리로 다시 저장합니다.<br>
+6-3. 그 해당 적의 transform을 저장합니다.<br>
+7. 가장 가까운 적을 반환합니다. (없으면 Null을 반환합니다.)<br>
+
 ## 스킬 및 업그레이드
 ### [스킬](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
 ### [UI](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/UI/SkillSelectionUI.cs)
