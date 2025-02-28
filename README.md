@@ -1,4 +1,4 @@
-![ranged](https://github.com/user-attachments/assets/d37312be-75d5-47c7-9ebb-6c97aadc9c7f)# 🎮 LegendNinja 🎮
+# 🎮 LegendNinja 🎮
 
 https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
