@@ -465,8 +465,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13075098}
-        m_TargetAssemblyTypeName: SceneManager_, Assembly-CSharp
+      - m_Target: {fileID: 1739239996}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: OnSettingUI
         m_Mode: 1
         m_Arguments:
@@ -1062,8 +1062,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13075098}
-        m_TargetAssemblyTypeName: SceneManager_, Assembly-CSharp
+      - m_Target: {fileID: 1739239996}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: OffSettingUI
         m_Mode: 1
         m_Arguments:
@@ -2195,6 +2195,17 @@ MonoBehaviour:
   exteriorPanel: {fileID: 2105436327}
   colorButton: {fileID: 1478635171}
   exteriorButton: {fileID: 406265996}
+--- !u!114 &1739239996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3143250678952978429, guid: f3ed733acc886234491934260be5d215, type: 3}
+  m_PrefabInstance: {fileID: 899885591051791450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea17e7fe7021e849bffa545663b1abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821844477
 GameObject:
   m_ObjectHideFlags: 0
