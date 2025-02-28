@@ -19,7 +19,7 @@ public class SkillSelectionUI : MonoBehaviour
     private SkillManager skillManager; // 스킬 관리 클래스
     private SkillList skillList; // 전체 스킬 리스트
 
-    private void Start()
+    private void Awake()
     {
         skillManager = FindObjectOfType<SkillManager>(); // SkillManager 찾기
         skillList = skillManager.GetSkillList(); // SkillManager에서 스킬 리스트 가져오기

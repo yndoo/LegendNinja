@@ -16,7 +16,7 @@ public class HpBar : MonoBehaviour
     private void Start()
     {
         playerScript = player.GetComponent<Player>(); 
-        canvas = canvas.GetComponent<Canvas>();
+        canvas = GetComponent<Canvas>();
     }
 
     private void Update()
