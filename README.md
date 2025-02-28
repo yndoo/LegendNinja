@@ -19,7 +19,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 - 코드 링크 설정
 - 주요 기능 설명
 ## 스킬 및 업그레이드
-- [스킬](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
+### [스킬](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
 SkillData
   - SkillData 클래스는 개별 스킬의 데이터를 저장합니다. 이 클래스는 스킬의 ID, 이름, 타입, 값, 설명, 스프라이트 경로 등을 포함합니다.
 SkillManager
