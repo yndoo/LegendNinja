@@ -21,7 +21,8 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
   장애물을 소환
   <details>
   <summary>랜덤하게 장애물 배치</summary>
-  public void SpawnObstacles(Vector2 position, int prefabIndex)
+  
+    public void SpawnObstacles(Vector2 position, int prefabIndex)
     {
         if (obstaclePrefabs.Length == 0) return;
 
@@ -37,6 +38,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
         float y = Random.Range(-mapSize.y / 2, mapSize.y / 2);
         return new Vector2(x, y);
     }
+  
   </details>
   
 
