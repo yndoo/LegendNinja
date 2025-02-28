@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
 # 🔥 주요 기능
 ## 타일맵
-- 에셋출처 및 주요 기능 설명
+- [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
 ## 플레이어 
 <details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
 
@@ -71,5 +71,6 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 - 코드 링크 설정
 - 주요 기능 설명
 ## 스테이지
-- 코드 링크 설정
+- [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+- [장애물](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
 - 주요 기능 설명
