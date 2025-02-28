@@ -1,4 +1,4 @@
-# 🎮 LegendNinja 🎮
+![ranged](https://github.com/user-attachments/assets/d37312be-75d5-47c7-9ebb-6c97aadc9c7f)# 🎮 LegendNinja 🎮
 
 https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
@@ -121,8 +121,16 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
     - SelectSkill(SkillData skillData): 선택한 스킬을 적용하고 패널을 닫습니다.
     - OpenPanel(): 스킬 선택 패널을 열고 스킬 버튼을 초기화합니다.
 ## 몬스터
-- 코드 링크 설정
-- 주요 기능 설명
+### [데이터 테이블 로더](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/DataTableLoader.cs)  
+### [몬스터](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Entity/Monster)  
+#### 몬스터 스폰
+* 각 웨이브에 등장 가능한 몬스터 종류와 개수를 [WaveDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/WaveDataTable.json)에서 관리합니다. 데이터를 로드해서 웨이브 정보 내에서 랜덤하게 몬스터를 스폰합니다. 
+* 몬스터 데이터는 [MonsterDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/MonsterTable.json)에서 관리하고, 로드된 데이터로 기본 능력치를 설정합니다.
+#### 몬스터 종류 
+|근접 몬스터|원거리 몬스터|보스 몬스터|
+|---|---|---|
+| ![melee](https://github.com/user-attachments/assets/4f346428-2bcd-4472-9fba-0ee683f0f1ac) | ![ranged](https://github.com/user-attachments/assets/927dc3d6-2712-4913-a3b0-5c9da0a1701b) | ![hide](https://github.com/user-attachments/assets/c56bb983-2b51-477e-a871-aae53fe8ab45) |
+
 ## 스테이지
 - [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
 - [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
