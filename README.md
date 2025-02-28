@@ -18,7 +18,30 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
   타일맵
 
 - [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
-  맵에 랜덤하게 장애물을 소환
+  장애물을 소환
+  <details>
+  <summary>랜덤하게 장애물 배치</summary>
+  public void SpawnObstacles(Vector2 position, int prefabIndex)
+    {
+        if (obstaclePrefabs.Length == 0) return;
+
+        prefabIndex = Mathf.Clamp(prefabIndex, 0, obstaclePrefabs.Length - 1);
+        GameObject obstacle = Instantiate(obstaclePrefabs[prefabIndex], position, Quaternion.identity);
+        spawnedObstacles.Add(obstacle); //생성된 장애물을 리스트에 추가
+       
+    }
+
+    Vector2 GetRandomPosition()
+    {
+        float x = Random.Range(-mapSize.x / 2, mapSize.x / 2);
+        float y = Random.Range(-mapSize.y / 2, mapSize.y / 2);
+        return new Vector2(x, y);
+    }
+  </details>
+  
+
+
+  
 
 ## 플레이어 
 <details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
