@@ -19,10 +19,21 @@ public class CharacterSelector : MonoBehaviour
     [Header(" 플레이어 캐릭터")]
     [SerializeField] private PlayerCharacter playerCharacter; // 플레이어 캐릭터
 
+    public static CharacterSelector Instance;
+    public CharacterData SelectedCharacterData;
     private CharacterData selectedCharacter; // 현재 선택한 캐릭터
 
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // 씬 전환 시 파괴되지 않음
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         if (playerCharacter == null)
         {
             playerCharacter = FindObjectOfType<PlayerCharacter>();

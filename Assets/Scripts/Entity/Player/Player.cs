@@ -36,7 +36,7 @@ public class Player : Character
         // 임의로 값 설정 했습니다.
         MaxHealth = 100f;
         Health = 100f;
-        AttackPower = 100f;
+        AttackPower = 10f;
         MoveSpeed = 4f;
         base.AttackSpeed = 1f;
 
