@@ -15,7 +15,8 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 # 🔥 주요 기능
 ## 타일맵
 - [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
-  타일맵
+
+  타일맵 무료 에셋
 
 - [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
 
