@@ -12,7 +12,8 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 팀원 : 배연두
 팀원 : 손효정
 팀원 : 이정구
-
+# 제작기간
+2025.02.21 ~ 2025.02.28 (7일)
 # 🔥 주요 기능
 ![Frame 1 (1)](https://github.com/user-attachments/assets/74a80a53-f719-47fd-b28e-9d63c8c5f428)
 
