@@ -15,9 +15,10 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 # 🔥 주요 기능
 ## 타일맵
 - [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
+  타일맵
 
- 맵에 랜덤하게 장애물을 소환
 - [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
+  맵에 랜덤하게 장애물을 소환
 
 ## 플레이어 
 <details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
