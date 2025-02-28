@@ -124,13 +124,16 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 - 코드 링크 설정
 - 주요 기능 설명
 ## 스테이지
+- [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+
 총 2개의 스테이지로 구성.
 
 각 스테이지는 5개의 웨이브를 가진다. 맵에있는 몬스터를 전부 처치하면 웨이브 클리어, 이후 포탈을 통해 다음 웨이브로 진입가능. 마지막인 5웨이브 에서는 보스몬스터 등장. 5개의 웨이브를 전부 클리어하면 다음 스테이지로 진출.
 
 웨이브는 클리어할 때 마다 난이도가 증가(장애물 개수증가, 몬스터 종류와 몬스터 마리수 증가) 
 
-- [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+- [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
+
 
 
   
