@@ -107,7 +107,7 @@ public class WaveManager : MonoBehaviour
     {
         foreach (Vector2 spawnedPosiotion in _spawnedPosition)
         {
-            if (Vector2.Distance(position, spawnedPosiotion) < 2f) 
+            if (Vector2.Distance(position, spawnedPosiotion) < 4f) 
             {
                 return true;
             }

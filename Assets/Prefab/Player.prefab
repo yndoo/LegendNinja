@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9144839104347642826}
   - component: {fileID: 7290884183631413299}
   - component: {fileID: 9149374012171698030}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,8 +197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPivot: {fileID: 8676508240851217807}
+  rb: {fileID: 0}
+  AttackDirection: {x: 0, y: 0}
   weaponList: []
-  hpBar: {fileID: 0}
   AttackMaxCoolDown: 1
 --- !u!1 &4809812064090795152
 GameObject:
@@ -211,7 +212,7 @@ GameObject:
   - component: {fileID: 1877478614503803228}
   - component: {fileID: 9183605746041289238}
   - component: {fileID: 91544757797072037}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Under
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +395,7 @@ GameObject:
   - component: {fileID: 1108460258587092393}
   - component: {fileID: 2676792153016011459}
   - component: {fileID: 8483219192228742171}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
