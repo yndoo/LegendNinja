@@ -10,19 +10,94 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 ## 🕹️플레이 해보기
 [플레이 링크](https://play.unity.com/en/games/39c7b41f-32cd-4582-9b28-952342f04667/legend-ninja)  
 
-# 🏆 팀 정보
+## 🏆 팀 정보
 - 팀장 : 김태겸
 - 팀원 : 배연두, 손효정, 이정구
 - 제작기간 : 2025.02.21 ~ 2025.02.28 (7일)
 
+|김태겸|배연두|손효정|이정구|
+|:---:|:---:|:---:|:---:|
+|스킬과 업그레이드|몬스터|플레이어|맵|
 
-# 🔥 주요 기능
-![Frame 1 (1)](https://github.com/user-attachments/assets/74a80a53-f719-47fd-b28e-9d63c8c5f428)
 
-## 타일맵
-### [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack) 무료 타일셋  
+## 📒 개발 준비 단계
+* Figma를 사용하여 플로우 차트를 그려보고, 간단한 클래스 설계도를 작성한 후 작업하였습니다.
+* 코드 컨벤션과 깃 컨벤션 규칙을 정했습니다.
+* 팀 Notion을 활용해 회의록을 작성하고 공통 문서를 관리하였습니다. 
+![Frame 1 (1)](https://github.com/user-attachments/assets/74a80a53-f719-47fd-b28e-9d63c8c5f428)  
 
-### [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs) : 맵에 장애물을 소환
+# 🔥 주요 기능  
+## 🥷플레이어 
+<details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
+
+  ```
+  Transform FindCloseMonster()
+  {
+    GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); 
+    Transform ClosestEnemy = null;
+    float MaxDistance = 50f; 
+    float ClosestDistance = MaxDistance;
+    Vector2 PlayerPos = transform.position; 
+    foreach (GameObject monster in monsters)
+        {
+            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); 
+            if (Distance < ClosestDistance) 
+            {
+                ClosestDistance = Distance; 
+                ClosestEnemy = monster.transform; 
+        }
+    }
+    return ClosestEnemy; 
+  }
+  ```
+</details>
+
+#### 설명<br>
+1. 몬스터 태그를 가진 오브젝트를 찾습니다.<br>
+2. 가장 가까운 적 오브젝트를 저장할 변수를 만들고 처음엔 없으니 Null로 지정합니다.<br>
+3. 처음에 볼 거리를 50f로 설정합니다. (탐색할 최대거리)<br>
+4. 가장 가까운 거리를 처음에 탐색할 최대거리로 초기화 시킵니다.<br>
+5. 플레이어의 위치를 받아옵니다.<br>
+6. foreach문을 돌려서 플레이어와 적 사이의 거리를 Distance를 통해 계산합니다.<br>
+6-1. 만약 지금까지 저장된 가장 가까운 거리보다 작으면<br>
+6-2. 그 거리를 새로운 가장 가까운 거리로 다시 저장합니다.<br>
+6-3. 그 해당 적의 transform을 저장합니다.<br>
+7. 가장 가까운 적을 반환합니다. (없으면 Null을 반환합니다.)<br>
+
+## ⚔️스킬 및 업그레이드
+#### [스킬 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
+#### [UI 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/UI/SkillSelectionUI.cs)  
+
+#### SkillData
+  - SkillData 클래스는 개별 스킬의 데이터를 저장합니다. 이 클래스는 스킬의 ID, 이름, 타입, 값, 설명, 스프라이트 경로 등을 포함합니다.
+#### SkillManager
+  - SkillManager 클래스는 스킬 데이터를 관리하고, 스킬을 적용하는 역할을 합니다. 주요 메서드는 다음과 같습니다.
+    - GetSkillList(): 스킬 리스트를 반환합니다.
+    - ApplySkill(int skillId): 주어진 스킬 ID에 해당하는 스킬을 적용합니다.
+    - AddweaponList(SkillData skill): 무기 리스트에 스킬을 추가합니다.
+#### SkillSelectionUI
+  - SkillSelectionUI 클래스는 스킬 선택 UI를 관리합니다. 주요 메서드는 다음과 같습니다.
+    - SetupSkillButtons(): 스킬 선택 UI를 설정하고 3개의 랜덤한 스킬을 표시합니다.
+    - SelectSkill(SkillData skillData): 선택한 스킬을 적용하고 패널을 닫습니다.
+    - OpenPanel(): 스킬 선택 패널을 열고 스킬 버튼을 초기화합니다.
+## 👾몬스터
+#### [데이터 테이블 로더 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/DataTableLoader.cs)  
+#### [몬스터 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Entity/Monster)  
+### 몬스터 스폰
+* 각 웨이브에 등장 가능한 몬스터 종류와 개수를 [WaveDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/WaveDataTable.json)에서 관리합니다. 데이터를 로드해서 웨이브 정보 내에서 랜덤하게 몬스터를 스폰합니다. 
+* 몬스터 데이터는 [MonsterDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/MonsterTable.json)에서 관리하고, 로드된 데이터로 기본 능력치를 설정합니다.
+### 몬스터 종류 
+* 공통 행동 : 감지용 Collision에 플레이어가 들어오면 플레이어에게 따라갑니다. 플레이어가 공격 사거리 안에 들어오면 공격을 실행합니다.
+
+|근접 몬스터|원거리 몬스터|보스 몬스터|
+|---|---|---|
+| ![melee](https://github.com/user-attachments/assets/4f346428-2bcd-4472-9fba-0ee683f0f1ac) | ![ranged](https://github.com/user-attachments/assets/927dc3d6-2712-4913-a3b0-5c9da0a1701b) | ![hide](https://github.com/user-attachments/assets/c56bb983-2b51-477e-a871-aae53fe8ab45) |
+|공격 사거리가 짧습니다.|공격 사거리가 길고,<br>발사체를 5개씩 발사하며 공격합니다.|공격 시 일정 확률로 스킬을 사용합니다.<br>은신 후 플레이어의 뒤에서 나타나 공격합니다.| 
+
+## 🏗️타일맵
+#### [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack) 무료 타일셋  
+
+#### [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs) : 맵에 장애물을 소환
 
   <details>
   <summary>랜덤하게 장애물 배치</summary>
@@ -67,76 +142,9 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
     
   </details>
   
-
-
-  
-
-## 플레이어 
-<details><summary> [주요기능] 가장 가까운 적 탐지 로직</summary>
-
-  ```
-  Transform FindCloseMonster()
-  {
-    GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); 
-    Transform ClosestEnemy = null;
-    float MaxDistance = 50f; 
-    float ClosestDistance = MaxDistance;
-    Vector2 PlayerPos = transform.position; 
-    foreach (GameObject monster in monsters)
-        {
-            float Distance = Vector2.Distance(PlayerPos, monster.transform.position); 
-            if (Distance < ClosestDistance) 
-            {
-                ClosestDistance = Distance; 
-                ClosestEnemy = monster.transform; 
-        }
-    }
-    return ClosestEnemy; 
-  }
-  ```
-</details>
-
-## 설명 (각 1줄씩 설명)<br>
-1. 몬스터 태그를 가진 오브젝트를 찾습니다.<br>
-2. 가장 가까운 적 오브젝트를 저장할 변수를 만들고 처음엔 없으니 Null로 지정합니다.<br>
-3. 처음에 볼 거리를 50f로 설정합니다. (탐색할 최대거리)<br>
-4. 가장 가까운 거리를 처음에 탐색할 최대거리로 초기화 시킵니다.<br>
-5. 플레이어의 위치를 받아옵니다.<br>
-6. foreach문을 돌려서 플레이어와 적 사이의 거리를 Distance를 통해 계산합니다.<br>
-6-1. 만약 지금까지 저장된 가장 가까운 거리보다 작으면<br>
-6-2. 그 거리를 새로운 가장 가까운 거리로 다시 저장합니다.<br>
-6-3. 그 해당 적의 transform을 저장합니다.<br>
-7. 가장 가까운 적을 반환합니다. (없으면 Null을 반환합니다.)<br>
-
-## 스킬 및 업그레이드
-### [스킬 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
-### [UI 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/UI/SkillSelectionUI.cs)
-### SkillData
-  - SkillData 클래스는 개별 스킬의 데이터를 저장합니다. 이 클래스는 스킬의 ID, 이름, 타입, 값, 설명, 스프라이트 경로 등을 포함합니다.
-### SkillManager
-  - SkillManager 클래스는 스킬 데이터를 관리하고, 스킬을 적용하는 역할을 합니다. 주요 메서드는 다음과 같습니다.
-    - GetSkillList(): 스킬 리스트를 반환합니다.
-    - ApplySkill(int skillId): 주어진 스킬 ID에 해당하는 스킬을 적용합니다.
-    - AddweaponList(SkillData skill): 무기 리스트에 스킬을 추가합니다.
-### SkillSelectionUI
-  - SkillSelectionUI 클래스는 스킬 선택 UI를 관리합니다. 주요 메서드는 다음과 같습니다.
-    - SetupSkillButtons(): 스킬 선택 UI를 설정하고 3개의 랜덤한 스킬을 표시합니다.
-    - SelectSkill(SkillData skillData): 선택한 스킬을 적용하고 패널을 닫습니다.
-    - OpenPanel(): 스킬 선택 패널을 열고 스킬 버튼을 초기화합니다.
-## 몬스터
-### [데이터 테이블 로더 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/DataTableLoader.cs)  
-### [몬스터 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Entity/Monster)  
-#### 몬스터 스폰
-* 각 웨이브에 등장 가능한 몬스터 종류와 개수를 [WaveDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/WaveDataTable.json)에서 관리합니다. 데이터를 로드해서 웨이브 정보 내에서 랜덤하게 몬스터를 스폰합니다. 
-* 몬스터 데이터는 [MonsterDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/MonsterTable.json)에서 관리하고, 로드된 데이터로 기본 능력치를 설정합니다.
-#### 몬스터 종류 
-|근접 몬스터|원거리 몬스터|보스 몬스터|
-|---|---|---|
-| ![melee](https://github.com/user-attachments/assets/4f346428-2bcd-4472-9fba-0ee683f0f1ac) | ![ranged](https://github.com/user-attachments/assets/927dc3d6-2712-4913-a3b0-5c9da0a1701b) | ![hide](https://github.com/user-attachments/assets/c56bb983-2b51-477e-a871-aae53fe8ab45) |
-
-## 스테이지
-### [스테이지 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
-### [포탈 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
+## 🎪스테이지
+#### [스테이지 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+#### [포탈 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
 
 스테이지 구성
 - 총 2개의 스테이지, 각 스테이지는 5개의 웨이브 포함
