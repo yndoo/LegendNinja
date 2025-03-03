@@ -5,8 +5,11 @@ https://github.com/user-attachments/assets/7771a099-5b70-4d5a-ab06-f41af2ddb0f8
 
 # 📌 프로젝트 개요
 LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌자가 되어 몰려오는 적들을 물리치는 게임입니다.
-다양한 **스킬**과 **무기**를 조합해 생존을 목표로 합니다.
-[빌드 링크](https://play.unity.com/en/games/39c7b41f-32cd-4582-9b28-952342f04667/legend-ninja)
+다양한 **스킬**과 **무기**를 조합해 생존을 목표로 합니다.  
+
+## 🕹️플레이 해보기
+[플레이 링크](https://play.unity.com/en/games/39c7b41f-32cd-4582-9b28-952342f04667/legend-ninja)  
+
 # 🏆 팀 정보
 - 팀장 : 김태겸
 - 팀원 : 배연두, 손효정, 이정구
