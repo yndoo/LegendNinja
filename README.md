@@ -20,10 +20,10 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 ![Frame 1 (1)](https://github.com/user-attachments/assets/74a80a53-f719-47fd-b28e-9d63c8c5f428)
 
 ## 타일맵
-- [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack) 무료 타일셋
+### [에셋](https://pixel-boy.itch.io/ninja-adventure-asset-pack) 무료 타일셋  
 
-- [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs)
-맵에 장애물을 소환
+### [장애물 스포너](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/ObstacleSpawner.cs) : 맵에 장애물을 소환
+
   <details>
   <summary>랜덤하게 장애물 배치</summary>
 
@@ -109,8 +109,8 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 7. 가장 가까운 적을 반환합니다. (없으면 Null을 반환합니다.)<br>
 
 ## 스킬 및 업그레이드
-### [스킬](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
-### [UI](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/UI/SkillSelectionUI.cs)
+### [스킬 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Skill)
+### [UI 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/UI/SkillSelectionUI.cs)
 ### SkillData
   - SkillData 클래스는 개별 스킬의 데이터를 저장합니다. 이 클래스는 스킬의 ID, 이름, 타입, 값, 설명, 스프라이트 경로 등을 포함합니다.
 ### SkillManager
@@ -124,8 +124,8 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
     - SelectSkill(SkillData skillData): 선택한 스킬을 적용하고 패널을 닫습니다.
     - OpenPanel(): 스킬 선택 패널을 열고 스킬 버튼을 초기화합니다.
 ## 몬스터
-### [데이터 테이블 로더](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/DataTableLoader.cs)  
-### [몬스터](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Entity/Monster)  
+### [데이터 테이블 로더 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/DataTableLoader.cs)  
+### [몬스터 코드](https://github.com/BeautifulMaple/LegendNinja/tree/main/Assets/Scripts/Entity/Monster)  
 #### 몬스터 스폰
 * 각 웨이브에 등장 가능한 몬스터 종류와 개수를 [WaveDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/WaveDataTable.json)에서 관리합니다. 데이터를 로드해서 웨이브 정보 내에서 랜덤하게 몬스터를 스폰합니다. 
 * 몬스터 데이터는 [MonsterDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/MonsterTable.json)에서 관리하고, 로드된 데이터로 기본 능력치를 설정합니다.
@@ -135,8 +135,8 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 | ![melee](https://github.com/user-attachments/assets/4f346428-2bcd-4472-9fba-0ee683f0f1ac) | ![ranged](https://github.com/user-attachments/assets/927dc3d6-2712-4913-a3b0-5c9da0a1701b) | ![hide](https://github.com/user-attachments/assets/c56bb983-2b51-477e-a871-aae53fe8ab45) |
 
 ## 스테이지
-- [스테이지](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
-- [포탈](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
+### [스테이지 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WaveManager.cs)
+### [포탈 코드](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Scripts/Map/WavePortal.cs)
 
 스테이지 구성
 - 총 2개의 스테이지, 각 스테이지는 5개의 웨이브 포함
