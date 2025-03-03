@@ -87,7 +87,7 @@ LegendNinja는 로그라이크 스타일의 액션 게임으로, 강력한 닌�
 * 각 웨이브에 등장 가능한 몬스터 종류와 개수를 [WaveDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/WaveDataTable.json)에서 관리합니다. 데이터를 로드해서 웨이브 정보 내에서 랜덤하게 몬스터를 스폰합니다. 
 * 몬스터 데이터는 [MonsterDataTable](https://github.com/BeautifulMaple/LegendNinja/blob/main/Assets/Resources/MonsterTable.json)에서 관리하고, 로드된 데이터로 기본 능력치를 설정합니다.
 ### 몬스터 종류 
-* 공통 행동 : 감지용 Collision에 플레이어가 들어오면 플레이어에게 따라갑니다. 플레이어가 공격 사거리 안에 들어오면 공격을 실행합니다.
+* 공통 행동 : 감지용 Collision에 플레이어가 들어오면 플레이어를 따라갑니다. 플레이어가 공격 사거리 안에 들어오면 공격을 실행합니다.
 
 |근접 몬스터|원거리 몬스터|보스 몬스터|
 |---|---|---|
